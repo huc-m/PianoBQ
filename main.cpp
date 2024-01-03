@@ -3,6 +3,8 @@
 #include <QApplication>
 #include <QGraphicsView>
 
+#include<unistd.h> /////////////////////////////////////////////////////////////////////////
+
 #include "midi/midi_with_fluidsynth.h"
 
 #include "midi/globals.h"
@@ -22,7 +24,11 @@ int main(int argc, char *argv[])
 
 
     AppWindow.show();
-    AppWindow.DrawStaff();
+    for(int i=0; i<tune_length; i++){
+        AppWindow.DrawStaff(i);
+        usleep(500000);
+    }
+
 
 return theApp.exec();
 

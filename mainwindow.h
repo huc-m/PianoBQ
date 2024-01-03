@@ -20,12 +20,13 @@ public:
     QPixmap *staffPixmap;
     QGraphicsPixmapItem *staffPixmapItem;
     QPainter *paint;
-    void DrawStaff();
+    void DrawStaff(int);
 
 private:
     Ui::MainWindow *ui;
 
     QGraphicsScene staffScene;
+    QSize staff_area_size;
 
     void DrawTuple(int pos_screen, int pos_tune);
 
@@ -41,6 +42,8 @@ private:
     int note_zero_r;   //line of note with code 0 - left
     int note_zero_l;   //right
     char* staff_font_n;
+
+    int begin;         //begin position on staff
 
 // offset C, #C, D, #D, E, F, #F, G, #G, A, #A, B
     const int note_ofset[12] = {0,0,1,1,2,3,3,4,4,5,5,6};

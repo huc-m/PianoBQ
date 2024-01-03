@@ -25,9 +25,12 @@ MainWindow::MainWindow(QWidget *parent)
     note_zero_l = note_zero_r + staff_step - staff_base_h*6;
     staff_font_n = "../fonts/PianoBQ.ttf";
 
+    begin = -1;
+    staff_area_size = QSize(10,10);
+
 //set staff view
 
-    staffPixmap = new QPixmap(ui->graphicsView->size());
+    staffPixmap = new QPixmap(staff_area_size);
     staffPixmapItem = staffScene.addPixmap(*staffPixmap);
     paint = new QPainter(staffPixmap);
     paint->setPen(QPen(Qt::black, staff_line_w));

@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include <QPainter>
 #include <QGraphicsPathItem>
 #include <QApplication>
@@ -6,7 +7,7 @@
 #include "midi/globals.h"
 
 
-#include<unistd.h> //??????????????????????????????????????????????????????
+//#include<unistd.h> //??????????????????????????????????????????????????????
 
 #define F5S 78
 #define E4F 64
@@ -101,32 +102,40 @@ void MainWindow::DrawTuple(int pos_screen, int pos_tune){
     }
 }
 
-void MainWindow::DrawStaff(){
+void MainWindow::DrawStaff(int pos){
 
-    int i, j;
+    int i;
     int num = (width()-staff_pading_w) / staff_base_w;
-    staffPixmap->fill(Qt::white);
+    int pointerX = (pos % num) * staff_base_w + staff_pading_w - staff_base_w / 10;
+    int cbegin = pos / num * num;
+    int pointerY0 = staff_pading_h /2;
+    int pointerY1 = staff_step + 5 * staff_base_h + pointerY0;
+    int cend = cbegin + num;
+    if(cend > tune_length) cend = tune_length;
 
-    for(i=0; i<5; ++i){
-        paint->drawLine(staff_pading_w, staff_pading_h + i * staff_base_h, width() - staff_pading_w,  staff_pading_h + i * staff_base_h);
-        paint->drawLine(staff_pading_w, staff_pading_h + i * staff_base_h + staff_step, width() - staff_pading_w,  staff_pading_h + i * staff_base_h + staff_step);
-     }
-
-    for (j = 0; j < tune_length ; j++){
-        DrawTuple(staff_pading_w + (j % num) * staff_base_w, j) ;
-        if(!(j % num) && j){
-            staffPixmapItem->setPixmap(*staffPixmap);
-            QApplication::processEvents();
-            sleep(1);
-            staffPixmap->fill(Qt::white);
-            for(i=0; i<5; ++i){
-                paint->drawLine(staff_pading_w, staff_pading_h + i * staff_base_h, width() - staff_pading_w,  staff_pading_h + i * staff_base_h);
-                paint->drawLine(staff_pading_w, staff_pading_h + i * staff_base_h + staff_step, width() - staff_pading_w,  staff_pading_h + i * staff_base_h + staff_step);
-             }
-
+    if(cbegin != begin){
+        if(ui->graphicsView->size() != staff_area_size){
+            staff_area_size = ui->graphicsView->size();
+            delete paint;
+            delete staffPixmap;
+            staffPixmap = new QPixmap(staff_area_size);
+            paint = new QPainter(staffPixmap);
+            paint->setFont(QFont("PianoBQ",staff_font_z));
         }
+        begin = cbegin;
+        staffPixmap->fill(Qt::white);
+        for(i=0; i<5; ++i){
+            paint->drawLine(staff_pading_w, staff_pading_h + i * staff_base_h, width() - staff_pading_w,  staff_pading_h + i * staff_base_h);
+            paint->drawLine(staff_pading_w, staff_pading_h + i * staff_base_h + staff_step, width() - staff_pading_w,  staff_pading_h + i * staff_base_h + staff_step);
+        }
+        for(i = cbegin; i < cend; ++i)
+            DrawTuple(staff_pading_w + (i - cbegin) * staff_base_w, i) ;
     }
 
+    paint->setPen(QPen(Qt::white, staff_line_w));
+    paint->drawLine(pointerX - staff_base_w, pointerY0, pointerX - staff_base_w, pointerY1);
+    paint->setPen(QPen(Qt::black, staff_line_w));
+    paint->drawLine(pointerX, pointerY0, pointerX, pointerY1);
     staffPixmapItem->setPixmap(*staffPixmap);
     QApplication::processEvents();
 
