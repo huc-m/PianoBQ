@@ -5,6 +5,7 @@
 #include <QApplication>
 
 #include "midi/globals.h"
+#include "myevents.h"
 
 
 //#include<unistd.h> //??????????????????????????????????????????????????????
@@ -108,8 +109,8 @@ void MainWindow::DrawStaff(int pos){
     int num = (width()-staff_pading_w) / staff_base_w;
     int pointerX = (pos % num) * staff_base_w + staff_pading_w - staff_base_w / 10;
     int cbegin = pos / num * num;
-    int pointerY0 = staff_pading_h /2;
-    int pointerY1 = staff_step + 5 * staff_base_h + pointerY0;
+    int pointerY0 = staff_pading_h / 2;
+    int pointerY1 = staff_step +  1.5  * staff_pading_h + 4 * staff_base_h ;
     int cend = cbegin + num;
     if(cend > tune_length) cend = tune_length;
 
@@ -141,4 +142,6 @@ void MainWindow::DrawStaff(int pos){
 
 }
 
-
+void MainWindow::customEvent(QEvent *event){
+    DrawStaff(((NewPos*)event)->cur_pos);
+}

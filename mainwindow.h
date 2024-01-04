@@ -28,6 +28,8 @@ private:
     QGraphicsScene staffScene;
     QSize staff_area_size;
 
+    void customEvent(QEvent *event);
+
     void DrawTuple(int pos_screen, int pos_tune);
 
     int staff_base_h;   //space between lines

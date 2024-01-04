@@ -20,14 +20,17 @@ int main(int argc, char *argv[])
     QApplication theApp(argc, argv);
     MainWindow AppWindow;
 
-   int err = read_midi_file(argv[1]);
-
+    int err;
+    if(argc == 2) err = read_midi_file(argv[1]);
 
     AppWindow.show();
-    for(int i=0; i<tune_length; i++){
-        AppWindow.DrawStaff(i);
-        usleep(500000);
-    }
+    AppWindow.DrawStaff(0);
+    read_midi_keyboard_with_libfluidsynth(&AppWindow);
+
+//    for(int i=0; i<tune_length; i++){
+//        AppWindow.DrawStaff(i);
+//        usleep(500000);
+//    }
 
 
 return theApp.exec();

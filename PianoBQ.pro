@@ -12,13 +12,15 @@ SOURCES += \
     DrawSatff.cpp \
 	main.cpp \
     mainwindow.cpp \
+    midi/midi_keyboard_libfluidsynth.cpp \
     midi/read_midi_file_fluidsynth.cpp
 
 HEADERS += \
 	mainwindow.h \
     midi/globals.h \
 	midi/constants.h \
-    midi/midi_with_fluidsynth.h
+    midi/midi_with_fluidsynth.h \
+    myevents.h
 
 FORMS += \
     mainwindow.ui
