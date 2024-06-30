@@ -62,4 +62,6 @@ unix:!macx: LIBS += -lfluidsynth
 
 DISTFILES += \
     LICENSE \
-    README.md
+    README.md \
+    fonts/PianoBQ.sfd \
+    fonts/PianoBQ.ttf
