@@ -29,7 +29,7 @@ union tune_def {
 extern tune_def tune_data[TUNE_LENGTH_MAX]; //all notes
 extern tune_def tune_newNotes[TUNE_LENGTH_MAX]; // only new notes
 extern tune_def tune_draw[TUNE_LENGTH_MAX]; //to draw
-extern uint8_t tuple_nums[TUNE_LENGTH_MAX][5]; // for each hand and all
+extern uint8_t tuple_nums[TUNE_LENGTH_MAX][TUPLE_NUMS_LENGTH]; // for each hand and all
 extern int tune_length;
 extern int cur_position;
 extern int cur_start;

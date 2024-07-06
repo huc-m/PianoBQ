@@ -128,6 +128,7 @@ int read_midi_file(const char *midi_file_name){
                     delete_fluid_settings(fluid_settings);
 
     reset_keyboard_fluid( -1 );
+    set_hand( ALL_H );
 
     return tune_length < 1 ? MIDI_FILE_ERROR_ON_READING : error;
 }

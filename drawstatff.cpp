@@ -16,6 +16,7 @@ void MainWindow::DrawTuple(int pos_screen, int pos_tune){
     int old_note;
     int i, ledjer;
     int margin;
+    int interval;
 
     for( hand = LE_H, hand_d = LE_D; hand <= RI_H; ++hand, ++hand_d) {
          back_note = back_note_offset = old_note = 0;
@@ -25,8 +26,11 @@ void MainWindow::DrawTuple(int pos_screen, int pos_tune){
             if( old_note > 0 )
                 if( back_note_offset > 0) {back_note = back_note_offset = 0; }
                 else
-                    if( note - old_note < 3){
-                        back_note = other_note_offset; back_note_offset = 0.5 * staff_font_z;
+                    if( note - old_note < 4){
+                        if( ( interval = note_ofset[ note % 12 ] - note_ofset[ old_note % 12 ] ) < 0 ) interval =+ 7;
+                        if ( interval < 2) {
+                            back_note = other_note_offset; back_note_offset = 0.5 * staff_font_z;
+                        }
                     }
 //compute ledjers
             if( note < staff_low[hand]) {
@@ -69,9 +73,10 @@ void MainWindow::paintEvent(QPaintEvent *event) {
         if(ui->graphicsView->size() != staff_area_size){
             delete paint;
             delete staffPixmap;
-            ui->graphicsView->setContentsMargins(0,0,0,0);
             staff_area_size = ui->graphicsView->size();
             staffPixmap = new QPixmap(staff_area_size);
+            ui->graphicsView->setContentsMargins( 0, 0, 0, 0 );
+            ui->graphicsView->setSceneRect( staffPixmap->rect());
             paint = new QPainter(staffPixmap);
             paint->setFont(QFont("PianoBQ",staff_font_z));
         }

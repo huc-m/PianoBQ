@@ -11,6 +11,11 @@ void MainWindow::createMenus() {
         tuneMenu->addAction( tuneChangeConfigAction );
         tuneMenu->addAction( tuneNewAction );
         tuneMenu->addAction( tuneDivisionsAction );
+    handMenu = menuBar()->addMenu( "Hands" );
+        handMenu->addAction( handAllHandsAction );
+        handMenu->addAction( handLeftOnlyAction );
+        handMenu->addAction( handRightOnlyAction );
+        handMenu->addAction( handNoHandsAction );
     menuBar()->addSeparator();
         menuBar()->addAction( tuneToBeginAction );
         menuBar()->addAction( tuneMoveLeftManyAction );
@@ -59,4 +64,19 @@ void MainWindow::createActions() {
         connect( tuneSetFinishAction, &QAction::triggered, this, &MainWindow::tuneSetFinish );
     tuneDelFinishAction = new QAction( "!>", this );
         connect( tuneDelFinishAction, &QAction::triggered, this, &MainWindow::tuneDelFinish );
+
+    handAllHandsAction = new QAction( "Check All", this );
+        connect( handAllHandsAction, &QAction::triggered, this, &MainWindow::handAllHands );
+    handNoHandsAction = new QAction( "Free" );
+        connect( handNoHandsAction, &QAction::triggered, this, &MainWindow::handNoHands );
+    handLeftOnlyAction = new QAction( "Left Only" );
+        connect( handLeftOnlyAction, &QAction::triggered, this, &MainWindow::handLeftOnly );
+    handRightOnlyAction = new QAction( "Right Only" );
+        connect( handRightOnlyAction, &QAction::triggered, this, &MainWindow::handRightOnly );
+    handGroup = new QActionGroup( this );
+        handAllHandsAction->setCheckable( true ); handGroup->addAction( handAllHandsAction );
+        handNoHandsAction->setCheckable( true ); handGroup->addAction( handNoHandsAction );
+        handLeftOnlyAction->setCheckable( true ); handGroup->addAction( handLeftOnlyAction );
+        handRightOnlyAction->setCheckable( true ); handGroup->addAction( handRightOnlyAction );
+        handGroup->setExclusive( true );
 }

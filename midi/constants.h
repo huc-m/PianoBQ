@@ -9,6 +9,12 @@
 #define NEW_N 2
 #define LE_D 3
 #define RI_D 4
+#define TUPLE_NUMS_LENGTH 5 // = number of items above
+
+#define ALL_H 2 // <> *_H
+#define NO_H 3  // <> *_H
+#define HtoD 3  // =LE_D -LE_H
+
 //#define NOTES8    // if defined max notes per hand = 8 else 4
 
 // error codes

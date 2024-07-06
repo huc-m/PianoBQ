@@ -25,6 +25,7 @@ void tuneRehearsalGetDialog::accept() {
     if( ui->listWidget->currentRow() >= 0 ) {
         setStartFinishByPart( (MainWindow*)(this->parent()), ui->listWidget->currentItem()->text() );
         reset_keyboard_fluid( ((MainWindow*)this->parent())->cur_pos = cur_start );
+        ((MainWindow*)this->parent())->startOneHand();
         ((MainWindow*)this->parent())->update();
     }
     QDialog::accept();

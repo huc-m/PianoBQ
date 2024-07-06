@@ -10,7 +10,7 @@ tuneRehearsalSaveDialog::tuneRehearsalSaveDialog(QWidget *parent) :
 {
     setAttribute(Qt::WA_DeleteOnClose);
     ui->setupUi(this);
-    ui->lineEdit->setFocus();
+    ui->comboBox->addItems( getPartsByTune( (MainWindow*)(this->parent()) ) );
 }
 
 tuneRehearsalSaveDialog::~tuneRehearsalSaveDialog()
@@ -19,7 +19,8 @@ tuneRehearsalSaveDialog::~tuneRehearsalSaveDialog()
 }
 
 void tuneRehearsalSaveDialog::accept(){
-    saveTunePart( (MainWindow*)this->parent(), ui->lineEdit->text() );
+    if(  ui->comboBox->currentText().length() < 1 ) return;
+    saveTunePart( (MainWindow*)this->parent(), ui->comboBox->currentText() );
 
     QDialog::accept();
 }

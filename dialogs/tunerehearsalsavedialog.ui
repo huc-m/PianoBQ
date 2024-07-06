@@ -66,9 +66,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>100</y>
+     <y>90</y>
      <width>41</width>
-     <height>16</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="toolTip">
@@ -93,12 +93,12 @@
     <set>Qt::NoTextInteraction</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QComboBox" name="comboBox">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>100</y>
-     <width>331</width>
+     <x>60</x>
+     <y>90</y>
+     <width>321</width>
      <height>22</height>
     </rect>
    </property>
@@ -115,6 +115,12 @@
     <string notr="true"/>
    </property>
    <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="editable">
+    <bool>true</bool>
+   </property>
+   <property name="currentText">
     <string notr="true"/>
    </property>
    <property name="placeholderText">

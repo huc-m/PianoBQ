@@ -9,7 +9,7 @@ int tune_length;
 tune_def tune_data[TUNE_LENGTH_MAX];
 tune_def tune_newNotes[TUNE_LENGTH_MAX];
 tune_def tune_draw[TUNE_LENGTH_MAX];
-uint8_t tuple_nums[TUNE_LENGTH_MAX][5];
+uint8_t tuple_nums[TUNE_LENGTH_MAX][TUPLE_NUMS_LENGTH];
 tune_def tune_pastNotes[TUNE_LENGTH_MAX];
 int left_hand_channel;
 int right_hand_channel;
@@ -51,5 +51,6 @@ int main(int argc, char *argv[])
 
     read_midi_keyboard_with_libfluidsynth( &AppWindow );
 
+    set_hand( NO_H );
     return theApp.exec();
 }

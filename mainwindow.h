@@ -11,6 +11,10 @@
 #include <QDialog>
 #include <QGraphicsScene>
 
+#include <QActionGroup>
+
+#include "myqgraphicsview.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -20,6 +24,9 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 friend void setParameters( MainWindow *mainwindow );
+friend class myQGraphicsView;
+friend void set_hand( int key );
+friend class tuneRehearsalGetDialog;
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -30,14 +37,18 @@ public:
     QPainter *paint;
     void DrawStaff(int);
 
+protected:
+
+    void resizeEvent(QResizeEvent* event) override;
+    void paintEvent(QPaintEvent *event) override;
+
 private:
     Ui::MainWindow *ui;
 
+    void startOneHand( bool right = true );
+
     QGraphicsScene staffScene;
     QSize staff_area_size;
-
-    void resizeEvent(QResizeEvent* event);
-    void paintEvent(QPaintEvent *event);
 
     void DrawTuple(int pos_screen, int pos_tune);
     int staff_base_h;   //space between lines
@@ -66,6 +77,7 @@ private:
 private:
     QMenu *fileMenu;
     QMenu *tuneMenu;
+    QMenu *handMenu;
 
     QAction *exitProgramAction;
 
@@ -85,6 +97,12 @@ private:
     QAction *tuneDelFinishAction;
     QAction *tuneRehearsalSaveAction;
     QAction *tuneRehearsalGetAction;
+
+    QAction *handAllHandsAction;
+    QAction *handNoHandsAction;
+    QAction *handLeftOnlyAction;
+    QAction *handRightOnlyAction;
+    QActionGroup *handGroup;
 
     void createMenus();
     void createActions();
@@ -117,6 +135,11 @@ private slots:
     void tuneSetFinish();
     void tuneDelStart();
     void tuneDelFinish();
+
+    void handAllHands();
+    void handNoHands();
+    void handLeftOnly();
+    void handRightOnly();
 
 public: // globals
     QString currentPath;

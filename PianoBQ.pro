@@ -3,6 +3,8 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
+CONFIG += cmdline precompile_header
+PRECOMPILED_HEADER = stable.h
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -22,13 +24,15 @@ SOURCES += \
     drawstatff.cpp \
     main.cpp \
     mainwindow.cpp \
+    menus/manu_hands.cpp \
     menus/menu.cpp \
     menus/menu_dialogs.cpp \
     menus/menu_tune.cpp \
     midi/midi_keyboard_libfluidsynth.cpp \
-    midi/read_midi_file_fluidsynth.cpp
+    midi/read_midi_file_fluidsynth.cpp \
+    myqgraphicsview.cpp
 
-HEADERS += \
+HEADERS += stable.h \
 	configuration/configurationconstant.h \
 	configuration/edittuneconfig.h \
 	configuration/mainconfig.h \
@@ -42,7 +46,8 @@ HEADERS += \
 	mainwindow.h \
 	midi/globals.h \
 	midi/constants.h \
-	midi/midi_with_fluidsynth.h
+	midi/midi_with_fluidsynth.h \
+	myqgraphicsview.h
 
 FORMS += \
     dialogs/tunechangeconfigdialog.ui \
