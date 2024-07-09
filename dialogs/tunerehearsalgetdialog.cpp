@@ -14,6 +14,8 @@ tuneRehearsalGetDialog::tuneRehearsalGetDialog(QWidget *parent) :
     ui->setupUi(this);
     ui->listWidget->addItems( getPartsByTune( (MainWindow*)(this->parent()) ) );
     connect( ui->listWidget, &QListWidget::doubleClicked, this, &tuneRehearsalGetDialog::accept );
+
+    setFixedSize( size() );
 }
 
 tuneRehearsalGetDialog::~tuneRehearsalGetDialog()

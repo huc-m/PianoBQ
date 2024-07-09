@@ -20,12 +20,10 @@ MainWindow::MainWindow(QWidget *parent)
 
 //set parameters
     setParameters( this );
+    staff_step = staff_step_default;
+    staff_pading_h = staff_pading_h_default;
 
-    staff_base_h = staff_base_h2 * 2;
-    staff_base_h7 = staff_base_h2 * 7;
-    staff_base_w = staff_font_z * 1.3;
-    note_zero[RI_H] = staff_pading_h + staff_base_h2*46;
-    note_zero[LE_H] = note_zero[RI_H] + staff_step - staff_base_h*6;
+    setStaffParameters();
 
     begin = -1;
     staff_area_size = QSize(10,10);
@@ -59,4 +57,13 @@ void MainWindow::resizeEvent(QResizeEvent* event)
    update();
 
    QMainWindow::resizeEvent(event);
+}
+
+void MainWindow::setStaffParameters(){
+
+    staff_base_h = staff_base_h2 * 2;
+    staff_base_h7 = staff_base_h2 * 7;
+    staff_base_w = staff_font_z * 1.3;
+    note_zero[RI_H] = staff_pading_h + staff_base_h2*46;
+    note_zero[LE_H] = note_zero[RI_H] + staff_step - staff_base_h*6;
 }

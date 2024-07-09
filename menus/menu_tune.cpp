@@ -28,6 +28,7 @@ void MainWindow::startOneHand( bool right ){
                 else break;
         cur_pos = cur_position;
     }
+    if( !right ) startOneHand();
 }
 
 void MainWindow::tuneMoveLeftOne() {

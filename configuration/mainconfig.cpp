@@ -25,8 +25,8 @@ void setParameters( MainWindow *mainwindow ) {
     conf.endGroup();
     conf.beginGroup( "STAFF" );
         mainwindow->staff_base_h2 = conf.value( "half_space_between_lines" ).toString().toInt();
-        mainwindow->staff_step = conf.value( "staffs_step" ).toString().toInt();
-        mainwindow->staff_pading_h = conf.value( "padding_top" ).toString().toInt();
+        mainwindow->staff_step_default = conf.value( "staffs_step" ).toString().toInt();
+        mainwindow->staff_pading_h_default = conf.value( "padding_top" ).toString().toInt();
         mainwindow->staff_pading_w = conf.value( "padding_left" ).toString().toInt();
         mainwindow->staff_font_z = conf.value( "font_size" ).toString().toInt();
         mainwindow->staff_line_w = conf.value( "line_width" ).toString().toInt();

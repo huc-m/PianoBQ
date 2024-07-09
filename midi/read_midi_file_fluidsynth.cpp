@@ -54,8 +54,10 @@ int get_midi_file_event(void* tick, fluid_midi_event_t *event){
             if( tuple_nums[tune_length][hand] == N_MAX ) error = MIDI_FILE_TOO_MANY_NOTES_IN_TUPLE;
             else {
                 tune_data[tune_length].hand[hand].note[tuple_nums[tune_length][hand]++] = note;
-// add new note
-                tune_newNotes[tune_length].noteOn[tuple_nums[tune_length][NEW_N]++] = note;
+// add new note if not exists
+                for( i = 0; i < tuple_nums[tune_length][NEW_N] && tune_newNotes[tune_length].noteOn[i] != note; ++i);
+                if ( i == tuple_nums[tune_length][NEW_N])
+                    tune_newNotes[tune_length].noteOn[tuple_nums[tune_length][NEW_N]++] = note;
 //draw data with sort
                 for( i = 0; i < tuple_nums[tune_length][hand_d]; ++i )
                     if( tune_draw[tune_length].hand[hand].note[i] > note ) {

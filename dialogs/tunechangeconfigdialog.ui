@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>tuneChangeConfigDialog</class>
  <widget class="QDialog" name="tuneChangeConfigDialog">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -9,6 +12,12 @@
     <width>400</width>
     <height>300</height>
    </rect>
+  </property>
+  <property name="baseSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string notr="true">Dialog</string>
@@ -55,8 +64,11 @@
    <property name="accessibleDescription">
     <string notr="true"/>
    </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="usesScrollButtons">
     <bool>false</bool>
@@ -78,14 +90,14 @@
      <string notr="true"/>
     </property>
     <attribute name="title">
-     <string>File</string>
+     <string notr="true">File</string>
     </attribute>
     <widget class="QDialogButtonBox" name="buttonBoxFile">
      <property name="geometry">
       <rect>
        <x>130</x>
        <y>240</y>
-       <width>171</width>
+       <width>261</width>
        <height>24</height>
       </rect>
      </property>
@@ -111,7 +123,7 @@
     <widget class="QPushButton" name="pushButtonDelFiile">
      <property name="geometry">
       <rect>
-       <x>310</x>
+       <x>140</x>
        <y>240</y>
        <width>80</width>
        <height>22</height>
@@ -408,7 +420,7 @@
      <string notr="true"/>
     </property>
     <attribute name="title">
-     <string>Parts</string>
+     <string notr="true">Parts</string>
     </attribute>
     <widget class="QListWidget" name="listWidgetParts">
      <property name="geometry">
@@ -447,9 +459,9 @@
     <widget class="QDialogButtonBox" name="buttonBoxParts">
      <property name="geometry">
       <rect>
-       <x>130</x>
+       <x>210</x>
        <y>240</y>
-       <width>171</width>
+       <width>181</width>
        <height>24</height>
       </rect>
      </property>
@@ -468,6 +480,9 @@
      <property name="accessibleDescription">
       <string notr="true"/>
      </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
      <property name="standardButtons">
       <set>QDialogButtonBox::Close</set>
      </property>
@@ -475,7 +490,7 @@
     <widget class="QPushButton" name="pushButtonDelDiv">
      <property name="geometry">
       <rect>
-       <x>310</x>
+       <x>220</x>
        <y>240</y>
        <width>80</width>
        <height>22</height>
@@ -498,6 +513,206 @@
      </property>
      <property name="text">
       <string notr="true">Delete</string>
+     </property>
+     <property name="shortcut">
+      <string notr="true"/>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <zorder>pushButtonDelDiv</zorder>
+    <zorder>listWidgetParts</zorder>
+    <zorder>buttonBoxParts</zorder>
+   </widget>
+   <widget class="QWidget" name="StaffTab">
+    <property name="toolTip">
+     <string notr="true"/>
+    </property>
+    <property name="statusTip">
+     <string notr="true"/>
+    </property>
+    <property name="whatsThis">
+     <string notr="true"/>
+    </property>
+    <property name="accessibleName">
+     <string notr="true"/>
+    </property>
+    <property name="accessibleDescription">
+     <string notr="true"/>
+    </property>
+    <attribute name="title">
+     <string notr="true">Staff</string>
+    </attribute>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>90</y>
+       <width>57</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string notr="true"/>
+     </property>
+     <property name="statusTip">
+      <string notr="true"/>
+     </property>
+     <property name="whatsThis">
+      <string notr="true"/>
+     </property>
+     <property name="accessibleName">
+      <string notr="true"/>
+     </property>
+     <property name="accessibleDescription">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Top</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>120</y>
+       <width>41</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string notr="true"/>
+     </property>
+     <property name="statusTip">
+      <string notr="true"/>
+     </property>
+     <property name="whatsThis">
+      <string notr="true"/>
+     </property>
+     <property name="accessibleName">
+      <string notr="true"/>
+     </property>
+     <property name="accessibleDescription">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Step</string>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::NoTextInteraction</set>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="spinBoxStaffTop">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>90</y>
+       <width>81</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string notr="true"/>
+     </property>
+     <property name="statusTip">
+      <string notr="true"/>
+     </property>
+     <property name="whatsThis">
+      <string notr="true"/>
+     </property>
+     <property name="accessibleName">
+      <string notr="true"/>
+     </property>
+     <property name="accessibleDescription">
+      <string notr="true"/>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="spinBoxStaffStep">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>120</y>
+       <width>81</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string notr="true"/>
+     </property>
+     <property name="statusTip">
+      <string notr="true"/>
+     </property>
+     <property name="whatsThis">
+      <string notr="true"/>
+     </property>
+     <property name="accessibleName">
+      <string notr="true"/>
+     </property>
+     <property name="accessibleDescription">
+      <string notr="true"/>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QDialogButtonBox" name="buttonBoxStaff">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>240</y>
+       <width>261</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string notr="true"/>
+     </property>
+     <property name="statusTip">
+      <string notr="true"/>
+     </property>
+     <property name="whatsThis">
+      <string notr="true"/>
+     </property>
+     <property name="accessibleName">
+      <string notr="true"/>
+     </property>
+     <property name="accessibleDescription">
+      <string notr="true"/>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Apply|QDialogButtonBox::Close</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonStaff">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>240</y>
+       <width>80</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string notr="true"/>
+     </property>
+     <property name="statusTip">
+      <string notr="true"/>
+     </property>
+     <property name="whatsThis">
+      <string notr="true"/>
+     </property>
+     <property name="accessibleName">
+      <string notr="true"/>
+     </property>
+     <property name="accessibleDescription">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string notr="true">Default</string>
      </property>
      <property name="shortcut">
       <string notr="true"/>

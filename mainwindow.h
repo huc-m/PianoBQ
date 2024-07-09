@@ -27,6 +27,11 @@ friend void setParameters( MainWindow *mainwindow );
 friend class myQGraphicsView;
 friend void set_hand( int key );
 friend class tuneRehearsalGetDialog;
+friend bool setStaffForm( MainWindow *mainwindow );
+friend class tuneChangeConfigDialog;
+friend void saveStaffForm(MainWindow *mainwindow);
+friend class tuneNewDialog;
+friend int read_keyboard_OneHand(void *data, fluid_midi_event_t *event);
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -36,6 +41,8 @@ public:
     QGraphicsPixmapItem *staffPixmapItem;
     QPainter *paint;
     void DrawStaff(int);
+
+    void setStaffParameters();
 
 protected:
 
@@ -61,6 +68,9 @@ private:
     int staff_line_w;  //width of line
     int staff_font_z;  //size of font
     int note_zero[2];  //line of the note with code 0 - left and right
+
+    int staff_step_default;
+    int staff_pading_h_default;
 
     int numVisibleNotes;  //number of notes that are visible on one staff screen
 

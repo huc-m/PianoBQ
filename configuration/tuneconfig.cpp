@@ -5,38 +5,6 @@
 
 #include "midi/globals.h"
 
-QStringList readDivisions( ) {
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-   return conf.value( "DIVISIONS/divisions" ).toStringList();
-}
-
-QStringList readNotUsedDivisions( ) {
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-    QStringList notUsed = conf.value( "DIVISIONS/divisions" ).toStringList();
-    conf.beginGroup( "TUNES" );
-
-    for( QString division : notUsed )
-        for( QString key : conf.allKeys() ) if( conf.value( key ).toStringList()[1] == division ) {
-            notUsed.removeOne( division );
-            break;
-        }
-   return notUsed;
-}
-
-void delDivision( QString division )  {
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-    conf.beginGroup( "DIVISIONS" );
-    QStringList divisions = conf.value( "divisions" ).toStringList();
-    divisions.removeOne( division );
-    conf.setValue( "divisions", divisions );
-}
-
-void saveDivisions(  QStringList dlist){
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-    dlist.sort();
-    conf.setValue("DIVISIONS/divisions", dlist);
-}
-
 void saveTune(MainWindow* mainwindow, QString fileName, QString division){
     QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
     QString fileNumber;
@@ -90,6 +58,7 @@ QStringList getPartsByTune( MainWindow *mainwindow ) {
     QSettings conf1 = QSettings( QDir::homePath() + ConfigTuneDirectory + conf.value( mainwindow->curTuneName ).toStringList()[4], QSettings::NativeFormat);
     conf1.beginGroup( "PARTS" );
     return conf1.allKeys();
+
 }
 
 void setStartFinishByPart( MainWindow *mainwindow, QString partName ) {
@@ -102,13 +71,21 @@ void setStartFinishByPart( MainWindow *mainwindow, QString partName ) {
     cur_finish = data[1].toInt();
 }
 
-QString getDivisionByTuneName( MainWindow *mainwindow ) {
-
+bool setStaffForm( MainWindow *mainwindow ){
     QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
     conf.beginGroup( "TUNES" );
-    QStringList data = conf.value( mainwindow->curTuneName).toStringList();
+    QStringList data = conf.value( mainwindow->curTuneName ).toStringList();
+    if( data.size() < 4 ) return true;
 
-    if( data.size() > 1 ) return data[1];
-    else return QString();
+    QSettings conf1 = QSettings( QDir::homePath() + ConfigTuneDirectory + data[4], QSettings::NativeFormat);
+    conf1.beginGroup( "STAFF" );
+    if( conf1.value( "top").isNull() ) {
+        mainwindow->staff_pading_h = mainwindow->staff_pading_h_default;
+        mainwindow->staff_step = mainwindow->staff_step_default;
+        return true;
+    } else {
+        mainwindow->staff_step = conf1.value( "step" ).toInt();
+        mainwindow->staff_pading_h = conf1.value( "top" ).toInt();
+        return false;
+    }
 }
-

@@ -11,6 +11,8 @@ tuneRehearsalSaveDialog::tuneRehearsalSaveDialog(QWidget *parent) :
     setAttribute(Qt::WA_DeleteOnClose);
     ui->setupUi(this);
     ui->comboBox->addItems( getPartsByTune( (MainWindow*)(this->parent()) ) );
+
+    setFixedSize( size() );
 }
 
 tuneRehearsalSaveDialog::~tuneRehearsalSaveDialog()

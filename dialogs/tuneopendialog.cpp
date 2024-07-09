@@ -1,6 +1,7 @@
 #include "tuneopendialog.h"
 #include "ui_tuneopendialog.h"
 
+#include "configuration/divisions.h"
 #include "configuration/tuneconfig.h"
 #include "midi/midi_with_fluidsynth.h"
 #include "midi/globals.h"
@@ -18,6 +19,8 @@ tuneOpenDialog::tuneOpenDialog(QWidget *parent) :
     if( ui->comboBox->currentIndex() == 0 ) emit ui->comboBox->currentTextChanged( ui->comboBox->currentText() );
 
     connect( ui->listWidget, &QListWidget::doubleClicked, this, &tuneOpenDialog::accept );
+
+    setFixedSize( size() );
 }
 
 tuneOpenDialog::~tuneOpenDialog()
@@ -36,9 +39,12 @@ void tuneOpenDialog::accept(){
         ((MainWindow*)this->parent())->curTuneName = ui->listWidget->currentItem()->text();
             ((MainWindow*)this->parent())->setWindowTitle( ((MainWindow*)this->parent())->curTuneName );
             ((MainWindow*)this->parent())->cur_devision_pos = ui->comboBox->currentIndex();
+        setStaffForm ( (MainWindow*)this->parent() );
+        ((MainWindow*)this->parent())->setStaffParameters();
 
         read_midi_file( getTuneFile( (MainWindow*)this->parent() ).toStdString().c_str() );
         reset_keyboard_fluid( -1 );
+        ((MainWindow*)this->parent())->setStaffParameters();
         ((MainWindow*)this->parent())->cur_pos = cur_start;
         cur_finish = tune_length;
         ((MainWindow*)this->parent())->begin = -1;

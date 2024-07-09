@@ -50,4 +50,27 @@ void deletePart( MainWindow *mainwindow, QString part ) {
     QSettings conf = QSettings( fileName, QSettings::NativeFormat);
     conf.beginGroup( "PARTS" );
     conf.remove( part );
+    conf.sync();
+    if( QFileInfo( fileName ).size() < 3 ) QFile( fileName ).remove();
+}
+
+
+void saveStaffForm(MainWindow *mainwindow) {
+    if( mainwindow->curTuneName.isEmpty() ) return;
+    QString fileName;
+    {
+        QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
+        conf.beginGroup( "TUNES" );
+        fileName = QDir::homePath() + ConfigTuneDirectory + conf.value( mainwindow->curTuneName ).toStringList()[4];
+    }
+    QSettings conf = QSettings( fileName, QSettings::NativeFormat);
+    if( mainwindow->staff_pading_h == mainwindow->staff_pading_h_default && mainwindow->staff_step == mainwindow->staff_step_default){
+        conf.remove( "STAFF" );
+        conf.sync();
+        if( QFileInfo( fileName ).size() < 3 ) QFile( fileName ).remove();
+    } else {
+        conf.beginGroup( "STAFF" );
+        conf.setValue( "top", mainwindow->staff_pading_h );
+        conf.setValue( "step", mainwindow->staff_step );
+    }
 }

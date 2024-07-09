@@ -1,6 +1,7 @@
 #include "dialogs/tunenewdialog.h"
 #include "ui_tunenewdialog.h"
 
+#include "configuration/divisions.h"
 #include "configuration/tuneconfig.h"
 #include "configuration/mainconfig.h"
 
@@ -21,6 +22,8 @@ tuneNewDialog::tuneNewDialog(QWidget *parent) :
     setMidiChannels();
     ui->spinBoxLH->setValue( left_hand_channel );
     ui->spinBoxRH->setValue( right_hand_channel );
+
+    setFixedSize( size() );
 }
 
 tuneNewDialog::~tuneNewDialog()
@@ -59,6 +62,10 @@ void tuneNewDialog::on_buttonBox_accepted(){
             ((MainWindow*)this->parent())->setWindowTitle( ((MainWindow*)this->parent())->curTuneName );
         left_hand_channel = ui->spinBoxLH->value();
         right_hand_channel = ui->spinBoxRH->value();
+
+        ((MainWindow*)this->parent())->staff_pading_h = ((MainWindow*)this->parent())->staff_pading_h_default;
+        ((MainWindow*)this->parent())->staff_step = ((MainWindow*)this->parent())->staff_step_default;
+        ((MainWindow*)this->parent())->setStaffParameters();
 
         saveTune( (MainWindow*)(this->parent()), ui->fileName->text(), ui->comboBox->currentText() );
     }

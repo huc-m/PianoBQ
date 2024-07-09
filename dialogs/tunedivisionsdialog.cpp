@@ -2,7 +2,7 @@
 #include "ui_tunedivisionsdialog.h"
 
 #include "mainwindow.h"
-#include "configuration/tuneconfig.h"
+#include "configuration/divisions.h"
 
 tuneDivisionsDialog::tuneDivisionsDialog(QWidget *parent) :
     QDialog(parent),
@@ -21,6 +21,7 @@ tuneDivisionsDialog::tuneDivisionsDialog(QWidget *parent) :
     connect( ui->buttonBoxAdd, &QDialogButtonBox::accepted, this, &tuneDivisionsDialog::accept );
     connect( ui->pushButtonRemove, &QPushButton::clicked, this, &tuneDivisionsDialog::buttonRemoveClicked );
 
+    setFixedSize( size() );
 }
 
 tuneDivisionsDialog::~tuneDivisionsDialog()

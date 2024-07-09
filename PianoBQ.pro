@@ -11,6 +11,7 @@ PRECOMPILED_HEADER = stable.h
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    configuration/divisions.cpp \
     configuration/edittuneconfig.cpp \
     configuration/fluidsettings.cpp \
     configuration/mainconfig.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
 
 HEADERS += stable.h \
 	configuration/configurationconstant.h \
+	configuration/divisions.h \
 	configuration/edittuneconfig.h \
 	configuration/mainconfig.h \
 	configuration/tuneconfig.h \

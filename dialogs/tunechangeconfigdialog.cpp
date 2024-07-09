@@ -2,6 +2,7 @@
 #include "ui_tunechangeconfigdialog.h"
 
 #include "configuration/tuneconfig.h"
+#include "configuration/divisions.h"
 #include "configuration/edittuneconfig.h"
 
 #include "midi/midi_with_fluidsynth.h"
@@ -16,6 +17,7 @@ tuneChangeConfigDialog::tuneChangeConfigDialog(QWidget *parent) :
 
     ui->buttonBoxParts->addButton( ui->pushButtonDelDiv, QDialogButtonBox::ActionRole );
     ui->buttonBoxFile->addButton( ui->pushButtonDelFiile, QDialogButtonBox::ActionRole );
+    ui->buttonBoxStaff->addButton( ui->pushButtonStaff, QDialogButtonBox::ActionRole );
 
     connect( ui->buttonBoxFile, &QDialogButtonBox::clicked, this, &tuneChangeConfigDialog::fileAction );
     connect( ui->buttonBoxParts, &QDialogButtonBox::clicked, this, &tuneChangeConfigDialog::partsAction);
@@ -27,6 +29,13 @@ tuneChangeConfigDialog::tuneChangeConfigDialog(QWidget *parent) :
     ui->comboBoxDiv->setCurrentText( getDivisionByTuneName ( (MainWindow*)(this->parent() ) ) );
 
     ui->listWidgetParts->addItems( getPartsByTune( (MainWindow*)(this->parent()) ) );
+
+    ui->spinBoxStaffTop->setValue( ((MainWindow*)this->parent())->staff_pading_h );
+    ui->spinBoxStaffStep->setValue( ((MainWindow*)this->parent())->staff_step );
+
+    connect( ui->buttonBoxStaff, &QDialogButtonBox::clicked, this, &tuneChangeConfigDialog::staffAction );
+
+    setFixedSize( size() );
 }
 
 tuneChangeConfigDialog::~tuneChangeConfigDialog()
@@ -62,7 +71,7 @@ void tuneChangeConfigDialog::fileAction( QAbstractButton *button) {
     }
 }
 
-void tuneChangeConfigDialog::partsAction(QAbstractButton *button) {
+void tuneChangeConfigDialog::partsAction( QAbstractButton *button ) {
     if( button->text() == "Close" ) { close(); return; }
     if( button->text() == "Delete" ) {
         if( ui->listWidgetParts->currentRow() < 0 ) return;
@@ -70,3 +79,19 @@ void tuneChangeConfigDialog::partsAction(QAbstractButton *button) {
         close();
     }
 }
+
+void tuneChangeConfigDialog::staffAction( QAbstractButton *button ){
+    if( button->text() == "Close" ) { close(); return; }
+    if( button->text() == "Apply" ) {
+        ((MainWindow*)this->parent())->staff_pading_h = ui->spinBoxStaffTop->value();
+        ((MainWindow*)this->parent())->staff_step = ui->spinBoxStaffStep->value();
+        ((MainWindow*)this->parent())->begin = -1;
+        ((MainWindow*)this->parent())->setStaffParameters();
+        ((MainWindow*)this->parent())->update();
+        saveStaffForm( ((MainWindow*)this->parent()) );
+    }
+    if( button->text() == "Default" ) {
+        ui->spinBoxStaffTop->setValue( ((MainWindow*)this->parent())->staff_pading_h_default );
+        ui->spinBoxStaffStep->setValue( ((MainWindow*)this->parent())->staff_step_default );
+    }
+};
