@@ -29,6 +29,7 @@ QString getTuneFile( MainWindow *mainwindow ) {
     QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
     conf.beginGroup( "TUNES" );
     QStringList data = conf.value( mainwindow->curTuneName).toStringList();
+    if( data.size() < 3 ) return QString();
         left_hand_channel = data[2].toInt();
         right_hand_channel = data[3].toInt();
 

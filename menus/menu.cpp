@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 
+#include "midi/midi_with_fluidsynth.h"
+
 void MainWindow::createMenus() {
     fileMenu = menuBar()->addMenu( "File" );
         fileMenu->addAction( exitProgramAction );
@@ -27,6 +29,8 @@ void MainWindow::createMenus() {
         menuBar()->addAction( tuneSetStartAction );
         menuBar()->addAction( tuneSetFinishAction );
         menuBar()->addAction( tuneDelFinishAction );
+    menuBar()->addSeparator();
+        menuBar()->addAction( tunePlayAction );
 }
 
 void MainWindow::createActions() {
@@ -79,4 +83,20 @@ void MainWindow::createActions() {
         handLeftOnlyAction->setCheckable( true ); handGroup->addAction( handLeftOnlyAction );
         handRightOnlyAction->setCheckable( true ); handGroup->addAction( handRightOnlyAction );
         handGroup->setExclusive( true );
+
+    tunePlayAction = new QAction( "Play" , this );
+    connect(menuBar(), &QMenuBar::triggered, this, &MainWindow::actionTriggered);
+}
+
+void MainWindow::actionTriggered(QAction *action){
+    if( action->text() == "Play" ) {
+        tunePlayAction->setText( "Stop");
+        fluid_play();
+
+    } else
+    if( tunePlayAction->text() == "Stop" ) {
+        tunePlayAction->setText( "Play");
+        fluid_play( false );
+    }
+
 }

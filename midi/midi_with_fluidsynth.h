@@ -10,4 +10,6 @@ void reset_keyboard_fluid( int from_pos ); //from_pos < 0 full reset
 
 void set_hand( int key );
 
+void fluid_play( bool key = true );
+
 #endif // MIDI_WITH_FLUIDSYNTH_H

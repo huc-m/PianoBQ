@@ -114,6 +114,8 @@ private:
     QAction *handRightOnlyAction;
     QActionGroup *handGroup;
 
+    QAction * tunePlayAction;
+
     void createMenus();
     void createActions();
 
@@ -150,6 +152,8 @@ private slots:
     void handNoHands();
     void handLeftOnly();
     void handRightOnly();
+
+    void actionTriggered( QAction *action );
 
 public: // globals
     QString currentPath;

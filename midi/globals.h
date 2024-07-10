@@ -35,6 +35,8 @@ extern int cur_position;
 extern int cur_start;
 extern int cur_finish;
 
+extern int midiTicks[TUNE_LENGTH_MAX];
+
 extern int left_hand_channel;
 extern int right_hand_channel;
 

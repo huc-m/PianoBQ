@@ -16,6 +16,9 @@ void setSoudFont( MainWindow *mainwindow ) {
     QSettings conf = QSettings( QDir::homePath() + MainConfigFileName, QSettings::NativeFormat);
     conf.beginGroup( "SOUND_FONT" );
         mainwindow->sf2FileName = conf.value( "file" ).toString();
+#ifdef QT_DEBUG
+        mainwindow->sf2FileName = "../piano.sf3";
+#endif
 }
 
 void setParameters( MainWindow *mainwindow ) {

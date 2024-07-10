@@ -30,6 +30,7 @@ int get_midi_file_event(void* tick, fluid_midi_event_t *event){
             if( tune_length + 1 == TUNE_LENGTH_MAX) { error = MIDI_FILE_TUNE_IS_TOO_LONG; return FLUID_OK; }
             if( tune_newNotes[tune_length].all != 0) {
                 ++tune_length;
+                midiTicks[tune_length] = ((ticks*)tick)->tick;
                 tune_data[tune_length].all = tune_data[tune_length - 1].all;
                 tuple_nums[tune_length][LE_H] = tuple_nums[tune_length - 1][LE_H];
                 tuple_nums[tune_length][RI_H] = tuple_nums[tune_length - 1][RI_H];
@@ -93,6 +94,7 @@ int read_midi_file(const char *midi_file_name){
     tuple_nums[0][LE_D] = tuple_nums[0][RI_D] = 0;
     tune_draw[0].all = 0;
     error = NO_ERRORS;
+    midiTicks[0] = 0;
 
     fluid_settings = new_fluid_settings();
     fluid_settings_setstr(fluid_settings, "audio.file.name", NULL_FILE_NAME);

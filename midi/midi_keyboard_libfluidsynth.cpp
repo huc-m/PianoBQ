@@ -7,6 +7,8 @@
 #include "configuration/mainconfig.h"
 #include "mainwindow.h"
 
+#include "configuration/tuneconfig.h"
+
 static fluid_settings_t* fluid_settings;
 static fluid_synth_t* fluid_synth;
 static fluid_midi_driver_t* read_keyboard_driver;
@@ -23,6 +25,9 @@ static int cur_num_wrong;
 
 static MainWindow *mainwindow;
 static int hand;
+
+static fluid_player_t *player = NULL;
+int midiTicks[TUNE_LENGTH_MAX];
 
 static int read_keyboard(void *data, fluid_midi_event_t *event){
 
@@ -207,5 +212,32 @@ void set_hand( int key) {
             read_keyboard_driver = new_fluid_midi_driver(fluid_settings, fluid_synth_handle_midi_event, fluid_synth);
             mainwindow->handNoHandsAction->setChecked( true );
         break;
+    }
+}
+
+int get_midi_tick(void *data, int curr_tick){
+    if( midiTicks[cur_position] < curr_tick )
+        if( cur_position >= cur_finish ) fluid_player_stop( player );
+        else {
+            mainwindow->cur_pos = ++cur_position;
+            mainwindow->update();
+        }
+    return FLUID_OK;
+}
+
+void fluid_play( bool key ) {
+    if ( key ){
+        if ( player == NULL ){
+            player = new_fluid_player( fluid_synth );
+            fluid_player_set_tick_callback(player, get_midi_tick, NULL);
+            fluid_player_add( player, getTuneFile( mainwindow ).toStdString().c_str());
+            fluid_player_seek( player, midiTicks[ mainwindow->cur_pos ] );
+            fluid_player_play( player );
+        }
+    } else {
+        if( player != NULL ){
+            delete_fluid_player( player );
+            player = NULL;
+        }
     }
 }
