@@ -4,13 +4,11 @@
 #include <QString>
 #include <QStringList>
 
-#include "mainwindow.h"
-
 QStringList readDivisions();
 QStringList readNotUsedDivisions();
 void saveDivisions( QStringList dlist );
 void delDivision( QString division );
 
-QString getDivisionByTuneName( MainWindow *mainwindow );
+QString getDivisionByTuneName();
 
 #endif // DIVISIONS_H

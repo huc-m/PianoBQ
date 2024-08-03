@@ -3,8 +3,14 @@
 
 #include "configuration/divisions.h"
 #include "configuration/tuneconfig.h"
+#include "mainwindow.h"
+
 #include "midi/midi_with_fluidsynth.h"
 #include "midi/globals.h"
+#include "midi/constants.h"
+
+
+extern MainWindow *mainwindow;
 
 tuneOpenDialog::tuneOpenDialog(QWidget *parent) :
     QDialog(parent),
@@ -29,26 +35,21 @@ tuneOpenDialog::~tuneOpenDialog()
 }
 
 void tuneOpenDialog::synchroList(QString division) {
-    ((MainWindow*)this->parent())->cur_devision_pos = ui->comboBox->currentIndex();
+    mainwindow->cur_devision_pos = ui->comboBox->currentIndex();
     ui->listWidget->clear();
     ui->listWidget->addItems( getTunesByDivision( division ));
 }
 
 void tuneOpenDialog::accept(){
     if( ui->listWidget->currentRow() >= 0 ){
-        ((MainWindow*)this->parent())->curTuneName = ui->listWidget->currentItem()->text();
-            ((MainWindow*)this->parent())->setWindowTitle( ((MainWindow*)this->parent())->curTuneName );
-            ((MainWindow*)this->parent())->cur_devision_pos = ui->comboBox->currentIndex();
-        setStaffForm ( (MainWindow*)this->parent() );
-        ((MainWindow*)this->parent())->setStaffParameters();
+        mainwindow->setWindowTitle( ui->listWidget->currentItem()->text() );
+            mainwindow->cur_devision_pos = ui->comboBox->currentIndex();
+        init_tune_conf();
 
-        read_midi_file( getTuneFile( (MainWindow*)this->parent() ).toStdString().c_str() );
+        read_midi_file( getTuneFile().toStdString().c_str() );
         reset_keyboard_fluid( -1 );
-        ((MainWindow*)this->parent())->setStaffParameters();
-        ((MainWindow*)this->parent())->cur_pos = cur_start;
-        cur_finish = tune_length;
-        ((MainWindow*)this->parent())->begin = -1;
-        ((MainWindow*)this->parent())->update();
+        mainwindow->begin = -1;
+        mainwindow->update();
     }
     QDialog::accept();
 }

@@ -3,7 +3,6 @@
 
 #include "configuration/divisions.h"
 #include "configuration/tuneconfig.h"
-#include "configuration/mainconfig.h"
 
 #include <QFileDialog>
 #include <QMessageBox>
@@ -12,6 +11,8 @@
 #include "midi/globals.h"
 #include "midi/midi_with_fluidsynth.h"
 
+extern MainWindow *mainwindow;
+
 tuneNewDialog::tuneNewDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::tuneNewDialog)
@@ -19,9 +20,8 @@ tuneNewDialog::tuneNewDialog(QWidget *parent) :
     setAttribute(Qt::WA_DeleteOnClose);
     ui->setupUi(this);
     ui->comboBox->addItems( readDivisions() );
-    setMidiChannels();
-    ui->spinBoxLH->setValue( left_hand_channel );
-    ui->spinBoxRH->setValue( right_hand_channel );
+    ui->spinBoxLH->setValue( mainwindow->left_hand_channel_default );
+    ui->spinBoxRH->setValue( mainwindow->right_hand_channel_default );
 
     setFixedSize( size() );
 }
@@ -36,7 +36,7 @@ void tuneNewDialog::on_pushButton_released(){
     ui->fileName->setText(fileName);
     QFileInfo fileInfo = QFileInfo( fileName );
     ui->tuneName->setText( fileInfo.baseName());
-    ((MainWindow*)this->parent())->currentPath = fileInfo.absoluteDir().absolutePath();
+    mainwindow->currentPath = fileInfo.absoluteDir().absolutePath();
 }
 
 
@@ -55,23 +55,14 @@ void tuneNewDialog::on_buttonBox_accepted(){
                 msgBox.setText("Error in file.");
         }
         msgBox.exec();
-        tune_length = 0;
-        ((MainWindow*)this->parent())->setWindowTitle( "Failed to read file" );
     } else {
-        ((MainWindow*)this->parent())->curTuneName = ui->tuneName->text();
-            ((MainWindow*)this->parent())->setWindowTitle( ((MainWindow*)this->parent())->curTuneName );
+        mainwindow->setWindowTitle( ui->tuneName->text() );
         left_hand_channel = ui->spinBoxLH->value();
         right_hand_channel = ui->spinBoxRH->value();
 
-        ((MainWindow*)this->parent())->staff_pading_h = ((MainWindow*)this->parent())->staff_pading_h_default;
-        ((MainWindow*)this->parent())->staff_step = ((MainWindow*)this->parent())->staff_step_default;
-        ((MainWindow*)this->parent())->setStaffParameters();
-
-        saveTune( (MainWindow*)(this->parent()), ui->fileName->text(), ui->comboBox->currentText() );
+        saveTune( ui->fileName->text(), ui->comboBox->currentText() );
+        init_tune_conf();
     }
-
-    reset_keyboard_fluid( -1 );
-    ((MainWindow*)this->parent())->cur_pos = cur_start;
-    ((MainWindow*)this->parent())->begin = -1;
-    ((MainWindow*)this->parent())->update();
+    mainwindow->begin = -1;
+    mainwindow->update();
 }

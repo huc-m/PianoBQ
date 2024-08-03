@@ -3,18 +3,14 @@
 #include "midi/globals.h"
 #include "midi/midi_with_fluidsynth.h"
 
-struct ticks {
-    int tick;
-    int old_tick;
-};
+static int error;
+static fluid_player_t *fluid_player;
+static int old_tick;
+static int tick_delta;
 
-int error;
-
-int get_midi_file_event(void* tick, fluid_midi_event_t *event){
-
+static int get_midi_file_event( void*, fluid_midi_event_t *event){
     int i, j, hand, hand_d;
-    int channel, note;
-
+    int channel, note, cur_tick;
     if ( error != NO_ERRORS ) return error;
 
     if( fluid_midi_event_get_type( event ) == MIDI_NOTE_ON ) {
@@ -23,14 +19,11 @@ int get_midi_file_event(void* tick, fluid_midi_event_t *event){
         if( channel == left_hand_channel ) { hand = LE_H; hand_d = LE_D; }
         else if ( channel == right_hand_channel) { hand = RI_H; hand_d = RI_D; }
             else return FLUID_OK;
-
-        if( ((ticks*)tick)->tick != ((ticks*)tick)->old_tick ) {
-            ((ticks*)tick)->old_tick = ((ticks*)tick)->tick;
+        if(( cur_tick = fluid_player_get_current_tick( fluid_player )) != old_tick ) {
 //copy tuple
             if( tune_length + 1 == TUNE_LENGTH_MAX) { error = MIDI_FILE_TUNE_IS_TOO_LONG; return FLUID_OK; }
             if( tune_newNotes[tune_length].all != 0) {
                 ++tune_length;
-                midiTicks[tune_length] = ((ticks*)tick)->tick;
                 tune_data[tune_length].all = tune_data[tune_length - 1].all;
                 tuple_nums[tune_length][LE_H] = tuple_nums[tune_length - 1][LE_H];
                 tuple_nums[tune_length][RI_H] = tuple_nums[tune_length - 1][RI_H];
@@ -41,6 +34,7 @@ int get_midi_file_event(void* tick, fluid_midi_event_t *event){
                 tune_draw[tune_length].all = 0;
                 tuple_nums[tune_length][LE_D] = tuple_nums[tune_length][RI_D] = 0;
             }
+            old_tick = cur_tick;
         }
         if( fluid_midi_event_get_velocity( event ) == 0 ) {
 // remove note
@@ -54,6 +48,9 @@ int get_midi_file_event(void* tick, fluid_midi_event_t *event){
 // introduce note
             if( tuple_nums[tune_length][hand] == N_MAX ) error = MIDI_FILE_TOO_MANY_NOTES_IN_TUPLE;
             else {
+                midiTicks[tune_length] = cur_tick;
+                if( tune_length > 0 )
+                    if( tick_delta > midiTicks[tune_length] -midiTicks[tune_length - 1] ) tick_delta = midiTicks[tune_length] - midiTicks[tune_length - 1];
                 tune_data[tune_length].hand[hand].note[tuple_nums[tune_length][hand]++] = note;
 // add new note if not exists
                 for( i = 0; i < tuple_nums[tune_length][NEW_N] && tune_newNotes[tune_length].noteOn[i] != note; ++i);
@@ -72,21 +69,12 @@ int get_midi_file_event(void* tick, fluid_midi_event_t *event){
     return FLUID_OK;
 }
 
-
-int update_midi_tick(void* tick, int curr_tick){
-
-    ((ticks*)tick)->tick = curr_tick;
-    return FLUID_OK;
-}
-
 int read_midi_file(const char *midi_file_name){
 
-    fluid_settings_t* fluid_settings;
-    fluid_synth_t* fluid_synth;
-    fluid_player_t* fluid_player;
-    fluid_file_renderer_t* fluid_file_renderer;
+    fluid_settings_t *fluid_settings;
+    fluid_synth_t *fluid_synth;
+    fluid_file_renderer_t *fluid_file_renderer;
 
-    struct ticks ticks = {0, 0};
     tune_length = 0;
     cur_position = 0;
     tuple_nums[0][LE_H] = tuple_nums[0][RI_H] = tuple_nums[0][NEW_N] = 0;
@@ -94,7 +82,9 @@ int read_midi_file(const char *midi_file_name){
     tuple_nums[0][LE_D] = tuple_nums[0][RI_D] = 0;
     tune_draw[0].all = 0;
     error = NO_ERRORS;
+    old_tick = 0;
     midiTicks[0] = 0;
+    tick_delta = INT_MAX;
 
     fluid_settings = new_fluid_settings();
     fluid_settings_setstr(fluid_settings, "audio.file.name", NULL_FILE_NAME);
@@ -112,20 +102,20 @@ int read_midi_file(const char *midi_file_name){
     fluid_synth = new_fluid_synth(fluid_settings);
     fluid_player = new_fluid_player(fluid_synth);
 
-    fluid_player_set_playback_callback(fluid_player, get_midi_file_event,  &ticks);
-    fluid_player_set_tick_callback(fluid_player, update_midi_tick, &ticks);
+    fluid_player_set_playback_callback( fluid_player, get_midi_file_event, NULL );
     if(fluid_player_add(fluid_player, midi_file_name) == FLUID_FAILED) {error = MIDI_FILE_ERROR_ON_READING; goto del_player;}
     fluid_file_renderer = new_fluid_file_renderer (fluid_synth);
 
     fluid_file_set_encoding_quality(fluid_file_renderer, 0.0);
-
     if(fluid_player_play(fluid_player) == FLUID_FAILED) {error = MIDI_FILE_ERROR_ON_READING; goto del_renderer;}
     while (fluid_player_get_status(fluid_player) == FLUID_PLAYER_PLAYING) {
         if ( error != NO_ERRORS) goto del_renderer;
         if (fluid_file_renderer_process_block(fluid_file_renderer) != FLUID_OK) break;
     }
 
-                    fluid_player_join(fluid_player);
+    fluid_player_join(fluid_player);
+    midiTicks[tune_length] = old_tick;
+
     del_renderer:   delete_fluid_file_renderer(fluid_file_renderer);
     del_player:     delete_fluid_player(fluid_player);
                     delete_fluid_synth(fluid_synth);
@@ -133,6 +123,8 @@ int read_midi_file(const char *midi_file_name){
 
     reset_keyboard_fluid( -1 );
     set_hand( ALL_H );
+
+    for( int i = 0; i < tune_length ; ++i ) midiTicks[ i ] -= tick_delta / 3;
 
     return tune_length < 1 ? MIDI_FILE_ERROR_ON_READING : error;
 }

@@ -4,6 +4,9 @@
 
 void MainWindow::createMenus() {
     fileMenu = menuBar()->addMenu( "File" );
+        fileMenu->addAction( tuneNewAction );
+        fileMenu->addAction( tuneDivisionsAction );
+        fileMenu->addSeparator();
         fileMenu->addAction( exitProgramAction );
     tuneMenu = menuBar()->addMenu( "Tune" );
         tuneMenu->addAction( tuneOpenAction );
@@ -11,13 +14,13 @@ void MainWindow::createMenus() {
         tuneMenu->addSeparator();
         tuneMenu->addAction( tuneRehearsalSaveAction );
         tuneMenu->addAction( tuneChangeConfigAction );
-        tuneMenu->addAction( tuneNewAction );
-        tuneMenu->addAction( tuneDivisionsAction );
     handMenu = menuBar()->addMenu( "Hands" );
         handMenu->addAction( handAllHandsAction );
+        handMenu->addAction( handNoHandsAction );
+        handMenu->addSeparator();
         handMenu->addAction( handLeftOnlyAction );
         handMenu->addAction( handRightOnlyAction );
-        handMenu->addAction( handNoHandsAction );
+        handMenu->addAction( handWithSoundAction );
     menuBar()->addSeparator();
         menuBar()->addAction( tuneToBeginAction );
         menuBar()->addAction( tuneMoveLeftManyAction );
@@ -77,6 +80,10 @@ void MainWindow::createActions() {
         connect( handLeftOnlyAction, &QAction::triggered, this, &MainWindow::handLeftOnly );
     handRightOnlyAction = new QAction( "Right Only" );
         connect( handRightOnlyAction, &QAction::triggered, this, &MainWindow::handRightOnly );
+    handWithSoundAction = new QAction( "With Sound" );
+        connect( handWithSoundAction, &QAction::triggered, this, &MainWindow::handWithSound );
+
+        handWithSoundAction->setCheckable( true ); handWithSoundAction->setChecked( false );
     handGroup = new QActionGroup( this );
         handAllHandsAction->setCheckable( true ); handGroup->addAction( handAllHandsAction );
         handNoHandsAction->setCheckable( true ); handGroup->addAction( handNoHandsAction );
@@ -89,14 +96,15 @@ void MainWindow::createActions() {
 }
 
 void MainWindow::actionTriggered(QAction *action){
+    extern int hand;
     if( action->text() == "Play" ) {
-        tunePlayAction->setText( "Stop");
+        handWithSoundAction->setChecked( false );
+        handWithSound();
+        if( this->windowTitle().isEmpty() ) return;
         fluid_play();
-
     } else
     if( tunePlayAction->text() == "Stop" ) {
-        tunePlayAction->setText( "Play");
         fluid_play( false );
+        set_hand( hand );
     }
-
 }

@@ -7,7 +7,7 @@
 #include <QGraphicsPathItem>
 
 char note_name[2] = {'\0'};
-static int pointerXold = 0;
+static int pointerXold;
 
 void MainWindow::DrawTuple(int pos_screen, int pos_tune){
 
@@ -59,13 +59,13 @@ void MainWindow::DrawTuple(int pos_screen, int pos_tune){
     }
 }
 
-void MainWindow::paintEvent(QPaintEvent *event) {
+void MainWindow::paintEvent( [[maybe_unused]] QPaintEvent *event) {
     int i;
     numVisibleNotes = (width()-staff_pading_w) / staff_base_w;
-    int pointerX = (cur_pos % numVisibleNotes) * staff_base_w + staff_pading_w;
+    int pointerX = (cur_position % numVisibleNotes) * staff_base_w + staff_pading_w;
     int pointerY0 = staff_pading_h / 2;
     int pointerY1 = staff_step +  1.5  * staff_pading_h + 4 * staff_base_h ;
-    int cbegin = cur_pos / numVisibleNotes * numVisibleNotes;
+    int cbegin = cur_position / numVisibleNotes * numVisibleNotes;
     int cend = cbegin + numVisibleNotes;
     if(cend > tune_length) cend = tune_length;
 
@@ -79,8 +79,10 @@ void MainWindow::paintEvent(QPaintEvent *event) {
             ui->graphicsView->setSceneRect( staffPixmap->rect());
             paint = new QPainter(staffPixmap);
             paint->setFont(QFont("PianoBQ",staff_font_z));
+            paint->setCompositionMode( QPainter::CompositionMode_Xor);
         }
         begin = cbegin;
+        pointerXold = 0;
         staffPixmap->fill(Qt::white);
         for(i=0; i<5; ++i){
             paint->drawLine(staff_pading_w, staff_pading_h + i * staff_base_h, width() - staff_pading_w,  staff_pading_h + i * staff_base_h);

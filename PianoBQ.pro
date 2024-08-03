@@ -13,8 +13,6 @@ PRECOMPILED_HEADER = stable.h
 SOURCES += \
     configuration/divisions.cpp \
     configuration/edittuneconfig.cpp \
-    configuration/fluidsettings.cpp \
-    configuration/mainconfig.cpp \
     configuration/tuneconfig.cpp \
     dialogs/tunechangeconfigdialog.cpp \
     dialogs/tunedivisionsdialog.cpp \
@@ -25,19 +23,17 @@ SOURCES += \
     drawstatff.cpp \
     main.cpp \
     mainwindow.cpp \
-    menus/manu_hands.cpp \
     menus/menu.cpp \
     menus/menu_dialogs.cpp \
+    menus/menu_hands.cpp \
     menus/menu_tune.cpp \
     midi/midi_keyboard_libfluidsynth.cpp \
     midi/read_midi_file_fluidsynth.cpp \
     myqgraphicsview.cpp
 
 HEADERS += stable.h \
-	configuration/configurationconstant.h \
 	configuration/divisions.h \
 	configuration/edittuneconfig.h \
-	configuration/mainconfig.h \
 	configuration/tuneconfig.h \
 	dialogs/tunechangeconfigdialog.h \
 	dialogs/tunedivisionsdialog.h \

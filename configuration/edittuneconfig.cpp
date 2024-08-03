@@ -1,76 +1,61 @@
 #include "configuration/edittuneconfig.h"
-#include "configuration/configurationconstant.h"
 
 #include "midi/globals.h"
-#include "midi/midi_with_fluidsynth.h"
 
-#include <QSettings>
 #include <QFile>
 
+extern QSettings *tune_conf;
+extern QSettings *tunes_conf;
+extern MainWindow *mainwindow;
 
-void editTuneConfig( MainWindow* mainwindow, QString newTuneMame, QString newDivision, int newLHch, int newRHch ) {
+void editTuneConfig( QString newTuneMame, QString newDivision, int newLHch, int newRHch ) {
 
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-    conf.beginGroup( "TUNES" );
-    QStringList data = conf.value( mainwindow->curTuneName ).toStringList();
+    tunes_conf->beginGroup( "TUNES" );
+        QStringList data = tunes_conf->value( mainwindow->windowTitle() ).toStringList();
         data[1] = newDivision;
         data[2] = QString::number( newLHch );
         data[3] = QString::number( newRHch );
-    conf.remove( mainwindow->curTuneName );
-    conf.setValue( newTuneMame, data );
+        tunes_conf->remove( mainwindow->windowTitle() );
+        tunes_conf->setValue( newTuneMame, data );
 
-    mainwindow->curTuneName = newTuneMame;
-    left_hand_channel = newLHch;
-    right_hand_channel = newRHch;
-    mainwindow->setWindowTitle( newTuneMame );
+        left_hand_channel = newLHch;
+        right_hand_channel = newRHch;
+        mainwindow->setWindowTitle( newTuneMame );
+    tunes_conf->endGroup();
 }
 
-void deleteTune( MainWindow *mainwindow ) {
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-    conf.beginGroup( "TUNES" );
-    QStringList data = conf.value( mainwindow->curTuneName ).toStringList();
-
-    if( data.size() > 4 ) {
-        QFile::remove( QDir::homePath() + ConfigTuneDirectory + data[4]);
-        conf.remove( mainwindow->curTuneName );
+void deleteTune() {
+    tunes_conf->beginGroup( "TUNES" );
+        tunes_conf->remove( mainwindow->windowTitle() );
+    tunes_conf->endGroup();
+    if( tune_conf != NULL ) {
+        QFile( tune_conf->fileName() ).remove();
+        delete tune_conf;
+        tune_conf = NULL;
     }
-
-    mainwindow->curTuneName = QString();
     mainwindow->setWindowTitle( QString() );
 }
 
-void deletePart( MainWindow *mainwindow, QString part ) {
-    if( mainwindow->curTuneName.isEmpty() ) return;
-    QString fileName;
-    {
-        QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-        conf.beginGroup( "TUNES" );
-        fileName = QDir::homePath() + ConfigTuneDirectory + conf.value( mainwindow->curTuneName ).toStringList()[4];
-    }
-    QSettings conf = QSettings( fileName, QSettings::NativeFormat);
-    conf.beginGroup( "PARTS" );
-    conf.remove( part );
-    conf.sync();
-    if( QFileInfo( fileName ).size() < 3 ) QFile( fileName ).remove();
+void deletePart( QString part ) {
+    if( tune_conf == NULL ) return;
+    tune_conf->beginGroup( "PARTS" );
+        tune_conf->remove( part );
+        tune_conf->sync();
+    tune_conf->endGroup();
+    if( QFile(tune_conf->fileName()).size() < 3 ) QFile(tune_conf->fileName()).remove();
 }
 
 
-void saveStaffForm(MainWindow *mainwindow) {
-    if( mainwindow->curTuneName.isEmpty() ) return;
-    QString fileName;
-    {
-        QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-        conf.beginGroup( "TUNES" );
-        fileName = QDir::homePath() + ConfigTuneDirectory + conf.value( mainwindow->curTuneName ).toStringList()[4];
-    }
-    QSettings conf = QSettings( fileName, QSettings::NativeFormat);
+void saveStaffForm() {
+    if( tune_conf == NULL ) return;
     if( mainwindow->staff_pading_h == mainwindow->staff_pading_h_default && mainwindow->staff_step == mainwindow->staff_step_default){
-        conf.remove( "STAFF" );
-        conf.sync();
-        if( QFileInfo( fileName ).size() < 3 ) QFile( fileName ).remove();
+        tune_conf->remove( "STAFF" );
+        tune_conf->sync();
+        if( QFile(tune_conf->fileName()).size() < 3 ) QFile(tune_conf->fileName()).remove();
     } else {
-        conf.beginGroup( "STAFF" );
-        conf.setValue( "top", mainwindow->staff_pading_h );
-        conf.setValue( "step", mainwindow->staff_step );
+        tune_conf->beginGroup( "STAFF" );
+            tune_conf->setValue( "top", mainwindow->staff_pading_h );
+            tune_conf->setValue( "step", mainwindow->staff_step );
+        tune_conf->endGroup();
     }
 }

@@ -1,49 +1,47 @@
 #include "configuration/tuneconfig.h"
-#include "configuration/configurationconstant.h"
-
-#include <QSettings>
+#include "midi/constants.h"
+#include "mainwindow.h"
 
 #include "midi/globals.h"
 
+extern QSettings *tune_conf;
+extern QSettings *tunes_conf;
+extern MainWindow *mainwindow;
+
 QStringList readDivisions( ) {
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-   return conf.value( "DIVISIONS/divisions" ).toStringList();
+   return tunes_conf->value( "DIVISIONS/divisions" ).toStringList();
 }
 
 QStringList readNotUsedDivisions( ) {
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-    QStringList divisionAll = conf.value( "DIVISIONS/divisions" ).toStringList();
+    if( tune_conf == NULL ) return QStringList();
+    QStringList divisionAll = tunes_conf->value( "DIVISIONS/divisions" ).toStringList();
     QStringList notUsed = divisionAll;
-    conf.beginGroup( "TUNES" );
-    for( QString division : divisionAll )
-        for( QString key : conf.allKeys() ) if( conf.value( key ).toStringList()[1] == division ) {
-            notUsed.removeOne( division );
-            break;
-        }
+    tunes_conf->beginGroup( "TUNES" );
+        for( QString division : divisionAll )
+            for( QString key : tunes_conf->allKeys() ) if( tunes_conf->value( key ).toStringList()[1] == division ) {
+                notUsed.removeOne( division );
+                break;
+            }
+    tunes_conf->endGroup();
    return notUsed;
 }
 
 void delDivision( QString division )  {
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-    conf.beginGroup( "DIVISIONS" );
-    QStringList divisions = conf.value( "divisions" ).toStringList();
-    divisions.removeOne( division );
-    conf.setValue( "divisions", divisions );
+    tunes_conf->beginGroup( "DIVISIONS" );
+        QStringList divisions = tunes_conf->value( "divisions" ).toStringList();
+        divisions.removeOne( division );
+        tunes_conf->setValue( "divisions", divisions );
+    tunes_conf->endGroup();
 }
 
 void saveDivisions(  QStringList dlist){
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
     dlist.sort();
-    conf.setValue("DIVISIONS/divisions", dlist);
+    tunes_conf->setValue("DIVISIONS/divisions", dlist);
 }
 
-QString getDivisionByTuneName( MainWindow *mainwindow ) {
-
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-    conf.beginGroup( "TUNES" );
-    QStringList data = conf.value( mainwindow->curTuneName).toStringList();
-
-    if( data.size() > 1 ) return data[1];
-    else return QString();
+QString getDivisionByTuneName() {
+    tunes_conf->beginGroup( "TUNES" );
+        QStringList data = tunes_conf->value( mainwindow->windowTitle() ).toStringList();
+    tunes_conf->endGroup();
+    if( data.size() > 1 ) return data[1]; else return QString();
 }
-

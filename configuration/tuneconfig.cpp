@@ -1,92 +1,85 @@
 #include "configuration/tuneconfig.h"
-#include "configuration/configurationconstant.h"
-
+#include <QDebug>
 #include <QSettings>
 
 #include "midi/globals.h"
+#include "midi/midi_with_fluidsynth.h"
 
-void saveTune(MainWindow* mainwindow, QString fileName, QString division){
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
+#include "mainwindow.h"
+
+extern QSettings *tune_conf;
+extern QSettings *tunes_conf;
+extern MainWindow *mainwindow;
+
+void saveTune(QString fileName, QString division){
     QString fileNumber;
-    fileNumber.setNum( conf.value("OTHER/LastFileNumber").toInt() + 1 );
-    conf.setValue("OTHER/LastFileNumber", fileNumber);
-
-    conf.beginGroup( "TUNES" );
-    conf.setValue(mainwindow->curTuneName, QStringList( { fileName, division, QString::number( left_hand_channel ), QString::number( right_hand_channel ),  fileNumber} ));
+    fileNumber.setNum( tunes_conf->value("OTHER/LastFileNumber").toInt() + 1 );
+    tunes_conf->setValue("OTHER/LastFileNumber", fileNumber);
+    tunes_conf->beginGroup( "TUNES" );
+        tunes_conf->setValue(mainwindow->windowTitle(), QStringList( { fileName, division, QString::number( left_hand_channel ), QString::number( right_hand_channel ),  fileNumber } ));
+    tunes_conf->endGroup();
 }
 
 QStringList getTunesByDivision( QString division ){
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-    conf.beginGroup( "TUNES" );
-    QStringList list;
-
-    for( QString key : conf.allKeys() ) if( conf.value( key ).toStringList()[1] == division ) list.append( key );
-
+    tunes_conf->beginGroup( "TUNES" );
+        QStringList list;
+        for( QString key : tunes_conf->allKeys() ) if( tunes_conf->value( key ).toStringList()[1] == division ) list.append( key );
+    tunes_conf->endGroup();
     return list;
 }
 
-QString getTuneFile( MainWindow *mainwindow ) {
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-    conf.beginGroup( "TUNES" );
-    QStringList data = conf.value( mainwindow->curTuneName).toStringList();
-    if( data.size() < 3 ) return QString();
-        left_hand_channel = data[2].toInt();
-        right_hand_channel = data[3].toInt();
+QString getTuneFile() {
+    tunes_conf->beginGroup( "TUNES" );
+        QStringList data = tunes_conf->value( mainwindow->windowTitle() ).toStringList();
+    tunes_conf->endGroup();
 
+    if( data.size() < 4 ) return QString();
+    left_hand_channel = data[2].toInt();
+    right_hand_channel = data[3].toInt();
     return data[0];
 }
 
-void saveTunePart(MainWindow *mainwindow, QString partName) {
-    if( mainwindow->curTuneName.isEmpty() ) return;
-    QString fileName;
-    {
-        QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-        conf.beginGroup( "TUNES" );
-        fileName = QDir::homePath() + ConfigTuneDirectory + conf.value( mainwindow->curTuneName ).toStringList()[4];
-    }
-
-    QStringList list = { QString::number( cur_start ), QString::number( cur_finish )};
-
-    QSettings conf = QSettings( fileName, QSettings::NativeFormat);
-    conf.beginGroup( "PARTS" );
-    conf.setValue( partName, list );
+void saveTunePart( QString partName ) {
+    if( tune_conf == NULL ) return;
+    tune_conf->beginGroup( "PARTS" );
+        tune_conf->setValue( partName,  QStringList( { QString::number( cur_start ), QString::number( cur_finish )}));
+    tune_conf->endGroup();
 }
 
-QStringList getPartsByTune( MainWindow *mainwindow ) {
-    if( mainwindow->curTuneName.isEmpty() ) return QStringList();
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-    conf.beginGroup( "TUNES" );
-    QSettings conf1 = QSettings( QDir::homePath() + ConfigTuneDirectory + conf.value( mainwindow->curTuneName ).toStringList()[4], QSettings::NativeFormat);
-    conf1.beginGroup( "PARTS" );
-    return conf1.allKeys();
+QStringList getPartsByTune() {
+    if( tune_conf == NULL ) return QStringList();
+    tune_conf->beginGroup( "PARTS" );
+        QStringList list = tune_conf->allKeys();
+    tune_conf->endGroup();
+    return list;
 
 }
 
-void setStartFinishByPart( MainWindow *mainwindow, QString partName ) {
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-    conf.beginGroup( "TUNES" );
-    QSettings conf1 = QSettings( QDir::homePath() + ConfigTuneDirectory + conf.value( mainwindow->curTuneName ).toStringList()[4], QSettings::NativeFormat);
-    conf1.beginGroup( "PARTS" );
-    QStringList data = conf1.value( partName ).toStringList();
+void setStartFinishByPart( QString partName ) {
+    if( tune_conf == NULL ) return;
+    tune_conf->beginGroup( "PARTS" );
+        QStringList data = tune_conf->value( partName ).toStringList();
+    tune_conf->endGroup();
+    if( data.size() < 1 ) return;
     cur_start = data[0].toInt();
     cur_finish = data[1].toInt();
 }
 
-bool setStaffForm( MainWindow *mainwindow ){
-    QSettings conf = QSettings( QDir::homePath() + ConfigFileName, QSettings::NativeFormat);
-    conf.beginGroup( "TUNES" );
-    QStringList data = conf.value( mainwindow->curTuneName ).toStringList();
-    if( data.size() < 4 ) return true;
-
-    QSettings conf1 = QSettings( QDir::homePath() + ConfigTuneDirectory + data[4], QSettings::NativeFormat);
-    conf1.beginGroup( "STAFF" );
-    if( conf1.value( "top").isNull() ) {
-        mainwindow->staff_pading_h = mainwindow->staff_pading_h_default;
-        mainwindow->staff_step = mainwindow->staff_step_default;
-        return true;
-    } else {
-        mainwindow->staff_step = conf1.value( "step" ).toInt();
-        mainwindow->staff_pading_h = conf1.value( "top" ).toInt();
-        return false;
-    }
+void init_tune_conf(){
+    delete tune_conf; tune_conf = NULL;
+    if( mainwindow->windowTitle().isEmpty() ) return;
+    tunes_conf->beginGroup("TUNES");
+        QStringList data = tunes_conf->value( mainwindow->windowTitle()).toStringList();
+        tune_conf = new QSettings( QDir::homePath() + CONFIG_TUNES_DIRECTORY + data[4], QSettings::NativeFormat );
+        left_hand_channel = data[2].toInt();
+        right_hand_channel = data[3].toInt();
+    tunes_conf->endGroup();
+    tune_conf->beginGroup( "STAFF" );
+        mainwindow->staff_step = tune_conf->value( "step" , mainwindow->staff_step_default ).toInt();
+        mainwindow->staff_pading_h = tune_conf->value( "top", mainwindow->staff_step_default ).toInt();
+    tune_conf->endGroup();
+    mainwindow->setStaffParameters();
+    reset_keyboard_fluid( -1 );
+    set_hand( ALL_H );
+    mainwindow->handAllHandsAction->setChecked( true );
 }

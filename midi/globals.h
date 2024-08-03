@@ -30,12 +30,12 @@ extern tune_def tune_data[TUNE_LENGTH_MAX]; //all notes
 extern tune_def tune_newNotes[TUNE_LENGTH_MAX]; // only new notes
 extern tune_def tune_draw[TUNE_LENGTH_MAX]; //to draw
 extern uint8_t tuple_nums[TUNE_LENGTH_MAX][TUPLE_NUMS_LENGTH]; // for each hand and all
+extern int midiTicks[TUNE_LENGTH_MAX];
+
 extern int tune_length;
 extern int cur_position;
 extern int cur_start;
 extern int cur_finish;
-
-extern int midiTicks[TUNE_LENGTH_MAX];
 
 extern int left_hand_channel;
 extern int right_hand_channel;

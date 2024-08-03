@@ -2,83 +2,72 @@
 
 #include "midi/globals.h"
 #include "midi/midi_with_fluidsynth.h"
-
-void MainWindow::startOneHand( bool right ){
-    if( handLeftOnlyAction->isChecked() ){
-        if ( right )
-            while ( tuple_nums[cur_position][LE_D] == 0 ) {
-                if( cur_position < cur_finish ) ++cur_position;
-                else break;
-            }
-        else
-            while ( tuple_nums[cur_position][LE_D] == 0 )
-                if( cur_position > cur_start ) --cur_position;
-                else break;
-        cur_pos = cur_position;
-    }
-    if( handRightOnlyAction->isChecked()){
-        if ( right )
-            while ( tuple_nums[cur_position][RI_D] == 0 ) {
-                if( cur_position < cur_finish ) ++cur_position;
-                else break;
-            }
-        else
-            while ( tuple_nums[cur_position][RI_D] == 0 )
-                if( cur_position > cur_start ) --cur_position;
-                else break;
-        cur_pos = cur_position;
-    }
-    if( !right ) startOneHand();
-}
+extern int hand;
 
 void MainWindow::tuneMoveLeftOne() {
-    if( --cur_pos < cur_start ) cur_pos = cur_start;
-    reset_keyboard_fluid( cur_pos );
-    startOneHand( false );
+    if( --cur_position < cur_start ) cur_position = cur_start;
+    if( hand == LE_H || hand == RI_H ) {
+        oneHandMovePreviousMrg();
+        reset_keyboard_fluid( cur_position );
+    }
+    if( hand == LE_D || hand == RI_D ) set_hand( hand );
     update();
 }
 
 void MainWindow::tuneMoveLeftMany(){
-    if( ( cur_pos -= numVisibleNotes ) < cur_start ) cur_pos = cur_start;
-    reset_keyboard_fluid( cur_pos );
-    startOneHand( false );
+    if( ( cur_position -= numVisibleNotes ) < cur_start ) cur_position = cur_start;
+    if( hand == LE_H || hand == RI_H ) {
+        oneHandMovePreviousMrg();
+        reset_keyboard_fluid( cur_position );
+    }
+    if( hand == LE_D || hand == RI_D ) set_hand( hand );
     update();
 }
 
 void MainWindow::tuneMoveRightOne() {
-    if( ++cur_pos > cur_finish ) cur_pos = cur_finish;
-    reset_keyboard_fluid( cur_pos );
-    startOneHand();
+    if( ++cur_position > cur_finish ) cur_position = cur_finish;
+    if( hand == LE_H || hand == RI_H ) {
+        oneHandMoveNextMrg();
+        reset_keyboard_fluid( cur_position );
+    }
+    if( hand == LE_D || hand == RI_D ) set_hand( hand );
     update();
 }
 
 void MainWindow::tuneMoveRightMany(){
-    if( ( cur_pos += numVisibleNotes ) > cur_finish ) cur_pos = cur_finish;
-    reset_keyboard_fluid( cur_pos );
-    startOneHand();
+    if( ( cur_position += numVisibleNotes ) > cur_finish ) cur_position = cur_finish;
+    if( hand == LE_H || hand == RI_H ) {
+        oneHandMoveNextMrg();
+        reset_keyboard_fluid( cur_position );
+    }
+    if( hand == LE_D || hand == RI_D ) set_hand( hand );
     update();
 }
 
 void MainWindow::tuneToBegin() {
-    reset_keyboard_fluid( cur_pos = cur_start );
-    startOneHand( false );
+    reset_keyboard_fluid( cur_start );
+    if( hand == LE_H || hand == RI_H ) {
+        oneHandMoveNextMrg();
+        reset_keyboard_fluid( cur_position );
+    }
+    if( hand == LE_D || hand == RI_D ) set_hand( hand );
     update();
 }
 
 void MainWindow::tuneSetStart() {
-    cur_start = cur_pos;
-    reset_keyboard_fluid( cur_pos );
+    cur_start = cur_position;
+    reset_keyboard_fluid( cur_position );
     update();
 }
 
 void MainWindow::tuneSetFinish() {
-    cur_finish = cur_pos;
-    reset_keyboard_fluid( cur_pos );
+    cur_finish = cur_position;
+    reset_keyboard_fluid( cur_position );
 }
 
 void MainWindow::tuneDelStart() {
     cur_start = 0;
-    reset_keyboard_fluid( cur_start );
+    reset_keyboard_fluid( cur_position );
 }
 
 void MainWindow::tuneDelFinish() {

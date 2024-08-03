@@ -30,7 +30,7 @@ tuneDivisionsDialog::~tuneDivisionsDialog()
 }
 
 
-void tuneDivisionsDialog::buttonRemoveClicked( bool checked ) {
+void tuneDivisionsDialog::buttonRemoveClicked( [[maybe_unused]] bool checked ) {
     if( ui->listWidget->currentRow() < 0 ) return;
     delDivision( ui->listWidget->currentItem()->text() );
     close();

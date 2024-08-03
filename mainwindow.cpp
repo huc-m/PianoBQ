@@ -1,13 +1,15 @@
-#include "midi/constants.h"
+#include "midi/globals.h"
 #include "midi/midi_with_fluidsynth.h"
-
-#include "configuration/mainconfig.h"
-#include "configuration/configurationconstant.h"
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 #include <QFontDatabase>
+#include <QSettings>
+
+MainWindow *mainwindow;
+QSettings *tune_conf = NULL;
+QSettings *tunes_conf;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -15,33 +17,58 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->graphicsView->setScene(&staffScene);
+    mainwindow = this;
+    setWindowTitle( NULL );
+    tunes_conf = new QSettings( QDir::homePath() + CONFIG_TUNES_FILE, QSettings::NativeFormat );
     createActions();
     createMenus();
 
 //set parameters
-    setParameters( this );
+    QSettings *conf = new QSettings( QDir::homePath() + CONFIG_MAIN_FILE, QSettings::NativeFormat);
+
+    conf->beginGroup( "MIDI" );
+        left_hand_channel_default =  conf->value( "LeftHandChannel" ).toInt();
+        right_hand_channel_default = conf->value( "RightHandChannel" ).toInt();
+        currentPath = conf->value( "currentPath" ).toString();
+    conf->endGroup();
+    conf->beginGroup( "STAFF" );
+        staff_base_h2 = conf->value( "half_space_between_lines" ).toString().toInt();
+        staff_step_default = conf->value( "staffs_step" ).toString().toInt();
+        staff_pading_h_default = conf->value( "padding_top" ).toString().toInt();
+        staff_pading_w = conf->value( "padding_left" ).toString().toInt();
+        staff_font_z = conf->value( "font_size" ).toString().toInt();
+        staff_line_w = conf->value( "line_width" ).toString().toInt();
+    conf->endGroup();
+
     staff_step = staff_step_default;
     staff_pading_h = staff_pading_h_default;
 
     setStaffParameters();
 
-    begin = -1;
     staff_area_size = QSize(10,10);
     cur_devision_pos = -1;
 
-    setSoudFont( this );
+    init_keyboard_libfluidsynth( conf );
+
+    delete( conf );
+
+    set_hand( NO_H );
+
 
 //set staff view
 
     staffPixmap = new QPixmap( staff_area_size );
     staffPixmapItem = staffScene.addPixmap( *staffPixmap );
     paint = new QPainter( staffPixmap );
-    QFontDatabase:: addApplicationFont( QDir::homePath() + FontFile );
+    QFontDatabase:: addApplicationFont( QDir::homePath() + FONT_FILE );
 }
 
 MainWindow::~MainWindow()
 {
     delete_keyboard_fluid();
+
+    delete tune_conf;
+    delete tunes_conf;
 
     paint->end();
     delete staffPixmap;
