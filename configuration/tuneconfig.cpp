@@ -76,7 +76,7 @@ void init_tune_conf(){
     tunes_conf->endGroup();
     tune_conf->beginGroup( "STAFF" );
         mainwindow->staff_step = tune_conf->value( "step" , mainwindow->staff_step_default ).toInt();
-        mainwindow->staff_pading_h = tune_conf->value( "top", mainwindow->staff_step_default ).toInt();
+        mainwindow->staff_pading_h = tune_conf->value( "top", mainwindow->staff_pading_h_default ).toInt();
     tune_conf->endGroup();
     mainwindow->setStaffParameters();
     reset_keyboard_fluid( -1 );
