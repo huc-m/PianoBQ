@@ -45,6 +45,7 @@ void tuneOpenDialog::accept(){
         mainwindow->setWindowTitle( ui->listWidget->currentItem()->text() );
             mainwindow->cur_devision_pos = ui->comboBox->currentIndex();
         init_tune_conf();
+        mainwindow->setToolboxParts();
 
         read_midi_file( getTuneFile().toStdString().c_str() );
         reset_keyboard_fluid( -1 );

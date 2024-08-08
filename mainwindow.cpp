@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     tunes_conf = new QSettings( QDir::homePath() + CONFIG_TUNES_FILE, QSettings::NativeFormat );
     createActions();
     createMenus();
+    setToolbox();
 
 //set parameters
     QSettings *conf = new QSettings( QDir::homePath() + CONFIG_MAIN_FILE, QSettings::NativeFormat);
