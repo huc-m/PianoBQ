@@ -10,8 +10,6 @@
 #include <QDebug>
 #endif
 
-extern MainWindow *mainwindow;
-
 static fluid_settings_t* fluid_settings;
 static fluid_synth_t* fluid_synth;
 static fluid_midi_driver_t* read_keyboard_driver;

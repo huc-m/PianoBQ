@@ -9,7 +9,6 @@
 
 extern QSettings *tune_conf;
 extern QSettings *tunes_conf;
-extern MainWindow *mainwindow;
 
 void saveTune(QString fileName, QString division){
     QString fileNumber;

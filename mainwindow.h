@@ -173,4 +173,6 @@ public: // globals
     int begin;         //begin position on the staff in the graphics
 };
 
+extern MainWindow *mainwindow;
+
 #endif // MAINWINDOW_H

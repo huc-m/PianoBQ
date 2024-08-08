@@ -9,9 +9,6 @@
 #include "midi/globals.h"
 #include "midi/constants.h"
 
-
-extern MainWindow *mainwindow;
-
 tuneOpenDialog::tuneOpenDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::tuneOpenDialog)

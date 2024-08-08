@@ -3,8 +3,6 @@
 #include "configuration/tuneconfig.h"
 #include "midi/midi_with_fluidsynth.h"
 
-extern MainWindow *mainwindow;
-
 void toolBox_openPart(){
     if( mainwindow->tunePlayAction->text() == "Stop" ) fluid_play( false );
     mainwindow->open_tuneOpenDialog();

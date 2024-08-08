@@ -7,7 +7,6 @@
 #include "midi/globals.h"
 #include "midi/midi_with_fluidsynth.h"
 
-extern MainWindow *mainwindow;
 extern int hand;
 
 tuneRehearsalGetDialog::tuneRehearsalGetDialog(QWidget *parent) :

@@ -6,7 +6,6 @@
 
 extern QSettings *tune_conf;
 extern QSettings *tunes_conf;
-extern MainWindow *mainwindow;
 
 QStringList readDivisions( ) {
    return tunes_conf->value( "DIVISIONS/divisions" ).toStringList();

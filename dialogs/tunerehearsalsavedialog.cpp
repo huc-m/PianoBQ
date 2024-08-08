@@ -4,6 +4,7 @@
 #include "configuration/tuneconfig.h"
 #include "mainwindow.h"
 
+
 tuneRehearsalSaveDialog::tuneRehearsalSaveDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::tuneRehearsalSaveDialog)
@@ -23,6 +24,7 @@ tuneRehearsalSaveDialog::~tuneRehearsalSaveDialog()
 void tuneRehearsalSaveDialog::accept(){
     if(  ui->comboBox->currentText().length() < 1 ) return;
     saveTunePart( ui->comboBox->currentText() );
+    mainwindow->setToolboxParts();
 
     QDialog::accept();
 }

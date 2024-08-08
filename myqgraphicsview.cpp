@@ -3,8 +3,6 @@
 
 #include "midi/midi_with_fluidsynth.h"
 
-extern MainWindow *mainwindow;
-
 myQGraphicsView::myQGraphicsView( QWidget *parent ) : QGraphicsView( parent )
 {
 
