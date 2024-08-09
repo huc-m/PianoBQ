@@ -27,6 +27,7 @@ SOURCES += \
     menus/menu_dialogs.cpp \
     menus/menu_hands.cpp \
     menus/menu_tune.cpp \
+    menus/toolbox.cpp \
     midi/midi_keyboard_libfluidsynth.cpp \
     midi/read_midi_file_fluidsynth.cpp \
     myqgraphicsview.cpp

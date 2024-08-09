@@ -13,6 +13,8 @@ QStringList getPartsByTune();
 void setStartFinishByPart(QString partName );
 void saveTunePart(QString partName );
 
+void tuneAcceptPart( QString part );
+
 void saveStaffForm();
 
 #endif // TUNECONFIG_H

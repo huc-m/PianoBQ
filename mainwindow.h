@@ -32,6 +32,10 @@ friend myQGraphicsView;
 friend void init_tune_conf();
 friend void fluid_play( bool, bool );
 friend int play_update_graphics ( void*, fluid_midi_event_t* );
+friend void tuneAcceptPart( QString part );
+
+friend void toolBox_openPart();
+friend void toolBox_AcceptParts();
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -129,6 +133,10 @@ private:
     QDialog *tunerehearsalgetdialog;
     QDialog *tunechangeconfigdialog;
 
+public:
+    void setToolbox();
+    void setToolboxParts();
+
 private slots:
 // File
     void exitProgram();
@@ -164,5 +172,7 @@ public: // globals
     int cur_devision_pos;
     int begin;         //begin position on the staff in the graphics
 };
+
+extern MainWindow *mainwindow;
 
 #endif // MAINWINDOW_H

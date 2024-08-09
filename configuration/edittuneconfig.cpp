@@ -1,12 +1,12 @@
 #include "configuration/edittuneconfig.h"
 
 #include "midi/globals.h"
+#include "mainwindow.h"
 
 #include <QFile>
 
 extern QSettings *tune_conf;
 extern QSettings *tunes_conf;
-extern MainWindow *mainwindow;
 
 void editTuneConfig( QString newTuneMame, QString newDivision, int newLHch, int newRHch ) {
 
@@ -43,6 +43,7 @@ void deletePart( QString part ) {
         tune_conf->sync();
     tune_conf->endGroup();
     if( QFile(tune_conf->fileName()).size() < 3 ) QFile(tune_conf->fileName()).remove();
+    mainwindow->setToolboxParts();
 }
 
 

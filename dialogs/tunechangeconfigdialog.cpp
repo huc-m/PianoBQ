@@ -9,8 +9,6 @@
 #include "midi/midi_with_fluidsynth.h"
 #include "midi/globals.h"
 
-extern MainWindow *mainwindow;
-
 tuneChangeConfigDialog::tuneChangeConfigDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::tuneChangeConfigDialog)

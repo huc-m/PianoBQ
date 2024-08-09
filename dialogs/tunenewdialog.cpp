@@ -11,8 +11,6 @@
 #include "midi/globals.h"
 #include "midi/midi_with_fluidsynth.h"
 
-extern MainWindow *mainwindow;
-
 tuneNewDialog::tuneNewDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::tuneNewDialog)
