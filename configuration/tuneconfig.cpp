@@ -6,6 +6,7 @@
 #include "midi/midi_with_fluidsynth.h"
 
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 
 extern QSettings *tune_conf;
 extern QSettings *tunes_conf;
@@ -80,5 +81,5 @@ void init_tune_conf(){
     mainwindow->setStaffParameters();
     reset_keyboard_fluid( -1 );
     set_hand( ALL_H );
-    mainwindow->handAllHandsAction->setChecked( true );
+    mainwindow->ui->handAllHandsAction->setChecked( true );
 }

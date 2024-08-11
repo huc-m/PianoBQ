@@ -68,4 +68,6 @@ DISTFILES += \
     LICENSE \
     README.md \
     fonts/PianoBQ.sfd \
-    fonts/PianoBQ.ttf
+    fonts/PianoBQ.ttf \
+    fonts/PianoBQn.sfd \
+    fonts/PianoBQn.ttf

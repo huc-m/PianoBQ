@@ -1,26 +1,9 @@
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 
 #include "midi/midi_with_fluidsynth.h"
 
 void MainWindow::createMenus() {
-    fileMenu = menuBar()->addMenu( "File" );
-        fileMenu->addAction( tuneNewAction );
-        fileMenu->addAction( tuneDivisionsAction );
-        fileMenu->addSeparator();
-        fileMenu->addAction( exitProgramAction );
-    tuneMenu = menuBar()->addMenu( "Tune" );
-        tuneMenu->addAction( tuneOpenAction );
-        tuneMenu->addAction( tuneRehearsalGetAction);
-        tuneMenu->addSeparator();
-        tuneMenu->addAction( tuneRehearsalSaveAction );
-        tuneMenu->addAction( tuneChangeConfigAction );
-    handMenu = menuBar()->addMenu( "Hands" );
-        handMenu->addAction( handAllHandsAction );
-        handMenu->addAction( handNoHandsAction );
-        handMenu->addSeparator();
-        handMenu->addAction( handLeftOnlyAction );
-        handMenu->addAction( handRightOnlyAction );
-        handMenu->addAction( handWithSoundAction );
     menuBar()->addSeparator();
         menuBar()->addAction( tuneToBeginAction );
         menuBar()->addAction( tuneMoveLeftManyAction );
@@ -37,21 +20,28 @@ void MainWindow::createMenus() {
 }
 
 void MainWindow::createActions() {
-    exitProgramAction = new QAction( "Exit", this );
-        connect( exitProgramAction, &QAction::triggered, this, &MainWindow::exitProgram );
+    connect( ui->tuneNewAction, &QAction::triggered, this, &MainWindow::open_tuneNewDialog );
+    connect( ui->tuneDivisionsAction, &QAction::triggered, this, &MainWindow::open_tuneDivisionsDialog );
+    connect( ui->loadFontAction, &QAction::triggered, this, &MainWindow::loadFont );
+    connect( ui->exitProgramAction, &QAction::triggered, this, &MainWindow::exitProgram );
 
-    tuneOpenAction = new QAction( "Open", this );
-        connect( tuneOpenAction, &QAction::triggered, this, &MainWindow::open_tuneOpenDialog );
-    tuneChangeConfigAction = new QAction( "Change conf", this );
-        connect( tuneChangeConfigAction, &QAction::triggered, this, &MainWindow::open_tuneChangeConfigDialog );
-    tuneRehearsalGetAction = new QAction( "Get Part", this );
-        connect( tuneRehearsalGetAction, &QAction::triggered, this, &MainWindow::open_tuneRehearsalGetDialog );
-    tuneRehearsalSaveAction = new QAction( "Save Part", this );
-        connect( tuneRehearsalSaveAction, &QAction::triggered, this, &MainWindow::open_tuneRehearsalSaveDialog );
-    tuneNewAction = new QAction( "New", this );
-        connect( tuneNewAction, &QAction::triggered, this, &MainWindow::open_tuneNewDialog );
-    tuneDivisionsAction = new QAction( "Divisions", this );
-        connect( tuneDivisionsAction, &QAction::triggered, this, &MainWindow::open_tuneDivisionsDialog );
+    connect( ui->tuneOpenAction, &QAction::triggered, this, &MainWindow::open_tuneOpenDialog );
+    connect( ui->tuneRehearsalGetAction, &QAction::triggered, this, &MainWindow::open_tuneRehearsalGetDialog );
+    connect( ui->tuneRehearsalSaveAction, &QAction::triggered, this, &MainWindow::open_tuneRehearsalSaveDialog );
+    connect( ui->tuneChangeConfigAction, &QAction::triggered, this, &MainWindow::open_tuneChangeConfigDialog );
+
+    connect( ui->handAllHandsAction, &QAction::triggered, this, &MainWindow::handAllHands );
+    connect( ui->handNoHandsAction, &QAction::triggered, this, &MainWindow::handNoHands );
+    connect( ui->handLeftOnlyAction, &QAction::triggered, this, &MainWindow::handLeftOnly );
+    connect( ui->handRightOnlyAction, &QAction::triggered, this, &MainWindow::handRightOnly );
+    connect( ui->handWithSoundAction, &QAction::triggered, this, &MainWindow::handWithSound );
+
+    handGroup = new QActionGroup( this );
+        handGroup->addAction( ui->handAllHandsAction );
+        handGroup->addAction( ui->handNoHandsAction );
+        handGroup->addAction( ui->handLeftOnlyAction );
+        handGroup->addAction( ui->handRightOnlyAction );
+    handGroup->setExclusive( true );
 
     tuneToBeginAction = new QAction( "!<", this );
         connect( tuneToBeginAction, &QAction::triggered, this, &MainWindow::tuneToBegin );
@@ -72,25 +62,6 @@ void MainWindow::createActions() {
     tuneDelFinishAction = new QAction( "!>", this );
         connect( tuneDelFinishAction, &QAction::triggered, this, &MainWindow::tuneDelFinish );
 
-    handAllHandsAction = new QAction( "Check All", this );
-        connect( handAllHandsAction, &QAction::triggered, this, &MainWindow::handAllHands );
-    handNoHandsAction = new QAction( "Free" );
-        connect( handNoHandsAction, &QAction::triggered, this, &MainWindow::handNoHands );
-    handLeftOnlyAction = new QAction( "Left Only" );
-        connect( handLeftOnlyAction, &QAction::triggered, this, &MainWindow::handLeftOnly );
-    handRightOnlyAction = new QAction( "Right Only" );
-        connect( handRightOnlyAction, &QAction::triggered, this, &MainWindow::handRightOnly );
-    handWithSoundAction = new QAction( "With Sound" );
-        connect( handWithSoundAction, &QAction::triggered, this, &MainWindow::handWithSound );
-
-        handWithSoundAction->setCheckable( true ); handWithSoundAction->setChecked( false );
-    handGroup = new QActionGroup( this );
-        handAllHandsAction->setCheckable( true ); handGroup->addAction( handAllHandsAction );
-        handNoHandsAction->setCheckable( true ); handGroup->addAction( handNoHandsAction );
-        handLeftOnlyAction->setCheckable( true ); handGroup->addAction( handLeftOnlyAction );
-        handRightOnlyAction->setCheckable( true ); handGroup->addAction( handRightOnlyAction );
-        handGroup->setExclusive( true );
-
     tunePlayAction = new QAction( "Play" , this );
     connect(menuBar(), &QMenuBar::triggered, this, &MainWindow::actionTriggered);
 }
@@ -98,7 +69,7 @@ void MainWindow::createActions() {
 void MainWindow::actionTriggered(QAction *action){
     extern int hand;
     if( action->text() == "Play" ) {
-        handWithSoundAction->setChecked( false );
+        ui->handWithSoundAction->setChecked( false );
         handWithSound();
         if( this->windowTitle().isEmpty() ) return;
         fluid_play();
@@ -107,4 +78,12 @@ void MainWindow::actionTriggered(QAction *action){
         fluid_play( false );
         set_hand( hand );
     }
+}
+
+void MainWindow::loadFont() {
+    QFontDatabase::removeAllApplicationFonts();
+    if( ui->loadFontAction->isChecked() ) QFontDatabase::addApplicationFont( QDir::homePath() + FONT_FILE_WITH_LETTER );
+    else QFontDatabase::addApplicationFont( QDir::homePath() + FONT_FILE_NO_LETTER );
+    begin = -1; staff_area_size = QSize(10,10);
+    mainwindow->update();
 }
