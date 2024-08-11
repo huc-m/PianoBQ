@@ -39,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
         staff_pading_w = conf->value( "padding_left" ).toString().toInt();
         staff_font_z = conf->value( "font_size" ).toString().toInt();
         staff_line_w = conf->value( "line_width" ).toString().toInt();
+        ui->loadFontAction->setChecked( conf->value("note_with_letter").toBool() );
     conf->endGroup();
 
     staff_step = staff_step_default;
@@ -61,7 +62,7 @@ MainWindow::MainWindow(QWidget *parent)
     staffPixmap = new QPixmap( staff_area_size );
     staffPixmapItem = staffScene.addPixmap( *staffPixmap );
     paint = new QPainter( staffPixmap );
-    QFontDatabase:: addApplicationFont( QDir::homePath() + FONT_FILE );
+    loadFont();
 }
 
 MainWindow::~MainWindow()

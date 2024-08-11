@@ -4,7 +4,8 @@
 #define CONFIG_MAIN_FILE "/.config/PianoBQ/main.conf"
 #define CONFIG_TUNES_FILE "/.config/PianoBQ/tunes.conf"
 #define CONFIG_TUNES_DIRECTORY "/.config/PianoBQ/tunes/"
-#define FONT_FILE "/.config/PianoBQ/fonts/PianoBQ.ttf"
+#define FONT_FILE_WITH_LETTER "/.config/PianoBQ/fonts/PianoBQ.ttf"
+#define FONT_FILE_NO_LETTER "/.config/PianoBQ/fonts/PianoBQn.ttf"
 
 #define G5S 80
 #define D4F 62
@@ -91,35 +92,18 @@ private:
     const int staff_high[2] = {B3F, G5S};
 
 private:
-    QMenu *fileMenu;
-    QMenu *tuneMenu;
-    QMenu *handMenu;
+    QActionGroup *handGroup;
 
-    QAction *exitProgramAction;
-
-    QAction *tuneOpenAction;
     QAction *tuneToBeginAction;
-    QAction *tuneNewAction;
-    QAction *tuneDivisionsAction;
-    QAction *tuneChangeConfigAction;
-
     QAction *tuneMoveLeftOneAction;
     QAction *tuneMoveLeftManyAction;
     QAction *tuneMoveRightOneAction;
     QAction *tuneMoveRightManyAction;
+
     QAction *tuneSetStartAction;
     QAction *tuneSetFinishAction;
     QAction *tuneDelStartAction;
     QAction *tuneDelFinishAction;
-    QAction *tuneRehearsalSaveAction;
-    QAction *tuneRehearsalGetAction;
-
-    QAction *handAllHandsAction;
-    QAction *handNoHandsAction;
-    QAction *handLeftOnlyAction;
-    QAction *handRightOnlyAction;
-    QAction *handWithSoundAction;
-    QActionGroup *handGroup;
 
     QAction * tunePlayAction;
 
@@ -144,6 +128,7 @@ private slots:
     void open_tuneOpenDialog();
     void open_tuneNewDialog();
     void open_tuneDivisionsDialog();
+    void loadFont();
     void open_tuneRehearsalSaveDialog();
     void open_tuneRehearsalGetDialog();
     void open_tuneChangeConfigDialog();

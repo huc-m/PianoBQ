@@ -225,7 +225,475 @@
    <property name="accessibleDescription">
     <string notr="true"/>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="mouseTracking">
+     <bool>true</bool>
+    </property>
+    <property name="acceptDrops">
+     <bool>false</bool>
+    </property>
+    <property name="toolTip">
+     <string notr="true"/>
+    </property>
+    <property name="statusTip">
+     <string notr="true"/>
+    </property>
+    <property name="whatsThis">
+     <string notr="true"/>
+    </property>
+    <property name="accessibleName">
+     <string notr="true"/>
+    </property>
+    <property name="accessibleDescription">
+     <string notr="true"/>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="title">
+     <string notr="true">File</string>
+    </property>
+    <addaction name="tuneNewAction"/>
+    <addaction name="tuneDivisionsAction"/>
+    <addaction name="loadFontAction"/>
+    <addaction name="separator"/>
+    <addaction name="exitProgramAction"/>
+   </widget>
+   <widget class="QMenu" name="menuTune">
+    <property name="acceptDrops">
+     <bool>false</bool>
+    </property>
+    <property name="toolTip">
+     <string notr="true"/>
+    </property>
+    <property name="statusTip">
+     <string notr="true"/>
+    </property>
+    <property name="whatsThis">
+     <string notr="true"/>
+    </property>
+    <property name="accessibleName">
+     <string notr="true"/>
+    </property>
+    <property name="accessibleDescription">
+     <string notr="true"/>
+    </property>
+    <property name="title">
+     <string notr="true">Tune</string>
+    </property>
+    <addaction name="tuneOpenAction"/>
+    <addaction name="tuneRehearsalGetAction"/>
+    <addaction name="separator"/>
+    <addaction name="tuneRehearsalSaveAction"/>
+    <addaction name="tuneChangeConfigAction"/>
+   </widget>
+   <widget class="QMenu" name="menuHands">
+    <property name="acceptDrops">
+     <bool>false</bool>
+    </property>
+    <property name="toolTip">
+     <string notr="true"/>
+    </property>
+    <property name="statusTip">
+     <string notr="true"/>
+    </property>
+    <property name="whatsThis">
+     <string notr="true"/>
+    </property>
+    <property name="accessibleName">
+     <string notr="true"/>
+    </property>
+    <property name="accessibleDescription">
+     <string notr="true"/>
+    </property>
+    <property name="title">
+     <string notr="true">Hands</string>
+    </property>
+    <addaction name="handAllHandsAction"/>
+    <addaction name="handNoHandsAction"/>
+    <addaction name="separator"/>
+    <addaction name="handLeftOnlyAction"/>
+    <addaction name="handRightOnlyAction"/>
+    <addaction name="handWithSoundAction"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuTune"/>
+   <addaction name="menuHands"/>
   </widget>
+  <action name="tuneNewAction">
+   <property name="text">
+    <string notr="true">New</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">New</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">New</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="tuneDivisionsAction">
+   <property name="text">
+    <string notr="true">Divisions</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Divisions</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Divisions</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="exitProgramAction">
+   <property name="text">
+    <string notr="true">Exit</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Exit</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Exit</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="tuneOpenAction">
+   <property name="text">
+    <string notr="true">Open</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Open</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Open</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="tuneRehearsalGetAction">
+   <property name="text">
+    <string notr="true">Get Part</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Get Part</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Get Part</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="tuneRehearsalSaveAction">
+   <property name="text">
+    <string>Save Part</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SAve Part</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Save Part</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="tuneChangeConfigAction">
+   <property name="text">
+    <string notr="true">Change conf</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Change conf</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Change conf</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="handAllHandsAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string notr="true">Check All</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Check All</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Check All</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="handNoHandsAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string notr="true">Free</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Free</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Free</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="handLeftOnlyAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string notr="true">Left Only</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Left Only</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Left Only</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="handRightOnlyAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string notr="true">Right Only</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Right Only</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Right Only</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="handWithSoundAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string notr="true">With Sound</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">With Sound</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">With Sound</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="loadFontAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string notr="true">With Letters</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">With Letters</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">With Letters</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>

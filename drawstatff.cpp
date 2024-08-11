@@ -79,11 +79,11 @@ void MainWindow::paintEvent( [[maybe_unused]] QPaintEvent *event) {
             ui->graphicsView->setSceneRect( staffPixmap->rect());
             paint = new QPainter(staffPixmap);
             paint->setFont(QFont("PianoBQ",staff_font_z));
-            paint->setCompositionMode( QPainter::CompositionMode_Xor);
         }
         begin = cbegin;
-        pointerXold = 0;
+        pointerXold = -1;
         staffPixmap->fill(Qt::white);
+        paint->setPen(QPen(Qt::black, staff_line_w));
         for(i=0; i<5; ++i){
             paint->drawLine(staff_pading_w, staff_pading_h + i * staff_base_h, width() - staff_pading_w,  staff_pading_h + i * staff_base_h);
             paint->drawLine(staff_pading_w, staff_pading_h + i * staff_base_h + staff_step, width() - staff_pading_w,  staff_pading_h + i * staff_base_h + staff_step);
@@ -91,9 +91,9 @@ void MainWindow::paintEvent( [[maybe_unused]] QPaintEvent *event) {
         for(i = cbegin; i < cend; ++i)
             DrawTuple(staff_pading_w + (i - cbegin) * staff_base_w, i) ;
     }
+    paint->setCompositionMode( QPainter::CompositionMode_Xor);
     paint->setPen(QPen(Qt::white, staff_line_w));
     paint->drawLine(pointerXold, pointerY0, pointerXold, pointerY1);
-    paint->setPen(QPen(Qt::black, staff_line_w));
     paint->drawLine(pointerX, pointerY0, pointerX, pointerY1);
     staffPixmapItem->setPixmap(*staffPixmap);
     pointerXold = pointerX;
