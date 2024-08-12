@@ -12,7 +12,6 @@ QStringList readDivisions( ) {
 }
 
 QStringList readNotUsedDivisions( ) {
-    if( tune_conf == NULL ) return QStringList();
     QStringList divisionAll = tunes_conf->value( "DIVISIONS/divisions" ).toStringList();
     QStringList notUsed = divisionAll;
     tunes_conf->beginGroup( "TUNES" );
