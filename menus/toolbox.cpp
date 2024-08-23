@@ -10,7 +10,8 @@ void toolBox_openPart(){
 
 void toolBox_AcceptParts() {
     if( mainwindow->tunePlayAction->text() == "Stop" ) fluid_play( false );
-    tuneAcceptPart(mainwindow->ui->comboBox_Part->currentText() );
+    if( mainwindow->ui->comboBox_Part->currentIndex() != -1 )
+        tuneAcceptPart(mainwindow->ui->comboBox_Part->currentText() );
 
 };
 
