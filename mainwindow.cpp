@@ -7,6 +7,8 @@
 #include <QFontDatabase>
 #include <QSettings>
 
+#include "dialogs/tuneopendialog.h"
+
 MainWindow *mainwindow;
 QSettings *tune_conf = NULL;
 QSettings *tunes_conf;
@@ -63,6 +65,10 @@ MainWindow::MainWindow(QWidget *parent)
     staffPixmapItem = staffScene.addPixmap( *staffPixmap );
     paint = new QPainter( staffPixmap );
     loadFont();
+
+//init dialogs
+
+    tuneopendialog = new tuneOpenDialog( this );
 }
 
 MainWindow::~MainWindow()
@@ -71,6 +77,8 @@ MainWindow::~MainWindow()
 
     delete tune_conf;
     delete tunes_conf;
+
+    delete tuneopendialog;
 
     paint->end();
     delete staffPixmap;

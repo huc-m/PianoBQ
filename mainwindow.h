@@ -110,7 +110,7 @@ private:
     void createMenus();
     void createActions();
 
-    QDialog *tuneopendialog;
+
     QDialog *tunenewdialog;
     QDialog *tunedivisionsdialog;
     QDialog *tunerehearsalsavedialog;
@@ -118,6 +118,8 @@ private:
     QDialog *tunechangeconfigdialog;
 
 public:
+    QDialog *tuneopendialog;
+
     void setToolbox();
     void setToolboxParts();
 

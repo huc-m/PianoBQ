@@ -12,15 +12,17 @@ void editTuneConfig( QString newTuneMame, QString newDivision, int newLHch, int 
 
     tunes_conf->beginGroup( "TUNES" );
         QStringList data = tunes_conf->value( mainwindow->windowTitle() ).toStringList();
-        data[1] = newDivision;
-        data[2] = QString::number( newLHch );
-        data[3] = QString::number( newRHch );
-        tunes_conf->remove( mainwindow->windowTitle() );
-        tunes_conf->setValue( newTuneMame, data );
+        if( !data.isEmpty() ){
+            data[1] = newDivision;
+            data[2] = QString::number( newLHch );
+            data[3] = QString::number( newRHch );
+            tunes_conf->remove( mainwindow->windowTitle() );
+            tunes_conf->setValue( newTuneMame, data );
 
-        left_hand_channel = newLHch;
-        right_hand_channel = newRHch;
-        mainwindow->setWindowTitle( newTuneMame );
+            left_hand_channel = newLHch;
+            right_hand_channel = newRHch;
+            mainwindow->setWindowTitle( newTuneMame );
+        }
     tunes_conf->endGroup();
 }
 

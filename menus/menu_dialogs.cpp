@@ -23,7 +23,6 @@ void MainWindow::open_tuneDivisionsDialog() {
 }
 
 void MainWindow::open_tuneOpenDialog() {
-    tuneopendialog = new tuneOpenDialog( this );
     tuneopendialog->open();
 }
 

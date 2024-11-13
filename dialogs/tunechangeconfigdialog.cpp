@@ -5,6 +5,7 @@
 #include "configuration/divisions.h"
 #include "configuration/edittuneconfig.h"
 #include "mainwindow.h"
+#include "dialogs/tuneopendialog.h"
 
 #include "midi/midi_with_fluidsynth.h"
 #include "midi/globals.h"
@@ -48,24 +49,25 @@ tuneChangeConfigDialog::~tuneChangeConfigDialog()
 void tuneChangeConfigDialog::fileAction( QAbstractButton *button) {
     if( button->text() == "Close" ) { close(); return; }
 
+
     if( button->text() == "Apply" ) {
         editTuneConfig( ui->lineEditTuneName->text() , ui->comboBoxDiv->currentText(), ui->spinBoxLHch->value(), ui->spinBoxRHch->value() );
+        mainwindow->cur_devision_pos = ui->comboBoxDiv->currentIndex();
 
         read_midi_file( getTuneFile().toStdString().c_str() );
         mainwindow->begin = -1;
         mainwindow->update();
-        return;
-    }
+    } else
+        if( button->text() == "Delete" ){
+            deleteTune();
 
-    if( button->text() == "Delete" ){
-        deleteTune();
-
-        tune_length = 0;
-        reset_keyboard_fluid( -1 );
-        mainwindow->begin = -1;
-        mainwindow->update();
-        close(); return;
+            tune_length = 0;
+            reset_keyboard_fluid( -1 );
+            mainwindow->begin = -1;
+            mainwindow->update();
+            close();
     }
+    static_cast <tuneOpenDialog*> (mainwindow->tuneopendialog)->refreshDivisions();
 }
 
 void tuneChangeConfigDialog::partsAction( QAbstractButton *button ) {
