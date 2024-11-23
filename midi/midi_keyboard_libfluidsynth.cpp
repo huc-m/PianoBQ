@@ -300,6 +300,7 @@ void fluid_play(bool play , bool del) {
         fluid_player_set_playback_callback( player, play_update_graphics, NULL );
         fluid_player_add( player, getTuneFile().toStdString().c_str());
         fluid_player_seek( player, midiTicks[ cur_position ] );
+        fluid_player_set_tempo( player, FLUID_PLAYER_TEMPO_INTERNAL, play_speed);
         fluid_player_play( player );
     } else {
         mainwindow->tunePlayAction->setText( "Play");
@@ -372,4 +373,3 @@ void oneHandMovePreviousMrg(){
         else break;
     if( tuple_nums[cur_position][hand + HtoD] == 0 ) oneHandStartPos();
 }
-

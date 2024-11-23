@@ -19,6 +19,8 @@ int cur_finish;
 int left_hand_channel;
 int right_hand_channel;
 
+double play_speed;
+
 int main(int argc, char *argv[])
 {
     QApplication theApp(argc, argv);

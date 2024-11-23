@@ -58,6 +58,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     set_hand( NO_H );
 
+    play_speed = 1;
+
 
 //set staff view
 

@@ -21,6 +21,8 @@
 
 #include "myqgraphicsview.h"
 
+#include "dialogs/tuneopendialog.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -34,6 +36,8 @@ friend void init_tune_conf();
 friend void fluid_play( bool, bool );
 friend int play_update_graphics ( void*, fluid_midi_event_t* );
 friend void tuneAcceptPart( QString part );
+friend void toolBox_changePlaySpeed();
+friend tuneOpenDialog;
 
 friend void toolBox_openPart();
 friend void toolBox_AcceptParts();

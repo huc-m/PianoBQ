@@ -5,6 +5,8 @@
 #include "configuration/tuneconfig.h"
 #include "mainwindow.h"
 
+#include "ui_mainwindow.h"
+
 #include "midi/midi_with_fluidsynth.h"
 #include "midi/globals.h"
 #include "midi/constants.h"
@@ -47,6 +49,7 @@ void tuneOpenDialog::accept(){
         mainwindow->begin = -1;
         mainwindow->update();
     }
+    mainwindow->ui->comboBox_Speed->setCurrentText("1.0");
     QDialog::accept();
 }
 

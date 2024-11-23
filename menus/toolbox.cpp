@@ -15,6 +15,11 @@ void toolBox_AcceptParts() {
 
 };
 
+void toolBox_changePlaySpeed(){
+    play_speed = mainwindow->ui->comboBox_Speed->currentText().toDouble();
+    if( mainwindow->tunePlayAction->text() == "Stop" ) fluid_play(true);
+}
+
 void MainWindow::setToolboxParts() {
     if( mainwindow->tunePlayAction->text() == "Stop" ) fluid_play( false );
     ui->comboBox_Part->clear();
@@ -25,6 +30,7 @@ void MainWindow::setToolboxParts() {
 void MainWindow::setToolbox() {
     connect( ui->pushButton_Open, &QPushButton::clicked, this, toolBox_openPart );
     connect( ui->comboBox_Part, &QComboBox::currentTextChanged, this, toolBox_AcceptParts );
+    connect(ui->comboBox_Speed, &QComboBox::currentTextChanged, this, toolBox_changePlaySpeed);
 }
 
 
