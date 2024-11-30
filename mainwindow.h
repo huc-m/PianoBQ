@@ -41,6 +41,7 @@ friend tuneOpenDialog;
 
 friend void toolBox_openPart();
 friend void toolBox_AcceptParts();
+friend void toolBox_setWholeTune();
 
 public:
     MainWindow(QWidget *parent = nullptr);

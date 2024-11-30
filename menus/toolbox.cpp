@@ -27,10 +27,16 @@ void MainWindow::setToolboxParts() {
     ui->comboBox_Part->setCurrentIndex( -1 );
 }
 
+void toolBox_setWholeTune() {
+    mainwindow->tuneDelStart();
+    mainwindow->tuneDelFinish();
+}
+
 void MainWindow::setToolbox() {
     connect( ui->pushButton_Open, &QPushButton::clicked, this, toolBox_openPart );
     connect( ui->comboBox_Part, &QComboBox::currentTextChanged, this, toolBox_AcceptParts );
-    connect(ui->comboBox_Speed, &QComboBox::currentTextChanged, this, toolBox_changePlaySpeed);
+    connect( ui->comboBox_Speed, &QComboBox::currentTextChanged, this, toolBox_changePlaySpeed );
+    connect( ui->pushButtonAll, &QPushButton::clicked, this, toolBox_setWholeTune );
 }
 
 
