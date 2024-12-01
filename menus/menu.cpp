@@ -23,7 +23,8 @@ void MainWindow::createActions() {
     connect( ui->tuneNewAction, &QAction::triggered, this, &MainWindow::open_tuneNewDialog );
     connect( ui->tuneDivisionsAction, &QAction::triggered, this, &MainWindow::open_tuneDivisionsDialog );
     connect( ui->loadFontAction, &QAction::triggered, this, &MainWindow::loadFont );
-    connect( ui->showPartOnlyaAtion, &QAction::triggered, this, &MainWindow::showPartOnlySwitch );
+    connect( ui->showPartOnlyAction, &QAction::triggered, this, &MainWindow::showPartOnlySwitch );
+    connect( ui->progressBarAction, &QAction::toggled, this, &MainWindow::progresBarShowSwitch );
     connect( ui->exitProgramAction, &QAction::triggered, this, &MainWindow::exitProgram );
 
     connect( ui->tuneOpenAction, &QAction::triggered, this, &MainWindow::open_tuneOpenDialog );
@@ -90,6 +91,11 @@ void MainWindow::loadFont() {
 }
 
 void MainWindow::showPartOnlySwitch(){
-    showPartOnly = ui->showPartOnlyaAtion->isChecked();
+    showPartOnly = ui->showPartOnlyAction->isChecked();
     begin=-1;
+}
+
+void MainWindow::progresBarShowSwitch(){
+    progresBarShow = ui->progressBarAction->isChecked();
+    if( !progresBarShow ) ui->progressBar->setValue( 0 );
 }

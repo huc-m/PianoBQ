@@ -60,49 +60,6 @@
     <property name="sizeConstraint">
      <enum>QLayout::SetMinimumSize</enum>
     </property>
-    <item row="2" column="0">
-     <widget class="myQGraphicsView" name="graphicsView">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="acceptDrops">
-       <bool>false</bool>
-      </property>
-      <property name="toolTip">
-       <string notr="true"/>
-      </property>
-      <property name="statusTip">
-       <string notr="true"/>
-      </property>
-      <property name="whatsThis">
-       <string notr="true"/>
-      </property>
-      <property name="accessibleName">
-       <string notr="true"/>
-      </property>
-      <property name="accessibleDescription">
-       <string notr="true"/>
-      </property>
-      <property name="verticalScrollBarPolicy">
-       <enum>Qt::ScrollBarAlwaysOff</enum>
-      </property>
-      <property name="horizontalScrollBarPolicy">
-       <enum>Qt::ScrollBarAlwaysOff</enum>
-      </property>
-      <property name="sizeAdjustPolicy">
-       <enum>QAbstractScrollArea::AdjustToContents</enum>
-      </property>
-      <property name="interactive">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="0">
      <widget class="QWidget" name="widgetTool" native="true">
       <property name="sizePolicy">
@@ -322,6 +279,83 @@
       </widget>
      </widget>
     </item>
+    <item row="2" column="0">
+     <widget class="myQGraphicsView" name="graphicsView">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="acceptDrops">
+       <bool>false</bool>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="statusTip">
+       <string notr="true"/>
+      </property>
+      <property name="whatsThis">
+       <string notr="true"/>
+      </property>
+      <property name="accessibleName">
+       <string notr="true"/>
+      </property>
+      <property name="accessibleDescription">
+       <string notr="true"/>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustToContents</enum>
+      </property>
+      <property name="interactive">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QProgressBar" name="progressBar">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>10</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="statusTip">
+       <string notr="true"/>
+      </property>
+      <property name="whatsThis">
+       <string notr="true"/>
+      </property>
+      <property name="accessibleName">
+       <string notr="true"/>
+      </property>
+      <property name="accessibleDescription">
+       <string notr="true"/>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+      <property name="textVisible">
+       <bool>false</bool>
+      </property>
+      <property name="format">
+       <string/>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -385,7 +419,8 @@
     <addaction name="tuneNewAction"/>
     <addaction name="tuneDivisionsAction"/>
     <addaction name="loadFontAction"/>
-    <addaction name="showPartOnlyaAtion"/>
+    <addaction name="showPartOnlyAction"/>
+    <addaction name="progressBarAction"/>
     <addaction name="separator"/>
     <addaction name="exitProgramAction"/>
    </widget>
@@ -824,7 +859,7 @@
     <bool>false</bool>
    </property>
   </action>
-  <action name="showPartOnlyaAtion">
+  <action name="showPartOnlyAction">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -839,6 +874,35 @@
    </property>
    <property name="toolTip">
     <string notr="true">Show Part Only</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="progressBarAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string notr="true">ProgressBar</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">ProgressBar</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">ProgressBar</string>
    </property>
    <property name="statusTip">
     <string notr="true"/>

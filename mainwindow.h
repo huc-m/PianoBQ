@@ -137,6 +137,7 @@ private slots:
     void open_tuneDivisionsDialog();
     void loadFont();
     void showPartOnlySwitch();
+    void progresBarShowSwitch();
     void open_tuneRehearsalSaveDialog();
     void open_tuneRehearsalGetDialog();
     void open_tuneChangeConfigDialog();
@@ -165,6 +166,7 @@ public: // globals
     int cur_devision_pos;
     int begin;         //begin position on the staff in the graphics
     bool showPartOnly;
+    bool progresBarShow;
 };
 
 extern MainWindow *mainwindow;

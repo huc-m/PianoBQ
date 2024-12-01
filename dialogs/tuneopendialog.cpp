@@ -49,7 +49,9 @@ void tuneOpenDialog::accept(){
         mainwindow->begin = -1;
         mainwindow->update();
     }
-    mainwindow->ui->comboBox_Speed->setCurrentText("1.0");
+    mainwindow->ui->comboBox_Speed->setCurrentText( "1.0" );
+    mainwindow->ui->progressBar->setMaximum( tune_length );
+    mainwindow->ui->progressBar->setValue( 0 );
     QDialog::accept();
 }
 

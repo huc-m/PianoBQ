@@ -99,4 +99,5 @@ void MainWindow::paintEvent( [[maybe_unused]] QPaintEvent *event) {
     paint->drawLine(pointerX, pointerY0, pointerX, pointerY1);
     staffPixmapItem->setPixmap(*staffPixmap);
     pointerXold = pointerX;
+    if( progresBarShow) ui->progressBar->setValue(cur_position);
 }
