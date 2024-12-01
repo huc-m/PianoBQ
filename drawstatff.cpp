@@ -10,6 +10,8 @@ char note_name[2] = {'\0'};
 static int pointerXold;
 
 void MainWindow::DrawTuple(int pos_screen, int pos_tune){
+    if( showPartOnly )
+        if(pos_tune < cur_start || pos_tune >= cur_finish) return;
 
     int hand, hand_d, note;
     int back_note, back_note_offset;

@@ -385,6 +385,7 @@
     <addaction name="tuneNewAction"/>
     <addaction name="tuneDivisionsAction"/>
     <addaction name="loadFontAction"/>
+    <addaction name="showPartOnlyaAtion"/>
     <addaction name="separator"/>
     <addaction name="exitProgramAction"/>
    </widget>
@@ -806,6 +807,38 @@
    </property>
    <property name="toolTip">
     <string notr="true">With Letters</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="showPartOnlyaAtion">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Show Part Only</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Show Part Only</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Show Part Only</string>
    </property>
    <property name="statusTip">
     <string notr="true"/>

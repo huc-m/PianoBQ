@@ -30,6 +30,7 @@ void MainWindow::setToolboxParts() {
 void toolBox_setWholeTune() {
     mainwindow->tuneDelStart();
     mainwindow->tuneDelFinish();
+    mainwindow->begin=-1;
 }
 
 void MainWindow::setToolbox() {

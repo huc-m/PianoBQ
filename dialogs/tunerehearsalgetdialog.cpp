@@ -39,6 +39,7 @@ void tuneAcceptPart( QString part ) {
         oneHandStartPos();
         reset_keyboard_fluid( cur_position );
     }
+    mainwindow->begin=-1;
     mainwindow->ui->comboBox_Part->setCurrentText( part );
     mainwindow->update();
 }

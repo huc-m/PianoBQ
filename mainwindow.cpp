@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
         staff_font_z = conf->value( "font_size" ).toString().toInt();
         staff_line_w = conf->value( "line_width" ).toString().toInt();
         ui->loadFontAction->setChecked( conf->value("note_with_letter").toBool() );
+        ui->showPartOnlyaAtion->setChecked( conf->value("show_part_only").toBool() );
     conf->endGroup();
 
     staff_step = staff_step_default;
@@ -59,7 +60,7 @@ MainWindow::MainWindow(QWidget *parent)
     set_hand( NO_H );
 
     play_speed = 1;
-
+    showPartOnlySwitch();
 
 //set staff view
 

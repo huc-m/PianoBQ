@@ -136,6 +136,7 @@ private slots:
     void open_tuneNewDialog();
     void open_tuneDivisionsDialog();
     void loadFont();
+    void showPartOnlySwitch();
     void open_tuneRehearsalSaveDialog();
     void open_tuneRehearsalGetDialog();
     void open_tuneChangeConfigDialog();
@@ -163,6 +164,7 @@ public: // globals
     QString currentPath;
     int cur_devision_pos;
     int begin;         //begin position on the staff in the graphics
+    bool showPartOnly;
 };
 
 extern MainWindow *mainwindow;

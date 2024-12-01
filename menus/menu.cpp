@@ -23,6 +23,7 @@ void MainWindow::createActions() {
     connect( ui->tuneNewAction, &QAction::triggered, this, &MainWindow::open_tuneNewDialog );
     connect( ui->tuneDivisionsAction, &QAction::triggered, this, &MainWindow::open_tuneDivisionsDialog );
     connect( ui->loadFontAction, &QAction::triggered, this, &MainWindow::loadFont );
+    connect( ui->showPartOnlyaAtion, &QAction::triggered, this, &MainWindow::showPartOnlySwitch );
     connect( ui->exitProgramAction, &QAction::triggered, this, &MainWindow::exitProgram );
 
     connect( ui->tuneOpenAction, &QAction::triggered, this, &MainWindow::open_tuneOpenDialog );
@@ -86,4 +87,9 @@ void MainWindow::loadFont() {
     else QFontDatabase::addApplicationFont( QDir::homePath() + FONT_FILE_NO_LETTER );
     begin = -1; staff_area_size = QSize(10,10);
     mainwindow->update();
+}
+
+void MainWindow::showPartOnlySwitch(){
+    showPartOnly = ui->showPartOnlyaAtion->isChecked();
+    begin=-1;
 }
