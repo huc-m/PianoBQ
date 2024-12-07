@@ -22,6 +22,9 @@
 #include "myqgraphicsview.h"
 
 #include "dialogs/tuneopendialog.h"
+#include "dialogs/fingeringdialog.h"
+
+#include "midi/constants.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -42,6 +45,8 @@ friend tuneOpenDialog;
 friend void toolBox_openPart();
 friend void toolBox_AcceptParts();
 friend void toolBox_setWholeTune();
+
+friend fingeringDialog;
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -65,6 +70,7 @@ public:
     int staff_line_w;  //width of line
     int staff_font_z;  //size of font
     int note_zero[2];  //line of the note with code 0 - left and right
+    QFont nFont, fFont;
 
 protected:
 
@@ -124,6 +130,8 @@ private:
 
 public:
     QDialog *tuneopendialog;
+    QDialog *fingeringdialog;
+
 
     void setToolbox();
     void setToolboxParts();
@@ -138,9 +146,11 @@ private slots:
     void loadFont();
     void showPartOnlySwitch();
     void progresBarShowSwitch();
+    void fingeringShowSwitch();
     void open_tuneRehearsalSaveDialog();
     void open_tuneRehearsalGetDialog();
     void open_tuneChangeConfigDialog();
+    void open_fingeringDialog();
 
     void tuneToBegin();
 
@@ -167,6 +177,16 @@ public: // globals
     int begin;         //begin position on the staff in the graphics
     bool showPartOnly;
     bool progresBarShow;
+    bool fingeringShow;
+
+// fingering
+public:
+    int32_t fingering[TUNE_LENGTH_MAX][2];
+    bool fingering_isLoaded;
+
+    void fingeringLoad();
+    void fingeringSave();
+
 };
 
 extern MainWindow *mainwindow;

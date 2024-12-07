@@ -40,3 +40,7 @@ void MainWindow::open_tuneChangeConfigDialog() {
     tunechangeconfigdialog = new tuneChangeConfigDialog( this );
     tunechangeconfigdialog->open();
 }
+
+void MainWindow::open_fingeringDialog(){
+    fingeringdialog->open();
+}

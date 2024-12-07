@@ -74,6 +74,7 @@ MainWindow::MainWindow(QWidget *parent)
 //init dialogs
 
     tuneopendialog = new tuneOpenDialog( this );
+    fingeringdialog = new fingeringDialog( this );
 }
 
 MainWindow::~MainWindow()
@@ -108,4 +109,27 @@ void MainWindow::setStaffParameters(){
     staff_base_w = staff_font_z * 1.3;
     note_zero[RI_H] = staff_pading_h + staff_base_h2*46;
     note_zero[LE_H] = note_zero[RI_H] + staff_step - staff_base_h*6;
+}
+
+void MainWindow::fingeringLoad(){
+    if( fingering_isLoaded ) return;
+    if( tune_conf == NULL ) return;
+
+    QFile *file = new QFile( tune_conf->fileName() + ".fng");
+    if( file->exists()){
+        file->open( QIODeviceBase::ReadOnly );
+          memcpy( fingering, qUncompress( file->readAll() ).data(), tune_length);
+        file->close();
+        QByteArray data;
+    } else
+    for(int i = 0; i < tune_length; ++i )  *(int64_t*)(mainwindow->fingering[i]) = 0;
+    fingering_isLoaded = true;
+}
+
+void MainWindow::fingeringSave(){
+    if( tune_conf == NULL ) return;
+    QFile *file = new QFile( tune_conf->fileName() + ".fng");
+    file->open( QIODeviceBase::WriteOnly );
+      file->write( qCompress( (uchar*) fingering, tune_length * 8, 9 ));
+    file->close();
 }

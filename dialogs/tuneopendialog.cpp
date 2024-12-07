@@ -52,6 +52,10 @@ void tuneOpenDialog::accept(){
     mainwindow->ui->comboBox_Speed->setCurrentText( "1.0" );
     mainwindow->ui->progressBar->setMaximum( tune_length );
     mainwindow->ui->progressBar->setValue( 0 );
+
+    mainwindow->fingering_isLoaded = false;
+    mainwindow->fingeringShowSwitch();
+
     QDialog::accept();
 }
 

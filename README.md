@@ -6,8 +6,9 @@ PianoBQ (Beginer Qt version) checks that the pianist is pressing only the correc
 
 ### Functionality
 - graphics view of the staff with note leters
+- storing and viewing of the fingering
 - step and page scrolling back and forth
-- playing the current midi file
+- playing the current midi file at different speeds
 - a library where tunes are grouped by category
 - rehearsing part of the tune by selecting its beginning and end
 - storing the parts of each tune for subsequent rehearsals
