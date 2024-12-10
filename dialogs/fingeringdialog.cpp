@@ -12,6 +12,8 @@ fingeringDialog::fingeringDialog(QWidget *parent) :
     ui->setupUi(this);
     connect( ui->pushButton_toRight, &QPushButton::clicked, this, &fingeringDialog::right );
     connect( ui->pushButton_toLeft, &QPushButton::clicked, this, &fingeringDialog::left );
+
+    setFixedSize( size() );
 }
 
 fingeringDialog::~fingeringDialog()

@@ -62,10 +62,14 @@ void MainWindow::DrawTuple(int pos_screen, int pos_tune){
 
         if( fingeringShow ) {
             paint->setFont(fFont);
-            (fng = QString((char*) &fingering[pos_tune][RI_H])).truncate(4);
-            paint->drawText(pos_screen - 8, staff_pading_h, 0,0, Qt::TextWrapAnywhere | Qt::TextDontClip | Qt::AlignBottom, fng);
-            (fng = QString((char*) &fingering[pos_tune][LE_H])).truncate(4);
-            paint->drawText(pos_screen - 8, staff_pading_h + staff_step + 4 * staff_base_h , 0,0, Qt::TextWrapAnywhere | Qt::TextDontClip | Qt::AlignTop, fng);
+            if( fingering[pos_tune][RI_H] ){
+                (fng = QString((char*) &fingering[pos_tune][RI_H])).truncate(4);
+                paint->drawText(pos_screen - 8, staff_pading_h, 0,0, Qt::TextWrapAnywhere | Qt::TextDontClip | Qt::AlignBottom, fng);
+            }
+            if( fingering[pos_tune][LE_H] ){
+                (fng = QString((char*) &fingering[pos_tune][LE_H])).truncate(4);
+                paint->drawText(pos_screen - 8, staff_pading_h + staff_step + 4 * staff_base_h , 0,0, Qt::TextWrapAnywhere | Qt::TextDontClip | Qt::AlignTop, fng);
+            }
             paint->setFont(nFont);
         }
     }
