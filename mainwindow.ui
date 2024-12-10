@@ -60,49 +60,6 @@
     <property name="sizeConstraint">
      <enum>QLayout::SetMinimumSize</enum>
     </property>
-    <item row="2" column="0">
-     <widget class="myQGraphicsView" name="graphicsView">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="acceptDrops">
-       <bool>false</bool>
-      </property>
-      <property name="toolTip">
-       <string notr="true"/>
-      </property>
-      <property name="statusTip">
-       <string notr="true"/>
-      </property>
-      <property name="whatsThis">
-       <string notr="true"/>
-      </property>
-      <property name="accessibleName">
-       <string notr="true"/>
-      </property>
-      <property name="accessibleDescription">
-       <string notr="true"/>
-      </property>
-      <property name="verticalScrollBarPolicy">
-       <enum>Qt::ScrollBarAlwaysOff</enum>
-      </property>
-      <property name="horizontalScrollBarPolicy">
-       <enum>Qt::ScrollBarAlwaysOff</enum>
-      </property>
-      <property name="sizeAdjustPolicy">
-       <enum>QAbstractScrollArea::AdjustToContents</enum>
-      </property>
-      <property name="interactive">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="0">
      <widget class="QWidget" name="widgetTool" native="true">
       <property name="sizePolicy">
@@ -191,6 +148,212 @@
         <string notr="true"/>
        </property>
       </widget>
+      <widget class="QComboBox" name="comboBox_Speed">
+       <property name="geometry">
+        <rect>
+         <x>410</x>
+         <y>0</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>51</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string notr="true"/>
+       </property>
+       <property name="statusTip">
+        <string notr="true"/>
+       </property>
+       <property name="whatsThis">
+        <string notr="true"/>
+       </property>
+       <property name="accessibleName">
+        <string notr="true"/>
+       </property>
+       <property name="accessibleDescription">
+        <string notr="true"/>
+       </property>
+       <property name="currentText">
+        <string notr="true">1.0</string>
+       </property>
+       <property name="currentIndex">
+        <number>2</number>
+       </property>
+       <property name="placeholderText">
+        <string notr="true"/>
+       </property>
+       <item>
+        <property name="text">
+         <string notr="true">2.0</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string notr="true">1.5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string notr="true">1.0</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string notr="true">0.7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string notr="true">0.5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+      </widget>
+      <widget class="QPushButton" name="pushButtonAll">
+       <property name="geometry">
+        <rect>
+         <x>300</x>
+         <y>0</y>
+         <width>51</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string notr="true"/>
+       </property>
+       <property name="statusTip">
+        <string notr="true"/>
+       </property>
+       <property name="whatsThis">
+        <string notr="true"/>
+       </property>
+       <property name="accessibleName">
+        <string notr="true"/>
+       </property>
+       <property name="accessibleDescription">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true">Whole</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>370</x>
+         <y>0</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string notr="true"/>
+       </property>
+       <property name="statusTip">
+        <string notr="true"/>
+       </property>
+       <property name="whatsThis">
+        <string notr="true"/>
+       </property>
+       <property name="accessibleName">
+        <string notr="true"/>
+       </property>
+       <property name="accessibleDescription">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>P_spd:</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="myQGraphicsView" name="graphicsView">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="acceptDrops">
+       <bool>false</bool>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="statusTip">
+       <string notr="true"/>
+      </property>
+      <property name="whatsThis">
+       <string notr="true"/>
+      </property>
+      <property name="accessibleName">
+       <string notr="true"/>
+      </property>
+      <property name="accessibleDescription">
+       <string notr="true"/>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustToContents</enum>
+      </property>
+      <property name="interactive">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QProgressBar" name="progressBar">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>10</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="statusTip">
+       <string notr="true"/>
+      </property>
+      <property name="whatsThis">
+       <string notr="true"/>
+      </property>
+      <property name="accessibleName">
+       <string notr="true"/>
+      </property>
+      <property name="accessibleDescription">
+       <string notr="true"/>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+      <property name="textVisible">
+       <bool>false</bool>
+      </property>
+      <property name="format">
+       <string/>
+      </property>
      </widget>
     </item>
    </layout>
@@ -255,7 +418,6 @@
     </property>
     <addaction name="tuneNewAction"/>
     <addaction name="tuneDivisionsAction"/>
-    <addaction name="loadFontAction"/>
     <addaction name="separator"/>
     <addaction name="exitProgramAction"/>
    </widget>
@@ -286,6 +448,7 @@
     <addaction name="separator"/>
     <addaction name="tuneRehearsalSaveAction"/>
     <addaction name="tuneChangeConfigAction"/>
+    <addaction name="showFingeringDialogAction"/>
    </widget>
    <widget class="QMenu" name="menuHands">
     <property name="acceptDrops">
@@ -316,9 +479,19 @@
     <addaction name="handRightOnlyAction"/>
     <addaction name="handWithSoundAction"/>
    </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="loadFontAction"/>
+    <addaction name="showPartOnlyAction"/>
+    <addaction name="progressBarAction"/>
+    <addaction name="showFingeringAction"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuTune"/>
    <addaction name="menuHands"/>
+   <addaction name="menuView"/>
   </widget>
   <action name="tuneNewAction">
    <property name="text">
@@ -478,7 +651,7 @@
   </action>
   <action name="tuneChangeConfigAction">
    <property name="text">
-    <string notr="true">Change conf</string>
+    <string>Change Conf</string>
    </property>
    <property name="iconText">
     <string notr="true">Change conf</string>
@@ -677,6 +850,122 @@
    </property>
    <property name="toolTip">
     <string notr="true">With Letters</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="showPartOnlyAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Part Only</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Show Part Only</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Show Part Only</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="progressBarAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string notr="true">ProgressBar</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">ProgressBar</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">ProgressBar</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="showFingeringAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Fingering</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Show Fingering</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Show Fingering</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="showFingeringDialogAction">
+   <property name="text">
+    <string notr="true">Fingering Dial</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Fingering Dial</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Fingering Dial</string>
    </property>
    <property name="statusTip">
     <string notr="true"/>

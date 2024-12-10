@@ -23,7 +23,6 @@ void MainWindow::open_tuneDivisionsDialog() {
 }
 
 void MainWindow::open_tuneOpenDialog() {
-    tuneopendialog = new tuneOpenDialog( this );
     tuneopendialog->open();
 }
 
@@ -40,4 +39,8 @@ void MainWindow::open_tuneRehearsalGetDialog() {
 void MainWindow::open_tuneChangeConfigDialog() {
     tunechangeconfigdialog = new tuneChangeConfigDialog( this );
     tunechangeconfigdialog->open();
+}
+
+void MainWindow::open_fingeringDialog(){
+    fingeringdialog->open();
 }

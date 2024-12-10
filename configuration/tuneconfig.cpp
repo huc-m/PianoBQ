@@ -1,5 +1,4 @@
 #include "configuration/tuneconfig.h"
-#include <QDebug>
 #include <QSettings>
 
 #include "midi/globals.h"

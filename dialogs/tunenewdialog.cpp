@@ -1,6 +1,8 @@
 #include "dialogs/tunenewdialog.h"
 #include "ui_tunenewdialog.h"
 
+#include "dialogs/tuneopendialog.h"
+
 #include "configuration/divisions.h"
 #include "configuration/tuneconfig.h"
 
@@ -20,7 +22,7 @@ tuneNewDialog::tuneNewDialog(QWidget *parent) :
     ui->comboBox->addItems( readDivisions() );
     ui->spinBoxLH->setValue( mainwindow->left_hand_channel_default );
     ui->spinBoxRH->setValue( mainwindow->right_hand_channel_default );
-
+    ui->comboBox->setCurrentIndex(mainwindow->cur_devision_pos);
     setFixedSize( size() );
 }
 
@@ -39,6 +41,9 @@ void tuneNewDialog::on_pushButton_released(){
 
 
 void tuneNewDialog::on_buttonBox_accepted(){
+    left_hand_channel = ui->spinBoxLH->value();
+    right_hand_channel = ui->spinBoxRH->value();
+
     int err = read_midi_file( fileName.toStdString().c_str() );
     if( err != NO_ERRORS ){
         QMessageBox msgBox;
@@ -55,11 +60,10 @@ void tuneNewDialog::on_buttonBox_accepted(){
         msgBox.exec();
     } else {
         mainwindow->setWindowTitle( ui->tuneName->text() );
-        left_hand_channel = ui->spinBoxLH->value();
-        right_hand_channel = ui->spinBoxRH->value();
-
+        mainwindow->cur_devision_pos = ui->comboBox->currentIndex();
         saveTune( ui->fileName->text(), ui->comboBox->currentText() );
         init_tune_conf();
+        static_cast <tuneOpenDialog*> (mainwindow->tuneopendialog)->refreshDivisions();
     }
     mainwindow->begin = -1;
     mainwindow->update();

@@ -21,6 +21,11 @@
 
 #include "myqgraphicsview.h"
 
+#include "dialogs/tuneopendialog.h"
+#include "dialogs/fingeringdialog.h"
+
+#include "midi/constants.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -34,9 +39,14 @@ friend void init_tune_conf();
 friend void fluid_play( bool, bool );
 friend int play_update_graphics ( void*, fluid_midi_event_t* );
 friend void tuneAcceptPart( QString part );
+friend void toolBox_changePlaySpeed();
+friend tuneOpenDialog;
 
 friend void toolBox_openPart();
 friend void toolBox_AcceptParts();
+friend void toolBox_setWholeTune();
+
+friend fingeringDialog;
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -60,6 +70,7 @@ public:
     int staff_line_w;  //width of line
     int staff_font_z;  //size of font
     int note_zero[2];  //line of the note with code 0 - left and right
+    QFont nFont, fFont;
 
 protected:
 
@@ -110,7 +121,7 @@ private:
     void createMenus();
     void createActions();
 
-    QDialog *tuneopendialog;
+
     QDialog *tunenewdialog;
     QDialog *tunedivisionsdialog;
     QDialog *tunerehearsalsavedialog;
@@ -118,6 +129,10 @@ private:
     QDialog *tunechangeconfigdialog;
 
 public:
+    QDialog *tuneopendialog;
+    QDialog *fingeringdialog;
+
+
     void setToolbox();
     void setToolboxParts();
 
@@ -129,9 +144,13 @@ private slots:
     void open_tuneNewDialog();
     void open_tuneDivisionsDialog();
     void loadFont();
+    void showPartOnlySwitch();
+    void progresBarShowSwitch();
+    void fingeringShowSwitch();
     void open_tuneRehearsalSaveDialog();
     void open_tuneRehearsalGetDialog();
     void open_tuneChangeConfigDialog();
+    void open_fingeringDialog();
 
     void tuneToBegin();
 
@@ -156,6 +175,18 @@ public: // globals
     QString currentPath;
     int cur_devision_pos;
     int begin;         //begin position on the staff in the graphics
+    bool showPartOnly;
+    bool progresBarShow;
+    bool fingeringShow;
+
+// fingering
+public:
+    int32_t fingering[TUNE_LENGTH_MAX][2];
+    bool fingering_isLoaded;
+
+    void fingeringLoad();
+    void fingeringSave();
+
 };
 
 extern MainWindow *mainwindow;

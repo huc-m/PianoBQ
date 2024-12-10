@@ -23,6 +23,8 @@ void MainWindow::createActions() {
     connect( ui->tuneNewAction, &QAction::triggered, this, &MainWindow::open_tuneNewDialog );
     connect( ui->tuneDivisionsAction, &QAction::triggered, this, &MainWindow::open_tuneDivisionsDialog );
     connect( ui->loadFontAction, &QAction::triggered, this, &MainWindow::loadFont );
+    connect( ui->showPartOnlyAction, &QAction::triggered, this, &MainWindow::showPartOnlySwitch );
+    connect( ui->progressBarAction, &QAction::toggled, this, &MainWindow::progresBarShowSwitch );
     connect( ui->exitProgramAction, &QAction::triggered, this, &MainWindow::exitProgram );
 
     connect( ui->tuneOpenAction, &QAction::triggered, this, &MainWindow::open_tuneOpenDialog );
@@ -35,6 +37,9 @@ void MainWindow::createActions() {
     connect( ui->handLeftOnlyAction, &QAction::triggered, this, &MainWindow::handLeftOnly );
     connect( ui->handRightOnlyAction, &QAction::triggered, this, &MainWindow::handRightOnly );
     connect( ui->handWithSoundAction, &QAction::triggered, this, &MainWindow::handWithSound );
+
+    connect( ui->showFingeringDialogAction, &QAction::triggered, this, &MainWindow::open_fingeringDialog );
+    connect( ui->showFingeringAction, &QAction::toggled, this, &MainWindow::fingeringShowSwitch );
 
     handGroup = new QActionGroup( this );
         handGroup->addAction( ui->handAllHandsAction );
@@ -85,5 +90,23 @@ void MainWindow::loadFont() {
     if( ui->loadFontAction->isChecked() ) QFontDatabase::addApplicationFont( QDir::homePath() + FONT_FILE_WITH_LETTER );
     else QFontDatabase::addApplicationFont( QDir::homePath() + FONT_FILE_NO_LETTER );
     begin = -1; staff_area_size = QSize(10,10);
+    nFont = QFont("PianoBQ", staff_font_z);
+    fFont = QFont("PianoBQ", 10);
     mainwindow->update();
+}
+
+void MainWindow::showPartOnlySwitch(){
+    showPartOnly = ui->showPartOnlyAction->isChecked();
+    begin = -1;
+}
+
+void MainWindow::progresBarShowSwitch(){
+    progresBarShow = ui->progressBarAction->isChecked();
+    if( !progresBarShow ) ui->progressBar->setValue( 0 );
+}
+
+void MainWindow::fingeringShowSwitch(){
+    fingeringShow = ui->showFingeringAction->isChecked();
+    if( fingeringShow ) mainwindow->fingeringLoad();
+    begin = -1;
 }

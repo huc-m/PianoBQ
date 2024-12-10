@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 
 #include "midi/globals.h"
 #include "midi/midi_with_fluidsynth.h"
@@ -58,18 +59,22 @@ void MainWindow::tuneSetStart() {
     cur_start = cur_position;
     reset_keyboard_fluid( cur_position );
     update();
+    mainwindow->ui->comboBox_Part->setCurrentIndex( -1 );
 }
 
 void MainWindow::tuneSetFinish() {
     cur_finish = cur_position;
     reset_keyboard_fluid( cur_position );
+    mainwindow->ui->comboBox_Part->setCurrentIndex( -1 );
 }
 
 void MainWindow::tuneDelStart() {
     cur_start = 0;
     reset_keyboard_fluid( cur_position );
+    mainwindow->ui->comboBox_Part->setCurrentIndex( -1 );
 }
 
 void MainWindow::tuneDelFinish() {
     cur_finish = tune_length;
+    mainwindow->ui->comboBox_Part->setCurrentIndex( -1 );
 }

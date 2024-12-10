@@ -14,6 +14,7 @@ SOURCES += \
     configuration/divisions.cpp \
     configuration/edittuneconfig.cpp \
     configuration/tuneconfig.cpp \
+    dialogs/fingeringdialog.cpp \
     dialogs/tunechangeconfigdialog.cpp \
     dialogs/tunedivisionsdialog.cpp \
     dialogs/tunenewdialog.cpp \
@@ -36,6 +37,7 @@ HEADERS += stable.h \
 	configuration/divisions.h \
 	configuration/edittuneconfig.h \
 	configuration/tuneconfig.h \
+	dialogs/fingeringdialog.h \
 	dialogs/tunechangeconfigdialog.h \
 	dialogs/tunedivisionsdialog.h \
 	dialogs/tunenewdialog.h \
@@ -49,6 +51,7 @@ HEADERS += stable.h \
 	myqgraphicsview.h
 
 FORMS += \
+    dialogs/fingeringdialog.ui \
     dialogs/tunechangeconfigdialog.ui \
     dialogs/tunedivisionsdialog.ui \
     dialogs/tunenewdialog.ui \

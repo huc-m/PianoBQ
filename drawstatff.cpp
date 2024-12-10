@@ -8,8 +8,11 @@
 
 char note_name[2] = {'\0'};
 static int pointerXold;
+ QString fng;
 
 void MainWindow::DrawTuple(int pos_screen, int pos_tune){
+    if( showPartOnly )
+        if(pos_tune < cur_start || pos_tune >= cur_finish) return;
 
     int hand, hand_d, note;
     int back_note, back_note_offset;
@@ -56,6 +59,19 @@ void MainWindow::DrawTuple(int pos_screen, int pos_tune){
             paint->drawText(pos_screen + back_note_offset, note_zero[hand] - note / 12 * staff_base_h7 - note_ofset[note % 12] * staff_base_h2, note_name);
             old_note = note;
         }
+
+        if( fingeringShow ) {
+            paint->setFont(fFont);
+            if( fingering[pos_tune][RI_H] ){
+                (fng = QString((char*) &fingering[pos_tune][RI_H])).truncate(4);
+                paint->drawText(pos_screen - 8, staff_pading_h, 0,0, Qt::TextWrapAnywhere | Qt::TextDontClip | Qt::AlignBottom, fng);
+            }
+            if( fingering[pos_tune][LE_H] ){
+                (fng = QString((char*) &fingering[pos_tune][LE_H])).truncate(4);
+                paint->drawText(pos_screen - 8, staff_pading_h + staff_step + 4 * staff_base_h , 0,0, Qt::TextWrapAnywhere | Qt::TextDontClip | Qt::AlignTop, fng);
+            }
+            paint->setFont(nFont);
+        }
     }
 }
 
@@ -78,7 +94,7 @@ void MainWindow::paintEvent( [[maybe_unused]] QPaintEvent *event) {
             ui->graphicsView->setContentsMargins( 0, 0, 0, 0 );
             ui->graphicsView->setSceneRect( staffPixmap->rect());
             paint = new QPainter(staffPixmap);
-            paint->setFont(QFont("PianoBQ",staff_font_z));
+            paint->setFont( nFont );
         }
         begin = cbegin;
         pointerXold = -1;
@@ -97,4 +113,5 @@ void MainWindow::paintEvent( [[maybe_unused]] QPaintEvent *event) {
     paint->drawLine(pointerX, pointerY0, pointerX, pointerY1);
     staffPixmapItem->setPixmap(*staffPixmap);
     pointerXold = pointerX;
+    if( progresBarShow) ui->progressBar->setValue(cur_position);
 }

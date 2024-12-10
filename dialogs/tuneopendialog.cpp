@@ -5,6 +5,8 @@
 #include "configuration/tuneconfig.h"
 #include "mainwindow.h"
 
+#include "ui_mainwindow.h"
+
 #include "midi/midi_with_fluidsynth.h"
 #include "midi/globals.h"
 #include "midi/constants.h"
@@ -13,12 +15,11 @@ tuneOpenDialog::tuneOpenDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::tuneOpenDialog)
 {
-    setAttribute(Qt::WA_DeleteOnClose);
     ui->setupUi(this);
 
     ui->comboBox->addItems( readDivisions() );
     connect( ui->comboBox, &QComboBox::currentTextChanged, this, &tuneOpenDialog::synchroList );
-    ui->comboBox->setCurrentIndex( ((MainWindow*)this->parent())->cur_devision_pos );
+    ui->comboBox->setCurrentIndex( mainwindow->cur_devision_pos );
     if( ui->comboBox->currentIndex() == 0 ) emit ui->comboBox->currentTextChanged( ui->comboBox->currentText() );
 
     connect( ui->listWidget, &QListWidget::doubleClicked, this, &tuneOpenDialog::accept );
@@ -32,7 +33,6 @@ tuneOpenDialog::~tuneOpenDialog()
 }
 
 void tuneOpenDialog::synchroList(QString division) {
-    mainwindow->cur_devision_pos = ui->comboBox->currentIndex();
     ui->listWidget->clear();
     ui->listWidget->addItems( getTunesByDivision( division ));
 }
@@ -49,5 +49,19 @@ void tuneOpenDialog::accept(){
         mainwindow->begin = -1;
         mainwindow->update();
     }
+    mainwindow->ui->comboBox_Speed->setCurrentText( "1.0" );
+    mainwindow->ui->progressBar->setMaximum( tune_length );
+    mainwindow->ui->progressBar->setValue( 0 );
+
+    mainwindow->fingering_isLoaded = false;
+    mainwindow->fingeringShowSwitch();
+
     QDialog::accept();
+}
+
+void tuneOpenDialog::refreshDivisions(){
+    ui->comboBox->clear();
+    ui->comboBox->addItems( readDivisions() );
+    ui->comboBox->setCurrentIndex( mainwindow->cur_devision_pos );
+    emit ui->comboBox->currentTextChanged( ui->comboBox->currentText() );
 }

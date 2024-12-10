@@ -40,4 +40,6 @@ extern int cur_finish;
 extern int left_hand_channel;
 extern int right_hand_channel;
 
+extern double play_speed;
+
 #endif // GLOBALS_H
