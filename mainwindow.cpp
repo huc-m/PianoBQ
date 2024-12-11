@@ -118,7 +118,7 @@ void MainWindow::fingeringLoad(){
     QFile *file = new QFile( tune_conf->fileName() + ".fng");
     if( file->exists()){
         file->open( QIODeviceBase::ReadOnly );
-          memcpy( fingering, qUncompress( file->readAll() ).data(), tune_length);
+          memcpy( fingering, qUncompress( file->readAll() ).data(), tune_length * 8);
         file->close();
         QByteArray data;
     } else
