@@ -37,11 +37,11 @@ void fingeringDialog::saveData(){
     std::string fng;
 
     fng.assign ( ui->lineEdit_Right->text().toUtf8().data() );
-    std::sort(fng.begin(), fng.end(), std::greater<int>() );
+    std::sort(fng.begin(), fng.end(), std::greater<char>() );
     strncpy( (char*)( &mainwindow->fingering[cur_position][RI_H] ), fng.data(), 4 );
 
     fng.assign ( ui->lineEdit_Left->text().toUtf8().data() );
-    std::sort( fng.begin(), fng.end() );
+    std::sort( fng.begin(), fng.end(), std::less<char>() );
     strncpy( (char*)( &mainwindow->fingering[cur_position][LE_H] ), fng.data(), 4 );
 
     mainwindow->begin = -1; mainwindow->update();
