@@ -58,23 +58,26 @@ void MainWindow::tuneToBegin() {
 void MainWindow::tuneSetStart() {
     cur_start = cur_position;
     reset_keyboard_fluid( cur_position );
-    update();
+    begin = -1; update();
     mainwindow->ui->comboBox_Part->setCurrentIndex( -1 );
 }
 
 void MainWindow::tuneSetFinish() {
     cur_finish = cur_position;
     reset_keyboard_fluid( cur_position );
+    begin = -1; update();
     mainwindow->ui->comboBox_Part->setCurrentIndex( -1 );
 }
 
 void MainWindow::tuneDelStart() {
     cur_start = 0;
     reset_keyboard_fluid( cur_position );
+    begin = -1; update();
     mainwindow->ui->comboBox_Part->setCurrentIndex( -1 );
 }
 
 void MainWindow::tuneDelFinish() {
     cur_finish = tune_length;
+    begin = -1; update();
     mainwindow->ui->comboBox_Part->setCurrentIndex( -1 );
 }

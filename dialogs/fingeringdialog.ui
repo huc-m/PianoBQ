@@ -255,8 +255,17 @@
    <property name="accessibleDescription">
     <string notr="true"/>
    </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="inputMask">
+    <string notr="true"/>
+   </property>
    <property name="maxLength">
     <number>4</number>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
    <property name="placeholderText">
     <string notr="true"/>
@@ -290,6 +299,9 @@
     <string notr="true"/>
    </property>
    <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="inputMask">
     <string notr="true"/>
    </property>
    <property name="maxLength">

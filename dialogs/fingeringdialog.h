@@ -24,9 +24,12 @@ private:
     void right();
     void saveData();
     void getData();
+    void freeHand( bool set );
 
     void accept() override;
     void reject() override;
+
+    QAction *handsMenu;
 };
 
 #endif // FINGERINGDIALOG_H

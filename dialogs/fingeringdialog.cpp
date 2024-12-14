@@ -2,8 +2,8 @@
 #include "ui_fingeringdialog.h"
 
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include "midi/globals.h"
-
 
 fingeringDialog::fingeringDialog(QWidget *parent) :
     QDialog(parent),
@@ -34,8 +34,16 @@ void fingeringDialog::right(){
 }
 
 void fingeringDialog::saveData(){
-    mainwindow->fingering[cur_position][LE_H] = *(int32_t*)( ui->lineEdit_Left->text().toStdString().c_str() );
-    mainwindow->fingering[cur_position][RI_H] = *(int32_t*)( ui->lineEdit_Right->text().toStdString().c_str() );
+    std::string fng;
+
+    fng.assign ( ui->lineEdit_Right->text().toUtf8().data() );
+    std::sort(fng.begin(), fng.end(), std::greater<int>() );
+    strncpy( (char*)( &mainwindow->fingering[cur_position][RI_H] ), fng.data(), 4 );
+
+    fng.assign ( ui->lineEdit_Left->text().toUtf8().data() );
+    std::sort( fng.begin(), fng.end() );
+    strncpy( (char*)( &mainwindow->fingering[cur_position][LE_H] ), fng.data(), 4 );
+
     mainwindow->begin = -1; mainwindow->update();
 }
 
@@ -51,6 +59,8 @@ void fingeringDialog::open(){
     mainwindow->fingeringLoad();
     getData();
 
+    freeHand( true );
+
     QDialog::open();
 }
 
@@ -58,11 +68,22 @@ void fingeringDialog::accept(){
     saveData();
     mainwindow->fingeringSave();
 
+    freeHand( false );
+
     QDialog::accept();
 }
 
 void fingeringDialog::reject(){
     saveData();
 
+    freeHand( false );
+
     QDialog::reject();
+}
+
+void fingeringDialog::freeHand( bool set ){
+    if( set ){
+        handsMenu = mainwindow->handGroup->checkedAction();
+        mainwindow->ui->handNoHandsAction->activate( QAction::Trigger );
+    } else handsMenu->activate( QAction::Trigger );
 }
