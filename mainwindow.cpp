@@ -85,6 +85,7 @@ MainWindow::~MainWindow()
     delete tunes_conf;
 
     delete tuneopendialog;
+    delete fingeringdialog;
 
     paint->end();
     delete staffPixmap;
@@ -115,10 +116,10 @@ void MainWindow::fingeringLoad(){
     if( fingering_isLoaded ) return;
     if( tune_conf == NULL ) return;
 
-    QFile *file = new QFile( tune_conf->fileName() + ".fng");
+    QFile *file = new QFile( QDir::homePath() + FINGERINGS_DIRECTORY + QFileInfo( tune_conf->fileName()).baseName() + ".fng");
     if( file->exists()){
         file->open( QIODeviceBase::ReadOnly );
-          memcpy( fingering, qUncompress( file->readAll() ).data(), tune_length);
+          memcpy( fingering, qUncompress( file->readAll() ).data(), tune_length * 8);
         file->close();
         QByteArray data;
     } else
@@ -128,7 +129,7 @@ void MainWindow::fingeringLoad(){
 
 void MainWindow::fingeringSave(){
     if( tune_conf == NULL ) return;
-    QFile *file = new QFile( tune_conf->fileName() + ".fng");
+    QFile *file = new QFile( QDir::homePath() + FINGERINGS_DIRECTORY + QFileInfo( tune_conf->fileName()).baseName() + ".fng");
     file->open( QIODeviceBase::WriteOnly );
       file->write( qCompress( (uchar*) fingering, tune_length * 8, 9 ));
     file->close();
