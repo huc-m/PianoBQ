@@ -116,21 +116,15 @@ void MainWindow::fingeringLoad(){
     if( fingering_isLoaded ) return;
     if( tune_conf == NULL ) return;
 
-    QFile *file = new QFile( QDir::homePath() + FINGERINGS_DIRECTORY + QFileInfo( tune_conf->fileName()).baseName() + ".fng");
-    if( file->exists()){
-        file->open( QIODeviceBase::ReadOnly );
-          memcpy( fingering, qUncompress( file->readAll() ).data(), tune_length * 8);
-        file->close();
-        QByteArray data;
-    } else
-    for(int i = 0; i < tune_length; ++i )  *(int64_t*)(mainwindow->fingering[i]) = 0;
+    if( tune_conf->value("FINGERING/data").isNull())
+        for(int i = 0; i < tune_length; ++i )  *(int64_t*)(mainwindow->fingering[i]) = 0;
+    else
+        memcpy( fingering, qUncompress( QByteArray::fromBase64( tune_conf->value("FINGERING/data").toByteArray() ) ).data(), tune_length * 8);
+
     fingering_isLoaded = true;
 }
 
 void MainWindow::fingeringSave(){
     if( tune_conf == NULL ) return;
-    QFile *file = new QFile( QDir::homePath() + FINGERINGS_DIRECTORY + QFileInfo( tune_conf->fileName()).baseName() + ".fng");
-    file->open( QIODeviceBase::WriteOnly );
-      file->write( qCompress( (uchar*) fingering, tune_length * 8, 9 ));
-    file->close();
+    tune_conf->setValue("FINGERING/data", qCompress( (uchar*) fingering, tune_length * 8, 9 ).toBase64());
 }

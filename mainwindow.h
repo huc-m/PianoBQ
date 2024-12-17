@@ -6,7 +6,6 @@
 #define CONFIG_TUNES_DIRECTORY "/.config/PianoBQ/tunes/"
 #define FONT_FILE_WITH_LETTER "/.config/PianoBQ/fonts/PianoBQ.ttf"
 #define FONT_FILE_NO_LETTER "/.config/PianoBQ/fonts/PianoBQn.ttf"
-#define FINGERINGS_DIRECTORY "/.config/PianoBQ/fingerings/"
 
 #define G5S 80
 #define D4F 62

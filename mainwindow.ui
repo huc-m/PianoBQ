@@ -475,8 +475,8 @@
     <addaction name="handAllHandsAction"/>
     <addaction name="handNoHandsAction"/>
     <addaction name="separator"/>
-    <addaction name="handLeftOnlyAction"/>
     <addaction name="handRightOnlyAction"/>
+    <addaction name="handLeftOnlyAction"/>
     <addaction name="handWithSoundAction"/>
    </widget>
    <widget class="QMenu" name="menuView">
