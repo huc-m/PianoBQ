@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
         ui->loadFontAction->setChecked( conf->value( "note_with_letter" ).toBool() );
         ui->showPartOnlyAction->setChecked( conf->value( "show_part_only" ).toBool() );
         ui->progressBarAction->setChecked( conf->value( "progressBar_Show" ).toBool());
+        numUpcomingNotes = conf->value( "number_of_upcoming_notes" ).toString().toInt();
     conf->endGroup();
 
     staff_step = staff_step_default;

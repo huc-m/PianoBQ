@@ -91,6 +91,7 @@ private:
     int staff_base_w;   //space between tuples
 
     int numVisibleNotes;  //number of notes that are visible on one staff screen
+    int numUpcomingNotes; //number of notes at the end before the screen scrolls
 
 // offset C, #C, D, #D, E, F, #F, G, #G, A, #A, B
     const int note_ofset[12] = {0,0,1,1,2,3,3,4,4,5,5,6};

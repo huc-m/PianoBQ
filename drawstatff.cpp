@@ -78,7 +78,7 @@ void MainWindow::DrawTuple(int pos_screen, int pos_tune){
 
 void MainWindow::paintEvent( [[maybe_unused]] QPaintEvent *event) {
     int i;
-    numVisibleNotes = (width()-staff_pading_w) / staff_base_w;
+    numVisibleNotes = (width()-staff_pading_w) / staff_base_w - numUpcomingNotes;
     int pointerX = (cur_position % numVisibleNotes) * staff_base_w + staff_pading_w;
     int pointerY0 = staff_pading_h / 2;
     int pointerY1 = staff_step +  1.5  * staff_pading_h + 4 * staff_base_h ;
@@ -105,7 +105,7 @@ void MainWindow::paintEvent( [[maybe_unused]] QPaintEvent *event) {
             paint->drawLine(staff_pading_w, staff_pading_h + i * staff_base_h, width() - staff_pading_w,  staff_pading_h + i * staff_base_h);
             paint->drawLine(staff_pading_w, staff_pading_h + i * staff_base_h + staff_step, width() - staff_pading_w,  staff_pading_h + i * staff_base_h + staff_step);
         }
-        for(i = cbegin; i < cend; ++i)
+        for(i = cbegin; i < cend + numUpcomingNotes; ++i)
             DrawTuple(staff_pading_w + (i - cbegin) * staff_base_w, i) ;
     }
     paint->setCompositionMode( QPainter::CompositionMode_Xor);
