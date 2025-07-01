@@ -40,6 +40,7 @@ friend void fluid_play( bool, bool );
 friend int play_update_graphics ( void*, fluid_midi_event_t* );
 friend void tuneAcceptPart( QString part );
 friend void toolBox_changePlaySpeed();
+friend void toolBox_openFingeringDialog();
 friend tuneOpenDialog;
 
 friend void toolBox_openPart();

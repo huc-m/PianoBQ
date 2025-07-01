@@ -238,7 +238,7 @@
     <enum>Qt::NoContextMenu</enum>
    </property>
    <property name="acceptDrops">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="toolTip">
     <string notr="true"/>
@@ -285,6 +285,9 @@
    </property>
    <property name="contextMenuPolicy">
     <enum>Qt::NoContextMenu</enum>
+   </property>
+   <property name="acceptDrops">
+    <bool>false</bool>
    </property>
    <property name="toolTip">
     <string notr="true"/>

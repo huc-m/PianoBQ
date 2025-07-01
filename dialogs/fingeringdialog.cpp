@@ -14,6 +14,8 @@ fingeringDialog::fingeringDialog(QWidget *parent) :
     connect( ui->pushButton_toLeft, &QPushButton::clicked, this, &fingeringDialog::left );
 
     setFixedSize( size() );
+    ui->buttonBox->button(QDialogButtonBox::Close)->setFocusPolicy(Qt::NoFocus);
+    ui->buttonBox->button(QDialogButtonBox::SaveAll)->setFocusPolicy(Qt::NoFocus);
 }
 
 fingeringDialog::~fingeringDialog()

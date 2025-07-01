@@ -33,11 +33,15 @@ void toolBox_setWholeTune() {
     mainwindow->begin=-1;
 }
 
+void toolBox_openFingeringDialog(){
+    if( mainwindow->tunePlayAction->text() == "Stop" ) fluid_play( false );
+    mainwindow->open_fingeringDialog();
+}
+
 void MainWindow::setToolbox() {
     connect( ui->pushButton_Open, &QPushButton::clicked, this, toolBox_openPart );
     connect( ui->comboBox_Part, &QComboBox::currentTextChanged, this, toolBox_AcceptParts );
     connect( ui->comboBox_Speed, &QComboBox::currentTextChanged, this, toolBox_changePlaySpeed );
     connect( ui->pushButtonAll, &QPushButton::clicked, this, toolBox_setWholeTune );
+    connect( ui->pushButton_OpenFingeringDialog, &QPushButton::clicked, this, toolBox_openFingeringDialog );
 }
-
-
