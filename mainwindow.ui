@@ -504,10 +504,11 @@
      <string notr="true">Hands</string>
     </property>
     <addaction name="handAllHandsAction"/>
-    <addaction name="handNoHandsAction"/>
-    <addaction name="separator"/>
     <addaction name="handRightOnlyAction"/>
     <addaction name="handLeftOnlyAction"/>
+    <addaction name="handNoHandsAction"/>
+    <addaction name="separator"/>
+    <addaction name="handPlayOnly"/>
     <addaction name="handWithSoundAction"/>
    </widget>
    <widget class="QMenu" name="menuView">
@@ -711,7 +712,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string notr="true">Check All</string>
+    <string>All In</string>
    </property>
    <property name="iconText">
     <string notr="true">Check All</string>
@@ -839,7 +840,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string notr="true">With Sound</string>
+    <string>Play Other</string>
    </property>
    <property name="iconText">
     <string notr="true">With Sound</string>
@@ -997,6 +998,35 @@
    </property>
    <property name="toolTip">
     <string notr="true">Fingering Dial</string>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="handPlayOnly">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string notr="true">Play Only</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Play Only</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Play Only</string>
    </property>
    <property name="statusTip">
     <string notr="true"/>

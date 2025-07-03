@@ -5,6 +5,7 @@
 
 #include "configuration/tuneconfig.h"
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 
 static fluid_settings_t* fluid_settings;
 static fluid_synth_t* fluid_synth;
@@ -298,7 +299,21 @@ void fluid_play(bool play , bool del) {
         fluid_player_seek( player, midiTicks[ cur_position ] );
         fluid_player_set_tempo( player, FLUID_PLAYER_TEMPO_INTERNAL, play_speed);
         fluid_player_play( player );
+
+        if(mainwindow->ui->handPlayOnly->isChecked()){
+            if(mainwindow->ui->handLeftOnlyAction->isChecked()) {
+                fluid_synth_reset_basic_channel( fluid_synth, -1);
+                fluid_synth_set_basic_channel( fluid_synth, left_hand_channel, FLUID_CHANNEL_MODE_OMNIOFF_POLY, 1);
+            }
+            if(mainwindow->ui->handRightOnlyAction->isChecked()) {
+                fluid_synth_reset_basic_channel( fluid_synth, -1);
+                fluid_synth_set_basic_channel( fluid_synth, right_hand_channel, FLUID_CHANNEL_MODE_OMNIOFF_POLY, 1);
+            }
+        }
+
     } else {
+        fluid_synth_reset_basic_channel( fluid_synth, -1);
+        fluid_synth_set_basic_channel( fluid_synth, 0, FLUID_CHANNEL_MODE_OMNION_POLY, 16);
         mainwindow->tunePlayAction->setText( "Play");
         if( player != NULL ){
             fluid_player_stop ( player );
