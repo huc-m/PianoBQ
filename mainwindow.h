@@ -22,6 +22,7 @@
 #include "myqgraphicsview.h"
 
 #include "dialogs/tuneopendialog.h"
+#include "dialogs/tunenewdialog.h"
 #include "dialogs/fingeringdialog.h"
 
 #include "midi/constants.h"
@@ -42,6 +43,7 @@ friend void tuneAcceptPart( QString part );
 friend void toolBox_changePlaySpeed();
 friend void toolBox_openFingeringDialog();
 friend tuneOpenDialog;
+friend tuneNewDialog;
 
 friend void toolBox_openPart();
 friend void toolBox_AcceptParts();

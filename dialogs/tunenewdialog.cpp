@@ -10,6 +10,7 @@
 #include <QMessageBox>
 
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include "midi/globals.h"
 #include "midi/midi_with_fluidsynth.h"
 
@@ -67,4 +68,11 @@ void tuneNewDialog::on_buttonBox_accepted(){
     }
     mainwindow->begin = -1;
     mainwindow->update();
+    mainwindow->ui->comboBox_Speed->setCurrentText( "1.0" );
+    mainwindow->ui->progressBar->setMaximum( tune_length );
+    mainwindow->ui->progressBar->setValue( 0 );
+
+    mainwindow->fingering_isLoaded = false;
+    mainwindow->fingeringShowSwitch();
+
 }
