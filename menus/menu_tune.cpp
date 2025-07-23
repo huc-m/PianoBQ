@@ -55,6 +55,12 @@ void MainWindow::tuneToBegin() {
     update();
 }
 
+void MainWindow::tuneToEnd(){
+    cur_position = cur_finish;
+    reset_keyboard_fluid( cur_position );
+    update();
+}
+
 void MainWindow::tuneSetStart() {
     cur_start = cur_position;
     reset_keyboard_fluid( cur_position );

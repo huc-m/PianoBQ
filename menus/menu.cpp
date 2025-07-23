@@ -10,6 +10,7 @@ void MainWindow::createMenus() {
         menuBar()->addAction( tuneMoveLeftOneAction );
         menuBar()->addAction( tuneMoveRightOneAction );
         menuBar()->addAction( tuneMoveRightManyAction );
+        menuBar()->addAction( tuneToEndAction );
     menuBar()->addSeparator();
         menuBar()->addAction( tuneDelStartAction );
         menuBar()->addAction( tuneSetStartAction );
@@ -58,6 +59,8 @@ void MainWindow::createActions() {
         connect( tuneMoveRightManyAction, &QAction::triggered, this, &MainWindow::tuneMoveRightMany );
     tuneMoveRightOneAction = new QAction( "> ", this);
         connect( tuneMoveRightOneAction, &QAction::triggered, this, &MainWindow::tuneMoveRightOne );
+    tuneToEndAction = new QAction( ">!", this);
+        connect( tuneToEndAction, &QAction::triggered, this, &MainWindow::tuneToEnd );
     tuneDelStartAction = new QAction( "<!", this );
         connect( tuneDelStartAction, &QAction::triggered, this, &MainWindow::tuneDelStart );
     tuneSetStartAction = new QAction( "!=", this );

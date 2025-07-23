@@ -114,6 +114,7 @@ private:
     QAction *tuneMoveLeftManyAction;
     QAction *tuneMoveRightOneAction;
     QAction *tuneMoveRightManyAction;
+    QAction *tuneToEndAction;
 
     QAction *tuneSetStartAction;
     QAction *tuneSetFinishAction;
@@ -157,6 +158,7 @@ private slots:
     void open_fingeringDialog();
 
     void tuneToBegin();
+    void tuneToEnd();
 
     void tuneMoveLeftOne();
     void tuneMoveLeftMany();
