@@ -124,7 +124,7 @@ int play_update_graphics ( void *, fluid_midi_event_t *event ){
 
 static int read_keyboard(void *, fluid_midi_event_t *event){
 
-    fluid_synth_handle_midi_event(fluid_synth, event);
+    if( mainwindow->notDigitalPiano ) fluid_synth_handle_midi_event(fluid_synth, event);
 
     int note_key = fluid_midi_event_get_key(event);
     int i, k;
@@ -155,6 +155,7 @@ check:
                     if( note_key == tune_data[cur_position].hand[k].note[i] ) return FLUID_OK;
 // note is wrong
             fluid_synth_all_notes_off( fluid_synth, SYNTH_CHANNEL_OUT );
+            if( !mainwindow->notDigitalPiano) fluid_synth_noteon( fluid_synth, SYNTH_CHANNEL_OUT, ALERT_NOTE, mainwindow->alertNoteVelocity );
             if( cur_num_wrong < N_MAX - 1 )
                 cur_notes_wrong.noteOn[cur_num_wrong++] = note_key;
             return FLUID_OK;
@@ -180,7 +181,7 @@ check:
 static int read_keyboard_OneHand(void *, fluid_midi_event_t *event){
 // LE_H, RI_H
 
-    fluid_synth_handle_midi_event(fluid_synth, event);
+    if( mainwindow->notDigitalPiano ) fluid_synth_handle_midi_event(fluid_synth, event);
 
     int note_key = fluid_midi_event_get_key(event);
     int i;
@@ -212,7 +213,11 @@ check:
                 for( i = 0; i < tuple_nums[cur_position][hand]; ++i)
                     if( note_key == tune_data[cur_position].hand[hand].note[i] ) return FLUID_OK;
 // note is wrong
-            fluid_synth_noteoff(fluid_synth, SYNTH_CHANNEL_OUT, note_key);
+            if( mainwindow->notDigitalPiano) fluid_synth_noteoff(fluid_synth, SYNTH_CHANNEL_OUT, note_key);
+            else {
+                fluid_synth_all_notes_off( fluid_synth, SYNTH_CHANNEL_OUT );
+                fluid_synth_noteon( fluid_synth, SYNTH_CHANNEL_OUT, ALERT_NOTE, mainwindow->alertNoteVelocity );
+            }
             if( cur_num_wrong < N_MAX - 1 )
                 cur_notes_wrong.noteOn[cur_num_wrong++] = note_key;
             return FLUID_OK;

@@ -33,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent)
         left_hand_channel_default =  conf->value( "LeftHandChannel" ).toInt();
         right_hand_channel_default = conf->value( "RightHandChannel" ).toInt();
         currentPath = conf->value( "currentPath" ).toString();
+        notDigitalPiano = !conf->value( "digital_piano").toBool();
+        alertNoteVelocity = conf->value( "alert_note_velocity" ).toInt();
     conf->endGroup();
     conf->beginGroup( "STAFF" );
         staff_base_h2 = conf->value( "half_space_between_lines" ).toString().toInt();

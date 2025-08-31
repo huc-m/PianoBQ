@@ -12,6 +12,8 @@
 #define B3F 59
 #define F2F 41
 
+#define ALERT_NOTE 90 //#F6 1480Hz
+
 #include <QMainWindow>
 #include <QMenuBar>
 #include <QDialog>
@@ -184,6 +186,8 @@ public: // globals
     bool showPartOnly;
     bool progresBarShow;
     bool fingeringShow;
+    bool notDigitalPiano;
+    int alertNoteVelocity;
 
 // fingering
 public:
