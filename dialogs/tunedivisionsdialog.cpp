@@ -2,6 +2,7 @@
 #include "ui_tunedivisionsdialog.h"
 
 #include "mainwindow.h"
+#include "dialogs/tuneopendialog.h"
 #include "configuration/divisions.h"
 
 tuneDivisionsDialog::tuneDivisionsDialog(QWidget *parent) :
@@ -34,6 +35,7 @@ void tuneDivisionsDialog::buttonRemoveClicked( [[maybe_unused]] bool checked ) {
     if( ui->listWidget->currentRow() < 0 ) return;
     delDivision( ui->listWidget->currentItem()->text() );
     close();
+    static_cast <tuneOpenDialog*> (mainwindow->tuneopendialog)->refreshDivisions();
 }
 
 void tuneDivisionsDialog::accept() {
@@ -44,6 +46,8 @@ void tuneDivisionsDialog::accept() {
     QStringList divisions;
     for( int i = 0; i < ui->comboBox->count(); ++i) divisions.append(ui->comboBox->itemText( i ));
     saveDivisions( divisions );
+
+    static_cast <tuneOpenDialog*> (mainwindow->tuneopendialog)->refreshDivisions();
 
     QDialog::accept();
 }

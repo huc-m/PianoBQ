@@ -15,6 +15,8 @@ public:
     explicit tuneOpenDialog(QWidget *parent = nullptr);
     ~tuneOpenDialog();
 
+    void refreshDivisions();
+
     void accept() override;
 
 private:

@@ -19,8 +19,12 @@ int cur_finish;
 int left_hand_channel;
 int right_hand_channel;
 
+double play_speed;
+
 int main(int argc, char *argv[])
 {
+    if( argc > 1 ) { qInfo("Build on " __DATE__" " __TIME__ " Qt" QT_VERSION_STR ); return 0; }
+
     QApplication theApp(argc, argv);
     MainWindow AppWindow;
 

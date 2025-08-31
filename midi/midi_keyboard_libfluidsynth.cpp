@@ -5,10 +5,7 @@
 
 #include "configuration/tuneconfig.h"
 #include "mainwindow.h"
-
-#ifdef QT_DEBUG
-#include <QDebug>
-#endif
+#include "ui_mainwindow.h"
 
 static fluid_settings_t* fluid_settings;
 static fluid_synth_t* fluid_synth;
@@ -127,7 +124,7 @@ int play_update_graphics ( void *, fluid_midi_event_t *event ){
 
 static int read_keyboard(void *, fluid_midi_event_t *event){
 
-    fluid_synth_handle_midi_event(fluid_synth, event);
+    if( mainwindow->notDigitalPiano ) fluid_synth_handle_midi_event(fluid_synth, event);
 
     int note_key = fluid_midi_event_get_key(event);
     int i, k;
@@ -158,6 +155,7 @@ check:
                     if( note_key == tune_data[cur_position].hand[k].note[i] ) return FLUID_OK;
 // note is wrong
             fluid_synth_all_notes_off( fluid_synth, SYNTH_CHANNEL_OUT );
+            if( !mainwindow->notDigitalPiano) fluid_synth_noteon( fluid_synth, SYNTH_CHANNEL_OUT, ALERT_NOTE, mainwindow->alertNoteVelocity );
             if( cur_num_wrong < N_MAX - 1 )
                 cur_notes_wrong.noteOn[cur_num_wrong++] = note_key;
             return FLUID_OK;
@@ -183,7 +181,7 @@ check:
 static int read_keyboard_OneHand(void *, fluid_midi_event_t *event){
 // LE_H, RI_H
 
-    fluid_synth_handle_midi_event(fluid_synth, event);
+    if( mainwindow->notDigitalPiano ) fluid_synth_handle_midi_event(fluid_synth, event);
 
     int note_key = fluid_midi_event_get_key(event);
     int i;
@@ -215,7 +213,11 @@ check:
                 for( i = 0; i < tuple_nums[cur_position][hand]; ++i)
                     if( note_key == tune_data[cur_position].hand[hand].note[i] ) return FLUID_OK;
 // note is wrong
-            fluid_synth_noteoff(fluid_synth, SYNTH_CHANNEL_OUT, note_key);
+            if( mainwindow->notDigitalPiano) fluid_synth_noteoff(fluid_synth, SYNTH_CHANNEL_OUT, note_key);
+            else {
+                fluid_synth_all_notes_off( fluid_synth, SYNTH_CHANNEL_OUT );
+                fluid_synth_noteon( fluid_synth, SYNTH_CHANNEL_OUT, ALERT_NOTE, mainwindow->alertNoteVelocity );
+            }
             if( cur_num_wrong < N_MAX - 1 )
                 cur_notes_wrong.noteOn[cur_num_wrong++] = note_key;
             return FLUID_OK;
@@ -300,8 +302,23 @@ void fluid_play(bool play , bool del) {
         fluid_player_set_playback_callback( player, play_update_graphics, NULL );
         fluid_player_add( player, getTuneFile().toStdString().c_str());
         fluid_player_seek( player, midiTicks[ cur_position ] );
+        fluid_player_set_tempo( player, FLUID_PLAYER_TEMPO_INTERNAL, play_speed);
         fluid_player_play( player );
+
+        if(mainwindow->ui->handPlayOnly->isChecked()){
+            if(mainwindow->ui->handLeftOnlyAction->isChecked()) {
+                fluid_synth_reset_basic_channel( fluid_synth, -1);
+                fluid_synth_set_basic_channel( fluid_synth, left_hand_channel, FLUID_CHANNEL_MODE_OMNIOFF_POLY, 1);
+            }
+            if(mainwindow->ui->handRightOnlyAction->isChecked()) {
+                fluid_synth_reset_basic_channel( fluid_synth, -1);
+                fluid_synth_set_basic_channel( fluid_synth, right_hand_channel, FLUID_CHANNEL_MODE_OMNIOFF_POLY, 1);
+            }
+        }
+
     } else {
+        fluid_synth_reset_basic_channel( fluid_synth, -1);
+        fluid_synth_set_basic_channel( fluid_synth, 0, FLUID_CHANNEL_MODE_OMNION_POLY, 16);
         mainwindow->tunePlayAction->setText( "Play");
         if( player != NULL ){
             fluid_player_stop ( player );
@@ -372,4 +389,3 @@ void oneHandMovePreviousMrg(){
         else break;
     if( tuple_nums[cur_position][hand + HtoD] == 0 ) oneHandStartPos();
 }
-

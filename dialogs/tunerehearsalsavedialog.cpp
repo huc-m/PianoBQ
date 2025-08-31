@@ -23,8 +23,10 @@ tuneRehearsalSaveDialog::~tuneRehearsalSaveDialog()
 
 void tuneRehearsalSaveDialog::accept(){
     if(  ui->comboBox->currentText().length() < 1 ) return;
-    saveTunePart( ui->comboBox->currentText() );
+    QString part = ui->comboBox->currentText();
+    saveTunePart( part );
     mainwindow->setToolboxParts();
+    tuneAcceptPart( part );
 
     QDialog::accept();
 }
