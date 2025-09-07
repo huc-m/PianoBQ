@@ -13,6 +13,8 @@ fingeringDialog::fingeringDialog(QWidget *parent) :
     connect( ui->pushButton_toRight, &QPushButton::clicked, this, &fingeringDialog::right );
     connect( ui->pushButton_toLeft, &QPushButton::clicked, this, &fingeringDialog::left );
 
+    connect( ui->buttonGroupNum, &QButtonGroup::buttonClicked, this, &fingeringDialog::typeNumber );
+
     setFixedSize( size() );
     ui->buttonBox->button(QDialogButtonBox::Close)->setFocusPolicy(Qt::NoFocus);
     ui->buttonBox->button(QDialogButtonBox::SaveAll)->setFocusPolicy(Qt::NoFocus);
@@ -64,6 +66,9 @@ void fingeringDialog::open(){
     freeHand( true );
 
     QDialog::open();
+
+    ui->lineEdit_Left->deselect();
+    ui->lineEdit_Right->deselect();
 }
 
 void fingeringDialog::accept(){
@@ -88,4 +93,10 @@ void fingeringDialog::freeHand( bool set ){
         handsMenu = mainwindow->handGroup->checkedAction();
         mainwindow->ui->handNoHandsAction->activate( QAction::Trigger );
     } else handsMenu->activate( QAction::Trigger );
+}
+
+void fingeringDialog::typeNumber( QAbstractButton *numClick ) {
+    QLineEdit *textLine = ui->lineEdit_Left->hasFocus() ? ui->lineEdit_Left : ui->lineEdit_Right;
+    if( numClick->text() == "<" ) textLine->backspace();
+    else textLine->insert( numClick->text() );
 }

@@ -26,6 +26,8 @@ private:
     void getData();
     void freeHand( bool set );
 
+    void typeNumber(QAbstractButton *numClick);
+
     void accept() override;
     void reject() override;
 
