@@ -79,6 +79,6 @@ void init_tune_conf(){
     tune_conf->endGroup();
     mainwindow->setStaffParameters();
     reset_keyboard_fluid( -1 );
-    set_hand( ALL_H );
+    mainwindow->handAllHands();
     mainwindow->ui->handAllHandsAction->setChecked( true );
 }

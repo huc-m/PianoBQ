@@ -38,10 +38,28 @@ void toolBox_openFingeringDialog(){
     mainwindow->open_fingeringDialog();
 }
 
+void toolBox_Hands( int id ){
+    switch ( id ) {
+        case -2:
+            mainwindow->handLeftOnly();
+        break;
+        case -3:
+            mainwindow->handRightOnly();
+        break;
+        case -4:
+            mainwindow->handAllHands();
+        break;
+
+    }
+}
+
 void MainWindow::setToolbox() {
     connect( ui->pushButton_Open, &QPushButton::clicked, this, toolBox_openPart );
     connect( ui->comboBox_Part, &QComboBox::currentTextChanged, this, toolBox_AcceptParts );
     connect( ui->comboBox_Speed, &QComboBox::currentTextChanged, this, toolBox_changePlaySpeed );
     connect( ui->pushButtonAll, &QPushButton::clicked, this, toolBox_setWholeTune );
     connect( ui->pushButton_OpenFingeringDialog, &QPushButton::clicked, this, toolBox_openFingeringDialog );
+
+    connect( ui->buttonGroupHands, &QButtonGroup::idClicked, this, toolBox_Hands );
 }
+

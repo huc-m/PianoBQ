@@ -171,13 +171,14 @@ private slots:
     void tuneDelStart();
     void tuneDelFinish();
 
+    void actionTriggered( QAction *action );
+
+public:
     void handAllHands();
     void handNoHands();
     void handLeftOnly();
     void handRightOnly();
     void handWithSound();
-
-    void actionTriggered( QAction *action );
 
 public: // globals
     QString currentPath;
