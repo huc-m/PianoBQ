@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>384</width>
     <height>300</height>
    </rect>
   </property>
@@ -34,9 +34,9 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>240</y>
-     <width>341</width>
+     <x>40</x>
+     <y>260</y>
+     <width>321</width>
      <height>32</height>
     </rect>
    </property>
@@ -66,7 +66,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>90</y>
+     <y>20</y>
      <width>41</width>
      <height>21</height>
     </rect>
@@ -97,8 +97,8 @@
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>90</y>
-     <width>321</width>
+     <y>20</y>
+     <width>301</width>
      <height>22</height>
     </rect>
    </property>
@@ -126,6 +126,762 @@
    <property name="placeholderText">
     <string notr="true"/>
    </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_6">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>70</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">1</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_7">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>70</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">2</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_8">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>70</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">3</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_9">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>70</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">4</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_10">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>70</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">5</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_11">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>70</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">&lt;</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_12">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">6</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_13">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>130</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">9</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_14">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>130</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">-</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_15">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>130</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">0</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_16">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>130</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">7</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_17">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>130</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">8</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_18">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>190</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">.</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_19">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>190</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">T</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_20">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>190</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">B</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_21">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>190</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">P</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_22">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>190</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">N</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="pushButton_23">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>190</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="whatsThis">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleName">
+    <string notr="true"/>
+   </property>
+   <property name="accessibleDescription">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true">E</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroupNum</string>
+   </attribute>
   </widget>
  </widget>
  <resources/>
@@ -163,4 +919,7 @@
    </hints>
   </connection>
  </connections>
+ <buttongroups>
+  <buttongroup name="buttonGroupNum"/>
+ </buttongroups>
 </ui>

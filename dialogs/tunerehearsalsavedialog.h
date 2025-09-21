@@ -19,6 +19,8 @@ public:
 
 private:
     Ui::tuneRehearsalSaveDialog *ui;
+
+    void typeNumber(QAbstractButton *numClick);
 };
 
 #endif // TUNEREHEARSALSAVEDIALOG_H

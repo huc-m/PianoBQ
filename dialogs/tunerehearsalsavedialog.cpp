@@ -4,6 +4,8 @@
 #include "configuration/tuneconfig.h"
 #include "mainwindow.h"
 
+#include <QLineEdit>
+
 
 tuneRehearsalSaveDialog::tuneRehearsalSaveDialog(QWidget *parent) :
     QDialog(parent),
@@ -14,6 +16,9 @@ tuneRehearsalSaveDialog::tuneRehearsalSaveDialog(QWidget *parent) :
     ui->comboBox->addItems( getPartsByTune() );
 
     setFixedSize( size() );
+
+    connect( ui->buttonGroupNum, &QButtonGroup::buttonClicked, this, &tuneRehearsalSaveDialog::typeNumber );
+
 }
 
 tuneRehearsalSaveDialog::~tuneRehearsalSaveDialog()
@@ -29,4 +34,9 @@ void tuneRehearsalSaveDialog::accept(){
     tuneAcceptPart( part );
 
     QDialog::accept();
+}
+
+void tuneRehearsalSaveDialog::typeNumber( QAbstractButton *numClick ) {
+    if( numClick->text() == "<" ) ui->comboBox->lineEdit()->backspace();
+    else ui->comboBox->lineEdit()->insert( numClick->text() );
 }

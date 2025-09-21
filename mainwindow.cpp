@@ -45,6 +45,7 @@ MainWindow::MainWindow(QWidget *parent)
         staff_line_w = conf->value( "line_width" ).toString().toInt();
         ui->loadFontAction->setChecked( conf->value( "note_with_letter" ).toBool() );
         ui->showPartOnlyAction->setChecked( conf->value( "show_part_only" ).toBool() );
+        ui->showFingeringAction->setChecked( conf->value( "fingering_show" ).toBool() );
         ui->progressBarAction->setChecked( conf->value( "progressBar_Show" ).toBool());
         numUpcomingNotes = conf->value( "number_of_upcoming_notes" ).toString().toInt();
     conf->endGroup();
