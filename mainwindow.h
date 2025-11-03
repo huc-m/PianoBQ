@@ -21,6 +21,8 @@
 
 #include <QActionGroup>
 
+#include <QTimer>
+
 #include "myqgraphicsview.h"
 
 #include "dialogs/tuneopendialog.h"
@@ -51,12 +53,15 @@ friend void toolBox_openPart();
 friend void toolBox_AcceptParts();
 friend void toolBox_setWholeTune();
 
+friend void toolBox_Time();
+
 friend fingeringDialog;
 
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    QTimer *timer = new QTimer(this);
     QPixmap *staffPixmap;
     QGraphicsPixmapItem *staffPixmapItem;
     QPainter *paint;

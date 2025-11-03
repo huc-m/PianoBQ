@@ -48,6 +48,8 @@ MainWindow::MainWindow(QWidget *parent)
         ui->showFingeringAction->setChecked( conf->value( "fingering_show" ).toBool() );
         ui->progressBarAction->setChecked( conf->value( "progressBar_Show" ).toBool());
         numUpcomingNotes = conf->value( "number_of_upcoming_notes" ).toString().toInt();
+
+        if(!conf->value("current_time").toBool()) ui->ctime->hide();
     conf->endGroup();
 
     staff_step = staff_step_default;
@@ -95,6 +97,8 @@ MainWindow::~MainWindow()
     delete staffPixmap;
     delete paint;
     QFontDatabase:: removeAllApplicationFonts();
+
+    delete timer;
 
     delete ui;
 }

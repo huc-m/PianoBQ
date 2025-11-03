@@ -53,6 +53,10 @@ void toolBox_Hands( int id ){
     }
 }
 
+void toolBox_Time(){
+    mainwindow->ui->ctime->setText(QTime::currentTime().toString("hh:mm"));
+}
+
 void MainWindow::setToolbox() {
     connect( ui->pushButton_Open, &QPushButton::clicked, this, toolBox_openPart );
     connect( ui->comboBox_Part, &QComboBox::currentTextChanged, this, toolBox_AcceptParts );
@@ -61,5 +65,11 @@ void MainWindow::setToolbox() {
     connect( ui->pushButton_OpenFingeringDialog, &QPushButton::clicked, this, toolBox_openFingeringDialog );
 
     connect( ui->buttonGroupHands, &QButtonGroup::idClicked, this, toolBox_Hands );
+
+    if(!ui->ctime->isHidden()){
+        connect( timer, &QTimer::timeout, this, toolBox_Time );
+        toolBox_Time();
+        timer->start(60000);
+    }
 }
 

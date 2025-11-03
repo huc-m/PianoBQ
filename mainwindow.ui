@@ -459,6 +459,34 @@
         <string notr="true">buttonGroupHands</string>
        </attribute>
       </widget>
+      <widget class="QLabel" name="ctime">
+       <property name="geometry">
+        <rect>
+         <x>680</x>
+         <y>0</y>
+         <width>41</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string notr="true"/>
+       </property>
+       <property name="statusTip">
+        <string notr="true"/>
+       </property>
+       <property name="whatsThis">
+        <string notr="true"/>
+       </property>
+       <property name="accessibleName">
+        <string notr="true"/>
+       </property>
+       <property name="accessibleDescription">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>00:00</string>
+       </property>
+      </widget>
       <zorder>pushButton_NH</zorder>
       <zorder>pushButton_RH</zorder>
       <zorder>pushButton_Open</zorder>
@@ -469,6 +497,7 @@
       <zorder>pushButton_OpenFingeringDialog</zorder>
       <zorder>pushButton_AH</zorder>
       <zorder>pushButton_LH</zorder>
+      <zorder>ctime</zorder>
      </widget>
     </item>
     <item row="2" column="0">
