@@ -43,4 +43,5 @@ void MainWindow::open_tuneChangeConfigDialog() {
 
 void MainWindow::open_fingeringDialog(){
     fingeringdialog->open();
+    fingeringdialog->setAttribute(Qt::WA_Moved);
 }
