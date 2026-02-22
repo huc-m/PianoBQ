@@ -58,15 +58,16 @@ void tuneChangeConfigDialog::fileAction( QAbstractButton *button) {
         mainwindow->begin = -1;
         mainwindow->update();
     } else
-        if( button->text() == "Delete" ){
-            deleteTune();
+        if( button->text() == "Delete" )
+            if( QMessageBox::critical (this, "Warning", "The tune going to be deleted.\nThere is no way back.", QMessageBox::Cancel | QMessageBox::Ok ) == QMessageBox::Ok) {
+                deleteTune();
 
-            tune_length = 0;
-            reset_keyboard_fluid( -1 );
-            mainwindow->begin = -1;
-            mainwindow->update();
-            close();
-    }
+                tune_length = 0;
+                reset_keyboard_fluid( -1 );int ret =
+                mainwindow->begin = -1;
+                mainwindow->update();
+                close();
+            }
     static_cast <tuneOpenDialog*> (mainwindow->tuneopendialog)->refreshDivisions();
 }
 
