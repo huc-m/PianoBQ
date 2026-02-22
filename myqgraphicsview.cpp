@@ -10,7 +10,11 @@ myQGraphicsView::myQGraphicsView( QWidget *parent ) : QGraphicsView( parent )
 
 void myQGraphicsView::mouseReleaseEvent( QMouseEvent *event ) {
 
-    if( mainwindow->tunePlayAction->text() == "Stop" ) fluid_play( false );
+    if( mainwindow->tunePlayAction->text() == "Stop" ) {
+        fluid_play( false );
+        return;
+    }
+
     mainwindow->tuneToBegin();
 
     QGraphicsView::mouseReleaseEvent( event );
