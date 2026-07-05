@@ -21,13 +21,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setScene(&staffScene);
     mainwindow = this;
     setWindowTitle( NULL );
-    tunes_conf = new QSettings( QDir::homePath() + CONFIG_TUNES_FILE, QSettings::NativeFormat );
+    tunes_conf = new QSettings( CONFIG_TUNES_FILE, QSettings::NativeFormat );
     createActions();
     createMenus();
     setToolbox();
 
 //set parameters
-    QSettings *conf = new QSettings( QDir::homePath() + CONFIG_MAIN_FILE, QSettings::NativeFormat);
+    QSettings *conf = new QSettings( CONFIG_MAIN_FILE, QSettings::NativeFormat);
 
     conf->beginGroup( "MIDI" );
         left_hand_channel_default =  conf->value( "LeftHandChannel" ).toInt();
@@ -58,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
     setStaffParameters();
 
     staff_area_size = QSize(10,10);
-    cur_devision_pos = -1;
+    cur_devision_pos = 0;
 
     init_keyboard_libfluidsynth( conf );
 

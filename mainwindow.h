@@ -1,11 +1,18 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#define CONFIG_MAIN_FILE "/.config/PianoBQ/main.conf"
-#define CONFIG_TUNES_FILE "/.config/PianoBQ/tunes.conf"
-#define CONFIG_TUNES_DIRECTORY "/.config/PianoBQ/tunes/"
-#define FONT_FILE_WITH_LETTER "/.config/PianoBQ/fonts/PianoBQ.ttf"
-#define FONT_FILE_NO_LETTER "/.config/PianoBQ/fonts/PianoBQn.ttf"
+#define CONFIG_MAIN_FILE QDir::homePath() + "/.config/PianoBQ/main.conf"
+#define CONFIG_TUNES_FILE QDir::homePath() + "/.config/PianoBQ/tunes.conf"
+#define CONFIG_TUNES_DIRECTORY QDir::homePath() + "/.config/PianoBQ/tunes/"
+
+#ifndef DEB_PACK
+    #define FONT_FILE_WITH_LETTER QDir::homePath() + "/.config/PianoBQ/fonts/PianoBQ.ttf"
+    #define FONT_FILE_NO_LETTER QDir::homePath() + "/.config/PianoBQ/fonts/PianoBQn.ttf"
+#else
+    #define FONT_FILE_WITH_LETTER "/usr/share/PianoBQ/fonts/PianoBQ.ttf"
+    #define FONT_FILE_NO_LETTER "/usr/share/PianoBQ/fonts/PianoBQn.ttf"
+    #define CONFIG_MAIN_FILE_DEFAULT "/usr/share/PianoBQ/main.conf"
+#endif
 
 #define G5S 80
 #define D4F 62

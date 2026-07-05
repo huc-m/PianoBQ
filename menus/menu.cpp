@@ -90,8 +90,8 @@ void MainWindow::actionTriggered(QAction *action){
 
 void MainWindow::loadFont() {
     QFontDatabase::removeAllApplicationFonts();
-    if( ui->loadFontAction->isChecked() ) QFontDatabase::addApplicationFont( QDir::homePath() + FONT_FILE_WITH_LETTER );
-    else QFontDatabase::addApplicationFont( QDir::homePath() + FONT_FILE_NO_LETTER );
+    if( ui->loadFontAction->isChecked() ) QFontDatabase::addApplicationFont( FONT_FILE_WITH_LETTER );
+    else QFontDatabase::addApplicationFont( FONT_FILE_NO_LETTER );
     begin = -1; staff_area_size = QSize(10,10);
     nFont = QFont("PianoBQ", staff_font_z);
     fFont = QFont("PianoBQ", 10);

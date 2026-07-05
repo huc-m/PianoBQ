@@ -214,6 +214,9 @@
    <property name="currentText">
     <string notr="true"/>
    </property>
+   <property name="currentIndex">
+    <number>-1</number>
+   </property>
    <property name="placeholderText">
     <string notr="true"/>
    </property>

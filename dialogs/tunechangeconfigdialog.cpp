@@ -63,7 +63,7 @@ void tuneChangeConfigDialog::fileAction( QAbstractButton *button) {
                 deleteTune();
 
                 tune_length = 0;
-                reset_keyboard_fluid( -1 );int ret =
+                reset_keyboard_fluid( -1 );
                 mainwindow->begin = -1;
                 mainwindow->update();
                 close();

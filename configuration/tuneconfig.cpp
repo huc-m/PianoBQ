@@ -69,7 +69,7 @@ void init_tune_conf(){
     if( mainwindow->windowTitle().isEmpty() ) return;
     tunes_conf->beginGroup("TUNES");
         QStringList data = tunes_conf->value( mainwindow->windowTitle()).toStringList();
-        tune_conf = new QSettings( QDir::homePath() + CONFIG_TUNES_DIRECTORY + data[4], QSettings::NativeFormat );
+        tune_conf = new QSettings( CONFIG_TUNES_DIRECTORY + data[4], QSettings::NativeFormat );
         left_hand_channel = data[2].toInt();
         right_hand_channel = data[3].toInt();
     tunes_conf->endGroup();
