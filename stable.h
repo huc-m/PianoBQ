@@ -7,6 +7,7 @@
 
 #include <QAbstractButton>
 #include <QApplication>
+#include <QActionGroup>
 #include <QDialog>
 #include <QDir>
 #include <QFile>
@@ -15,6 +16,7 @@
 #include <QGraphicsPathItem>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QLineEdit>
 #include <QMainWindow>
 #include <QMenuBar>
 #include <QMessageBox>
@@ -22,6 +24,7 @@
 #include <QSettings>
 #include <QString>
 #include <QStringList>
+#include <QTimer>
 
 #include <cstdint>
 

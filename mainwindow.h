@@ -59,6 +59,7 @@ friend tuneNewDialog;
 friend void toolBox_openPart();
 friend void toolBox_AcceptParts();
 friend void toolBox_setWholeTune();
+friend void toolBox_Hands( int );
 
 friend void toolBox_Time();
 

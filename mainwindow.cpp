@@ -125,7 +125,7 @@ void MainWindow::fingeringLoad(){
     if( tune_conf == NULL ) return;
 
     if( tune_conf->value("FINGERING/data").isNull())
-        for(int i = 0; i < tune_length; ++i )  *(int64_t*)(mainwindow->fingering[i]) = 0;
+        for(int i = 0; i < tune_length; ++i )  fingering[i][1] = fingering[i][0] = 0;
     else
         memcpy( fingering, qUncompress( QByteArray::fromBase64( tune_conf->value("FINGERING/data").toByteArray() ) ).data(), tune_length * 8);
 

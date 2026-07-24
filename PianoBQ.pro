@@ -11,7 +11,7 @@ QMAKE_LFLAGS_RELEASE += -s
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-DEFINES += DEB_PACK
+#DEFINES += DEB_PACK
 
 SOURCES += \
     configuration/divisions.cpp \

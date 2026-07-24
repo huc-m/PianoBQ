@@ -39,6 +39,7 @@ void toolBox_openFingeringDialog(){
 }
 
 void toolBox_Hands( int id ){
+    if( mainwindow->tunePlayAction->text() == "Stop" ) fluid_play( false );
     switch ( id ) {
         case -2:
             mainwindow->handLeftOnly();
